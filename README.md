@@ -48,6 +48,25 @@ like any other javascript DOM element you can bind event to web component with `
     document.querySelector('jb-time-input').addEventListener('change',()=>{});
     // when user press enter on type good for situation you want so submit form or call search function on user press enter. 
     document.querySelector('jb-time-input').addEventListener('enter',()=>{});
+    //focus event
+    document.querySelector('jb-time-input').addEventListener('focus',()=>{});
+    document.querySelector('jb-time-input').addEventListener('blur',()=>{});
+```
+
+### set value
+
+to set value of time input you have 2 way:
+
+- by html as a attribute:
+
+```html
+<jb-time-input value="14:34:63">
+```
+
+- by javascript
+
+```javascript
+    document.querySelector('jb-date-input').value = "01:11:12";
 ```
 
 ### set custom style
