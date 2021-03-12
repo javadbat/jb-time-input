@@ -69,6 +69,51 @@ to set value of time input you have 2 way:
     document.querySelector('jb-date-input').value = "01:11:12";
 ```
 
+### validation
+
+jb time input will check validation automatically and show error on user blur the input and hide error on user type and blur to use this feature you just have to set validation list of component.
+
+```javascript
+document.querySelector('jb-time-input').validationList = [
+    {
+    // custom validator with regex
+            validator: /^[1][1234].*$/g,
+            message:"market is only open on 11-14."
+    },
+    //custom validator with function 
+    {
+            validator: (typedText)=>{typedText?return true : return false;},
+            message:"you must fill the time"
+    }
+]
+```
+
+you can trigger validation manually by calling `triggerInputValidation` function. for example you can call it when submit button clicked and check if value is valid or not.
+
+```javascript
+    // if you set showError false you can get validation result but component wont show error to user by itself its good when you want show error in your own way
+    const showError = true;
+    const validationResult =  document.querySelector('jb-time-input').triggerInputValidation(showError);
+    if(validationResult.isAllValid){
+        alert('all validation are passed')
+    }else{
+        alert('validation error!');
+    }
+
+```
+
+you can also get validation result of your time input by following way:
+
+```javascript
+    document.querySelector('jb-time-input').validation
+    //in change event detail
+    document.querySelector('jb-time-input').addEventListener('change',(e)=>{
+        alert(e.detail.isValid);
+        console.log(e.detail.validationObject);
+    });
+
+```
+
 ### set custom style
 
 in some cases in your project you need to change defualt style of web-component for example you need zero margin or different border-radius and etc.

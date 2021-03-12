@@ -55,17 +55,17 @@
                 font-size: var( --jb-time-input-placeholder-font-size , 1.1em);
             }
         }
-        .message-box{
-            font-size: var(--jb-time-input-message-font-size , 0.7em);
-            padding: 2px 8px;
-            color: #929292;
-            display: var(--jb-time-input-message-box-display , block) ;
-            &:empty{
-                padding: 0;
-            }
-            &.error{
-                color: var(--jb-time-input-message-error-color ,red);
-            }
+    }
+    .message-box{
+        font-size: var(--jb-time-input-message-font-size , 0.7em);
+        padding: 2px 8px;
+        color: #929292;
+        display: var(--jb-time-input-message-box-display , block) ;
+        &:empty{
+            padding: 0;
+        }
+        &.--error{
+            color: var(--jb-time-input-message-error-color ,red);
         }
     }
 
