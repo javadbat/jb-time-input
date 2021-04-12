@@ -1,6 +1,7 @@
 .jb-time-input-web-component{
     width: 100%;
     margin: var(--jb-time-input-margin ,  12px 0);
+    position: relative;
     label {
         width: 100%;
         margin: 4px 0px;
@@ -66,6 +67,29 @@
         }
         &.--error{
             color: var(--jb-time-input-message-error-color ,red);
+        }
+    }
+    .time-picker-wrapper {
+        position: absolute;
+        display: none;
+        inset-block-start: 64px;
+        inset-inline-start: 0;;
+        background-color: #fff;
+        border-radius: 24px;
+        padding: 16px;
+        box-shadow:
+            12px 12px 16px 0 rgba(0, 0, 0, 0.25),
+            -8px -8px 12px 0 rgba(255, 255, 255, 0.3);
+        z-index: 10;
+
+        jb-time-picker {
+            &:focus {
+                outline: none;
+            }
+        }
+
+        &.--show {
+            display: block;
         }
     }
 
