@@ -1,6 +1,7 @@
 # jb-time-input web component
 
 in jb-time-input you can create a input specialy for time the advantage is:
+sample: <https://codepen.io/javadbat/pen/QWdxzKb>
 
 - validation so it only accept time value and not any other invalid format
 - support arrow key to increase and decrease time value
@@ -8,6 +9,7 @@ in jb-time-input you can create a input specialy for time the advantage is:
 - support both rtl and ltr direction
 - easy to use and can be used in any js framework like React, Vue, Angular,etc
 - can be used in purejs without any other dependancy
+- has a touch friendly time-picker
 - responsive
 
 ## instruction
