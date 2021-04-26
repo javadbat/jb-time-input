@@ -1,6 +1,7 @@
 # jb-time-input web component
 
 [![Published on webcomponents.org](https://img.shields.io/badge/webcomponents.org-published-blue.svg)](https://www.webcomponents.org/element/jb-time-input)
+[![GitHub license](https://img.shields.io/badge/license-MIT-brightgreen.svg)](https://raw.githubusercontent.com/javadbat/jb-time-input/master/LICENSE)
 
 in jb-time-input you can create a input specialy for time the advantage is:
 sample: <https://codepen.io/javadbat/pen/QWdxzKb>
