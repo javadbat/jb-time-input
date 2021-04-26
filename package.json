@@ -13,7 +13,7 @@
     "time",
     "web component"
   ],
-  "version": "1.0.4",
+  "version": "1.0.7",
   "bugs": "https://github.com/javadbat/jb-time-input/issues",
   "license": "MIT",
   "files": [
@@ -23,9 +23,10 @@
     "dist/"
   ],
   "main": "index.js",
+  "homepage": "https://github.com/javadbat/jb-time-input",
   "repository": {
 		"type": "git",
-		"url": "git@github.com:javadbat/jb-time-input.git"
+		"url": "https://github.com/javadbat/jb-time-input"
   },
   "dependencies": {
     "jb-time-picker": "^1.0.2"
