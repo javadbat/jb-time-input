@@ -119,6 +119,14 @@ you can also get validation result of your time input by following way:
 
 ```
 
+### configurabe attributes
+
+you can change some attribute in html like label or message configurable attribute are:
+
+```HTML
+<jb-time-input close-button-text="بستن"></jb-time-input>
+```
+
 ### set custom style
 
 in some cases in your project you need to change defualt style of web-component for example you need zero margin or different border-radius and etc.
