@@ -1,6 +1,7 @@
 {
   "name": "jb-time-input",
   "description": "time input web component",
+  "type": "module",
   "author": {
 		"name": "mohammad javad bathaei",
 		"email": "javadbat@gmail.com"
@@ -13,7 +14,7 @@
     "time",
     "web component"
   ],
-  "version": "1.0.8",
+  "version": "1.0.12",
   "bugs": "https://github.com/javadbat/jb-time-input/issues",
   "license": "MIT",
   "files": [
@@ -29,6 +30,6 @@
 		"url": "https://github.com/javadbat/jb-time-input"
   },
   "dependencies": {
-    "jb-time-picker": "^1.0.2"
+    "jb-time-picker": ">=1.0.4"
   }
 }
