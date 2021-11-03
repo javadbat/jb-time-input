@@ -155,3 +155,4 @@ if you want to set a custom style to this web-component all you need is to set t
 | --jb-time-input-message-font-size       | message and error message under input box font size defaulyt is `0.7em`                                  |
 | --jb-time-input-message-box-display     | if you want to hide a error message under the inputbox and show message in your own way set it to `none` |
 | --jb-time-input-message-error-color     | color of message error default is `red` but you can change it to what you want                           |
+| --jb-time-input-label-color             | input label color                                                                                        |
