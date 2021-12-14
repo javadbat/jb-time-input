@@ -13,7 +13,7 @@ sample: <https://codepen.io/javadbat/pen/QWdxzKb>
 - easy to use and can be used in any js framework like React, Vue, Angular,etc
 - can be used in purejs without any other dependancy
 - has a touch friendly time-picker
-- responsive
+- responsive and mobile friendly
 
 ## instruction
 
