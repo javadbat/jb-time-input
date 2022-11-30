@@ -2,7 +2,7 @@ import HTML from './JBTimeInput.html';
 import CSS from './JBTimeInput.scss';
 import 'jb-time-picker';
 import { JBTimeInputElements, JBTimeInputValidationItem, ValidationResult, ValidationResultItem, ValidationResultSummary } from './Types';
-import { JBTimePickerValueObject } from 'jb-time-picker/dist/Types';
+import { JBTimePickerValueObject, TimeUnitsString} from 'jb-time-picker/dist/Types';
 import { SecondRange } from '../../jb-time-picker/lib/Types';
 class JBTimeInputWebComponent extends HTMLElement {
     static get formAssociated() { return true; }
@@ -228,6 +228,19 @@ class JBTimeInputWebComponent extends HTMLElement {
         message: null,
         detail: null,
     }
+    set optionalUnits(value: TimeUnitsString[]) {
+        debugger;
+        this.#elements.timePicker.component.optionalUnits = value;
+    }
+    get optionalUnits() {
+        return this.#elements.timePicker.component.optionalUnits;
+    }
+    set frontalZero(value: boolean) {
+        this.#elements.timePicker.component.frontalZero = value;
+    }
+    get frontalZero() {
+        return this.#elements.timePicker.component.frontalZero;
+    }
     constructor() {
         super();
         if (typeof this.attachInternals == "function") {
@@ -302,13 +315,13 @@ class JBTimeInputWebComponent extends HTMLElement {
         }
     }
     static get observedAttributes() {
-        return ['label', 'message', 'value', 'name', 'close-button-text'];
+        return ['label', 'message', 'value', 'name', 'close-button-text', 'frontal-zero'];
     }
-    attributeChangedCallback(name, oldValue, newValue) {
+    attributeChangedCallback(name:string, oldValue:string, newValue:string) {
         // do something when an attribute has changed
         this.onAttributeChange(name, newValue);
     }
-    onAttributeChange(name, value) {
+    onAttributeChange(name:string, value:string) {
         switch (name) {
             case 'label':
                 this.#elements.label.value.innerHTML = value;
@@ -330,6 +343,8 @@ class JBTimeInputWebComponent extends HTMLElement {
             case 'close-button-text':
                 this.#elements.timePicker.closeButton.innerHTML = value;
                 break;
+            case 'frontal-zero':
+                this.frontalZero = Boolean(value);
         }
 
     }

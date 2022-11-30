@@ -132,7 +132,21 @@ if you want to just input minute and hour and disable second in picker and input
 ```javascript
     document.querySelector('jb-time-input').secondEnabled = false;
 ```
-
+### frontal zero
+if you want picker to show `02` instead of `2` when number is less than 10 just set `frontalZero` of timepicker default is `false`.    
+```js
+document.querySelector('jb-time-input').frontalZero = true;
+```
+or
+```html
+<jb-time-input frontal-zero="true"></jb-time-input>
+```
+### optional units
+if you want to tell user some units is optional and greyout the numbers in picker you can set `optionalUnits`
+```js
+//it could be 'hour' or 'minute' or 'second'
+document.querySelector('jb-time-input').optionalUnits = ['hour'];
+```
 ### set custom style
 
 in some cases in your project you need to change defualt style of web-component for example you need zero margin or different border-radius and etc.
