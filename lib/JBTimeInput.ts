@@ -229,7 +229,6 @@ class JBTimeInputWebComponent extends HTMLElement {
         detail: null,
     }
     set optionalUnits(value: TimeUnitsString[]) {
-        debugger;
         this.#elements.timePicker.component.optionalUnits = value;
     }
     get optionalUnits() {
