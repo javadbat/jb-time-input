@@ -1,5 +1,6 @@
 import { JBTimePickerWebComponent } from "jb-time-picker";
 
+export type TimeUnits = "hour" | "minute" | "second";
 export type JBTimeInputElements = {
     input:HTMLInputElement,
     timePicker:{
