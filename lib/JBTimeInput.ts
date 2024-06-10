@@ -11,7 +11,7 @@ import {
 import {
   JBTimePickerValueObject,
   TimeUnitsString,
-} from "jb-time-picker/dist/Types";
+} from "jb-time-picker/lib/Types";
 import { SecondRange } from "../../jb-time-picker/lib/Types";
 class JBTimeInputWebComponent extends HTMLElement {
   static get formAssociated() {
