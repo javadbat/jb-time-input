@@ -40,7 +40,7 @@ with npm:
 like any other javascript DOM element you can bind event to web component with `DOM.addEventListener` the supported event is:
 
 ```javascript
-    //when defualt property are defined best time for impl your config
+    //when default property are defined best time for impl your config
     document.querySelector('jb-date-input').addEventListener('init',this.onCalendarElementInitiated);
 
     //when calendar init all property and function and dom created and bind successully
@@ -133,7 +133,7 @@ if you want to just input minute and hour and disable second in picker and input
     document.querySelector('jb-time-input').secondEnabled = false;
 ```
 ### frontal zero
-if you want picker to show `02` instead of `2` when number is less than 10 just set `frontalZero` of timepicker default is `false`.    
+if you want picker to show `02` instead of `2` when number is less than 10 just set `frontalZero` of time picker default is `false`.    
 ```js
 document.querySelector('jb-time-input').frontalZero = true;
 ```
