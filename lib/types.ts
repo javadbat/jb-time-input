@@ -1,10 +1,10 @@
-import { JBTimePickerWebComponent } from "jb-time-picker";
+import { type JBTimePickerWebComponent } from "jb-time-picker";
 import {type JBPopoverWebComponent} from 'jb-popover';
 export type TimeUnits = "hour" | "minute" | "second";
 export type JBTimeInputElements = {
     input:HTMLInputElement,
     timePicker:{
-        wrapper:HTMLDivElement,
+        wrapper:JBPopoverWebComponent,
         component:JBTimePickerWebComponent,
         closeButton:HTMLButtonElement,
     },
