@@ -1,0 +1,27 @@
+:host(:focus), :host(:focus-visible){
+    outline: none;
+}
+.jb-time-input-web-component{
+    width: 100%;
+    margin: var(--jb-time-input-margin ,  12px 0);
+    position: relative;
+    jb-popover{
+        .close-time-picker-button{
+            width: auto;
+            padding: 8px 16px;
+            background-color: #2852bd00;
+            border:none;
+            border-radius: 8px;
+            font-family: inherit;
+            cursor: pointer;
+            transition: all 0.3s 0s ease;
+            &:hover{
+                background-color: #2852bd0f;
+            }
+            &:focus{
+                outline: none;
+            }
+        }
+    }
+
+}
