@@ -19,6 +19,9 @@ import { ValidationHelper } from "../../../common/scripts/validation/validation-
 import { JBTimePickerWebComponent } from "jb-time-picker";
 
 // eslint-disable-next-line no-duplicate-imports
+import { JBInputWebComponent } from "jb-input";
+
+// eslint-disable-next-line no-duplicate-imports
 export class JBTimeInputWebComponent extends HTMLElement implements WithValidation<JBTimeInputValidationValue> {
   static get formAssociated() {
     return true;
@@ -37,8 +40,8 @@ export class JBTimeInputWebComponent extends HTMLElement implements WithValidati
       }
     }
   }
-  #validation = new ValidationHelper<JBTimeInputValidationValue>(this.showValidationError,this.clearValidationError,()=>this.value,()=>this.value,()=>[]);
-  get validation(){
+  #validation = new ValidationHelper<JBTimeInputValidationValue>(this.showValidationError, this.clearValidationError, () => this.value, () => this.value, () => []);
+  get validation() {
     return this.#validation;
   }
   get #inputRanges() {
@@ -267,15 +270,16 @@ export class JBTimeInputWebComponent extends HTMLElement implements WithValidati
     this.#registerEventListener();
   }
   #registerEventListener() {
-    this.#elements.input.addEventListener("keydown",this.#onInputKeyDown.bind(this));
-    this.#elements.input.addEventListener("keyup",this.#onInputKeyup.bind(this));
-    this.#elements.input.addEventListener("change",this.#onInputChange.bind(this));
-    this.#elements.input.addEventListener("keypress",this.#onInputKeyPress.bind(this));
-    this.#elements.input.addEventListener("focus",this.#onInputFocus.bind(this));
+    this.#elements.input.addEventListener("keydown", this.#onInputKeyDown.bind(this));
+    this.#elements.input.addEventListener("keyup", this.#onInputKeyup.bind(this));
+    this.#elements.input.addEventListener("change", this.#onInputChange.bind(this));
+    this.#elements.input.addEventListener("keypress", this.#onInputKeyPress.bind(this));
+    this.#elements.input.addEventListener("beforeinput", this.#onInputBeforeInput.bind(this), {});
+    this.#elements.input.addEventListener("focus", this.#onInputFocus.bind(this));
     this.#elements.input.addEventListener("blur", this.#onInputBlur.bind(this));
-    this.#elements.timePicker.component.addEventListener("change",this.#onTimePickerChange.bind(this));
-    this.#elements.timePicker.closeButton.addEventListener("click", () => {this.showTimePicker = false;});
-    this.#elements.timePicker.component.addEventListener("blur",this.#onTimePickerBlur.bind(this));
+    this.#elements.timePicker.component.addEventListener("change", this.#onTimePickerChange.bind(this));
+    this.#elements.timePicker.closeButton.addEventListener("click", () => { this.showTimePicker = false; });
+    this.#elements.timePicker.component.addEventListener("blur", this.#onTimePickerBlur.bind(this));
   }
   #initProp() {
     //set initial value to input
@@ -284,8 +288,8 @@ export class JBTimeInputWebComponent extends HTMLElement implements WithValidati
   #resetInputValue() {
     const value = "00:00";
     if (this.secondEnabled) {
-      value.concat(":00") ;
-    } 
+      value.concat(":00");
+    }
     this.value = value;
   }
   static get observedAttributes() {
@@ -305,10 +309,10 @@ export class JBTimeInputWebComponent extends HTMLElement implements WithValidati
   #onAttributeChange(name: string, value: string) {
     switch (name) {
       case "label":
-        this.#elements.input.setAttribute('label',value);
+        this.#elements.input.setAttribute('label', value);
         break;
       case "message":
-        this.#elements.input.setAttribute("message",value);
+        this.#elements.input.setAttribute("message", value);
         break;
       case "value":
         this.value = value;
@@ -327,7 +331,7 @@ export class JBTimeInputWebComponent extends HTMLElement implements WithValidati
    * @public 
    * @description add given number to hour (you can provide negative value for subtract)
    */
-  addHour(interval:number) {
+  addHour(interval: number) {
     const hour = this.hour + interval;
     this.hour = hour;
   }
@@ -335,7 +339,7 @@ export class JBTimeInputWebComponent extends HTMLElement implements WithValidati
    * @public 
    * @description add given number to minute (you can provide negative value for subtract)
    */
-  addMinute(interval:number) {
+  addMinute(interval: number) {
     const minute = this.minute + interval;
     this.minute = minute;
   }
@@ -343,15 +347,18 @@ export class JBTimeInputWebComponent extends HTMLElement implements WithValidati
    * @public 
    * @description add given number to second (you can provide negative value for subtract)
    */
-  addSecond(interval:number) {
+  addSecond(interval: number) {
     const second = (this.second || 0) + interval;
     this.second = second;
   }
-  #inputChar(char:string, pos:number) {
+  #inputChar(char: string, pos: number) {
     const { dividerRange, hourRange, minuteRange, secondRange } =
       this.#inputRanges;
     if (dividerRange.includes(pos)) {
       pos++;
+      if(char == ":"){
+        return;
+      }
     }
     if (hourRange[0] == pos) {
       const tailChar = isNaN(Number(this.#elements.input.value[hourRange[1]]))
@@ -399,22 +406,10 @@ export class JBTimeInputWebComponent extends HTMLElement implements WithValidati
       }
     }
   }
-  #onInputKeyDown(e:KeyboardEvent) {
+  #onInputKeyDown(e: KeyboardEvent) {
     const { dividerRange, hourRange, minuteRange, secondRange } =
       this.#inputRanges;
     const caretPos = (e.target! as HTMLInputElement).selectionStart;
-    if (e.keyCode == 8) {
-      //on back space
-      if (caretPos == null || caretPos == 0) {
-        return;
-      }
-      // we map to x+1 becuase carrot is after ":" on back space
-      if (!dividerRange.map((x) => x + 1).includes(caretPos)) {
-        this.#inputChar("0", caretPos - 1);
-      }
-      (e.target as HTMLInputElement).setSelectionRange(caretPos - 1, caretPos - 1);
-      e.preventDefault();
-    }
     if (e.keyCode == 38 || e.keyCode == 40) {
       //on up key and down key
       let interval = 0;
@@ -455,124 +450,137 @@ export class JBTimeInputWebComponent extends HTMLElement implements WithValidati
     }
     this.#callOnKeyDownEvent(e);
   }
-  #callOnKeyDownEvent(e:KeyboardEvent) {
-    const keyDownInitObj = {
-      key: e.key,
-      keyCode: e.keyCode,
-      code: e.code,
-      ctrlKey: e.ctrlKey,
-      shiftKey: e.shiftKey,
-      altKey: e.altKey,
-      charCode: e.charCode,
-      which: e.which,
+  #callOnKeyDownEvent(e: KeyboardEvent) {
+    const keyDownInitObj: KeyboardEventInit = {
+      ...e,
+      cancelable: false
     };
     const event = new KeyboardEvent("keydown", keyDownInitObj);
     this.dispatchEvent(event);
   }
-  #onInputKeyPress(e: KeyboardEvent) {
-    const target: HTMLInputElement = e.target as HTMLInputElement;
+  #onInputBeforeInput(e: InputEvent) {
+    const target = e.target as JBInputWebComponent;
     let caretPos = target.selectionStart || 0;
-    let inputtedChar = e.key;
-    const { dividerRange, hourRange, minuteRange, secondRange, maxCaretPos } =
-      this.#inputRanges;
-    if (!isNaN(Number(inputtedChar))) {
-      if (dividerRange.includes(caretPos)) {
-        caretPos++;
-        target.setSelectionRange(caretPos, caretPos);
-      }
-      if (caretPos > maxCaretPos) {
-        caretPos = maxCaretPos;
-      }
-      //first we must see what is the inputed char hour or  minute or second
-      //handle hour
-      if (hourRange.includes(caretPos)) {
-        this.#elements.timePicker.component.setTimeUnitFocus("hour");
-        if (caretPos == hourRange[0]) {
-          if (inputtedChar > "2") {
-            this.hour = parseInt(inputtedChar);
-            caretPos++;
+    const { dividerRange, hourRange, minuteRange, secondRange, maxCaretPos } = this.#inputRanges;
+    const actionPerChar = (inputtedChar: string)=>{
+      if (!Number.isNaN(Number(inputtedChar))) {
+        if (dividerRange.includes(caretPos)) {
+          caretPos++;
+          target.setSelectionRange(caretPos, caretPos);
+        }
+        if (caretPos > maxCaretPos) {
+          caretPos = maxCaretPos;
+        }
+        //first we must see what is the inputted char hour or  minute or second
+        //handle hour
+        if (hourRange.includes(caretPos)) {
+          this.#elements.timePicker.component.setTimeUnitFocus("hour");
+          if (caretPos == hourRange[0]) {
+            if (inputtedChar > "2") {
+              this.hour = Number(inputtedChar);
+              caretPos++;
+            } else {
+              const tailNum: string = isNaN(
+                Number(this.#elements.input.value[hourRange[1]])
+              )
+                ? "0"
+                : this.#elements.input.value[hourRange[1]];
+              this.hour = parseInt(inputtedChar + tailNum);
+            }
           } else {
-            const tailNum: string = isNaN(
-              Number(this.#elements.input.value[hourRange[1]])
+            if (
+              inputtedChar > "4" &&
+              this.#elements.input.value[hourRange[0]] == "2"
+            ) {
+              inputtedChar = "4";
+            }
+            const headChar: string = isNaN(
+              Number(this.#elements.input.value[hourRange[0]])
             )
               ? "0"
-              : this.#elements.input.value[hourRange[1]];
-            this.hour = parseInt(inputtedChar + tailNum);
-          }
-        } else {
-          if (
-            inputtedChar > "4" &&
-            this.#elements.input.value[hourRange[0]] == "2"
-          ) {
-            inputtedChar = "4";
-          }
-          const headChar: string = isNaN(
-            Number(this.#elements.input.value[hourRange[0]])
-          )
-            ? "0"
-            : this.#elements.input.value[hourRange[0]];
-          this.hour = parseInt(headChar + inputtedChar);
-        }
-      }
-      //handle minute
-      if (minuteRange.includes(caretPos)) {
-        this.#elements.timePicker.component.setTimeUnitFocus("minute");
-        if (caretPos == minuteRange[0]) {
-          if (inputtedChar > "5") {
-            this.#inputChar("0", caretPos);
-            caretPos++;
+              : this.#elements.input.value[hourRange[0]];
+            this.hour = parseInt(headChar + inputtedChar);
           }
         }
-        this.#inputChar(inputtedChar, caretPos);
-      }
-      //handle second
-      if (this.secondEnabled && secondRange.includes(caretPos)) {
-        this.#elements.timePicker.component.setTimeUnitFocus("second");
-        if (caretPos == secondRange[0]) {
-          if (inputtedChar > "5") {
-            this.#inputChar("0", caretPos);
-            caretPos++;
+        //handle minute
+        if (minuteRange.includes(caretPos)) {
+          this.#elements.timePicker.component.setTimeUnitFocus("minute");
+          if (caretPos == minuteRange[0]) {
+            if (inputtedChar > "5") {
+              this.#inputChar("0", caretPos);
+              caretPos++;
+            }
           }
+          this.#inputChar(inputtedChar, caretPos);
         }
-        this.#inputChar(inputtedChar, caretPos);
+        //handle second
+        if (this.secondEnabled && secondRange.includes(caretPos)) {
+          this.#elements.timePicker.component.setTimeUnitFocus("second");
+          if (caretPos == secondRange[0]) {
+            if (inputtedChar > "5") {
+              this.#inputChar("0", caretPos);
+              caretPos++;
+            }
+          }
+          this.#inputChar(inputtedChar, caretPos);
+        }
       }
-      target.setSelectionRange(caretPos + 1, caretPos + 1);
+    };
+    const inputtedString = e.data;
+    if(['deleteContentBackward','deleteContentForward','delete', 'deleteByCut', 'deleteByDrag'].includes(e.inputType)) {
+      //in delete mode
+      if (caretPos == null || caretPos == 0) {
+        return;
+      }
+      // we map to x+1 becuase carrot is after ":" on back space
+      if (!dividerRange.map((x) => x + 1).includes(caretPos)) {
+        this.#inputChar("0", caretPos - 1);
+      }
+      (e.target as HTMLInputElement).setSelectionRange(caretPos - 1, caretPos - 1);
+      e.preventDefault();
+    }else if(typeof inputtedString == "string") {
+      //in insert mode
+      if(e.inputType == "insertText"){
+        for( const char of inputtedString){
+          actionPerChar(char);
+        }
+        target.setSelectionRange(caretPos + 1, caretPos + 1);
+        e.preventDefault();
+      }
+      if(e.inputType == "insertFromPaste"){
+        this.#handlePaste(inputtedString);
+        e.preventDefault();
+      }
     }
-    e.preventDefault();
-    this.callOnKeyPressEvent(e);
   }
-  callOnKeyPressEvent(e: KeyboardEvent) {
+  /**@description handle paste on beforeInput */
+  #handlePaste(pastedValue:string){
+    const selectionStart = this.#elements.input.selectionStart;
+    const {maxCaretPos } = this.#inputRanges;
+    const allowedPasteLength = (maxCaretPos +1 ) - selectionStart;
+    const replaceValue = pastedValue.replace(/[^0-9:]/g,"").slice(0,allowedPasteLength);
+    replaceValue.split('').forEach((char,i)=>{
+      this.#inputChar(char,selectionStart + i);
+    });
+  }
+
+  #onInputKeyPress(e: KeyboardEvent) {
+    this.#dispatchOnKeyPressEvent(e);
+  }
+  #dispatchOnKeyPressEvent(e: KeyboardEvent) {
     const keyPressInitObj: KeyboardEventInit = {
-      altKey: e.altKey,
-      bubbles: e.bubbles,
-      cancelable: e.cancelable,
-      charCode: e.charCode,
-      code: e.code,
-      ctrlKey: e.ctrlKey,
-      detail: e.detail,
-      key: e.key,
-      keyCode: e.keyCode,
-      location: e.location,
-      metaKey: e.metaKey,
-      repeat: e.repeat,
-      shiftKey: e.shiftKey,
-      which: e.which,
+      ...e,
+      cancelable: false
     };
     const event = new KeyboardEvent("keypress", keyPressInitObj);
     this.dispatchEvent(event);
   }
-  #onInputKeyup(e:KeyboardEvent) {
+  #onInputKeyup(e: KeyboardEvent) {
     //TODO:
     // this.triggerInputValidation(false);
-    const keyUpInitObj = {
-      key: e.key,
-      keyCode: e.keyCode,
-      code: e.code,
-      ctrlKey: e.ctrlKey,
-      shiftKey: e.shiftKey,
-      altKey: e.altKey,
-      charCode: e.charCode,
-      which: e.which,
+    const keyUpInitObj: KeyboardEventInit = {
+      ...e,
+      cancelable: false
     };
     const event = new KeyboardEvent("keyup", keyUpInitObj);
     this.dispatchEvent(event);
@@ -625,7 +633,7 @@ export class JBTimeInputWebComponent extends HTMLElement implements WithValidati
   /**
    * @description check if time is in proper format of time
    */
-  #checkTimeFormatValidation(text:string) {
+  #checkTimeFormatValidation(text: string) {
     let validationRegex: RegExp | null;
     if (this.secondEnabled) {
       validationRegex =
@@ -636,9 +644,9 @@ export class JBTimeInputWebComponent extends HTMLElement implements WithValidati
     const result = validationRegex.test(text);
     return result;
   }
-  
-   
-  showValidationError(error:string) {
+
+
+  showValidationError(error: string) {
     this.#elements.input.showValidationError(error);
   }
   clearValidationError() {
@@ -651,7 +659,7 @@ export class JBTimeInputWebComponent extends HTMLElement implements WithValidati
     //public method
     this.#elements.input.focus();
   }
-  #onTimePickerChange(e:CustomEvent) {
+  #onTimePickerChange(e: CustomEvent) {
     const { hour, minute, second } = (e.target as JBTimePickerWebComponent).value;
     this.hour = hour;
     this.minute = minute;
