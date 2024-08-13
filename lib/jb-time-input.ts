@@ -2,31 +2,23 @@ import HTML from "./jb-time-input.html";
 import CSS from "./jb-time-input.scss";
 import "jb-time-picker";
 import "jb-input";
-import {
-  JBTimeInputElements,
-  JBTimeInputValidationValue,
-} from "./types";
-import {
-  JBTimePickerValueObject,
-  TimeUnitsString,
-  SecondRange
-} from "jb-time-picker/types";
-import 'jb-popover';
-//TODO: change it to core validation packages 
-import { WithValidation } from "../../../common/scripts/validation/validation-helper-types";
-import { ValidationHelper } from "../../../common/scripts/validation/validation-helper";
-// eslint-disable-next-line no-duplicate-imports
-import { JBTimePickerWebComponent } from "jb-time-picker";
-
 // eslint-disable-next-line no-duplicate-imports
 import { JBInputWebComponent } from "jb-input";
-
 // eslint-disable-next-line no-duplicate-imports
+import { JBTimePickerWebComponent } from "jb-time-picker";
+import { JBTimeInputElements, JBTimeInputValidationValue, } from "./types";
+import { JBTimePickerValueObject, TimeUnitsString, SecondRange } from "jb-time-picker/types";
+import 'jb-popover';
+//TODO: change it to core validation packages 
+import { WithValidation } from "jb-validation/types";
+import { ValidationHelper } from "jb-validation";
+import { JBInputValue } from "jb-input/types";
+import { enToFaDigits, faToEnDigits } from "../../../common/scripts/persian-helper";
+
 export class JBTimeInputWebComponent extends HTMLElement implements WithValidation<JBTimeInputValidationValue> {
   static get formAssociated() {
     return true;
   }
-
   #elements!: JBTimeInputElements;
   get value() {
     return this.#elements.input.value;
@@ -40,7 +32,7 @@ export class JBTimeInputWebComponent extends HTMLElement implements WithValidati
       }
     }
   }
-  #validation = new ValidationHelper<JBTimeInputValidationValue>(this.showValidationError, this.clearValidationError, () => this.value, () => this.value, () => []);
+  #validation = new ValidationHelper<JBTimeInputValidationValue>(this.showValidationError, this.clearValidationError, this.#getValidationValue, () => this.value, () => []);
   get validation() {
     return this.#validation;
   }
@@ -214,6 +206,15 @@ export class JBTimeInputWebComponent extends HTMLElement implements WithValidati
       }
     }
   }
+  //will show persian number even if user type en number but value will be passed as en number
+  #showPersianNumber = false;
+  get showPersianNumber() {
+    return this.#showPersianNumber;
+  }
+  set showPersianNumber(value: boolean) {
+    this.#showPersianNumber = Boolean(value);
+    this.value = `${this.value}`;
+  }
   #internals: ElementInternals | null = null;
   #valueOnInputFocus: string | null = null;
   set optionalUnits(value: TimeUnitsString[]) {
@@ -284,6 +285,7 @@ export class JBTimeInputWebComponent extends HTMLElement implements WithValidati
   #initProp() {
     //set initial value to input
     this.#resetInputValue();
+    this.#elements.input.addStandardValueCallback(this.#standardTimeValue.bind(this));
   }
   #resetInputValue() {
     const value = "00:00";
@@ -327,6 +329,16 @@ export class JBTimeInputWebComponent extends HTMLElement implements WithValidati
         this.frontalZero = Boolean(value);
     }
   }
+  #standardTimeValue(inputtedString: string, oldValue: JBInputValue, prevResult: JBInputValue): JBInputValue {
+    let displayValue = inputtedString;
+    if(this.showPersianNumber){
+      displayValue = enToFaDigits(displayValue);
+    }
+    return {
+      displayValue,
+      value:inputtedString
+    };
+  }
   /**
    * @public 
    * @description add given number to hour (you can provide negative value for subtract)
@@ -356,7 +368,7 @@ export class JBTimeInputWebComponent extends HTMLElement implements WithValidati
       this.#inputRanges;
     if (dividerRange.includes(pos)) {
       pos++;
-      if(char == ":"){
+      if (char == ":") {
         return;
       }
     }
@@ -462,7 +474,7 @@ export class JBTimeInputWebComponent extends HTMLElement implements WithValidati
     const target = e.target as JBInputWebComponent;
     let caretPos = target.selectionStart || 0;
     const { dividerRange, hourRange, minuteRange, secondRange, maxCaretPos } = this.#inputRanges;
-    const actionPerChar = (inputtedChar: string)=>{
+    const actionPerChar = (inputtedChar: string) => {
       if (!Number.isNaN(Number(inputtedChar))) {
         if (dividerRange.includes(caretPos)) {
           caretPos++;
@@ -526,41 +538,41 @@ export class JBTimeInputWebComponent extends HTMLElement implements WithValidati
         }
       }
     };
-    const inputtedString = e.data;
-    if(['deleteContentBackward','deleteContentForward','delete', 'deleteByCut', 'deleteByDrag'].includes(e.inputType)) {
+    const inputtedString = faToEnDigits(e.data);
+    if (['deleteContentBackward', 'deleteContentForward', 'delete', 'deleteByCut', 'deleteByDrag'].includes(e.inputType)) {
       //in delete mode
       if (caretPos == null || caretPos == 0) {
         return;
       }
-      // we map to x+1 becuase carrot is after ":" on back space
+      // we map to x+1 because carrot is after ":" on back space
       if (!dividerRange.map((x) => x + 1).includes(caretPos)) {
         this.#inputChar("0", caretPos - 1);
       }
       (e.target as HTMLInputElement).setSelectionRange(caretPos - 1, caretPos - 1);
       e.preventDefault();
-    }else if(typeof inputtedString == "string") {
+    } else if (typeof inputtedString == "string") {
       //in insert mode
-      if(e.inputType == "insertText"){
-        for( const char of inputtedString){
+      if (e.inputType == "insertText") {
+        for (const char of inputtedString) {
           actionPerChar(char);
         }
         target.setSelectionRange(caretPos + 1, caretPos + 1);
         e.preventDefault();
       }
-      if(e.inputType == "insertFromPaste"){
+      if (e.inputType == "insertFromPaste") {
         this.#handlePaste(inputtedString);
         e.preventDefault();
       }
     }
   }
   /**@description handle paste on beforeInput */
-  #handlePaste(pastedValue:string){
+  #handlePaste(pastedValue: string) {
     const selectionStart = this.#elements.input.selectionStart;
-    const {maxCaretPos } = this.#inputRanges;
-    const allowedPasteLength = (maxCaretPos +1 ) - selectionStart;
-    const replaceValue = pastedValue.replace(/[^0-9:]/g,"").slice(0,allowedPasteLength);
-    replaceValue.split('').forEach((char,i)=>{
-      this.#inputChar(char,selectionStart + i);
+    const { maxCaretPos } = this.#inputRanges;
+    const allowedPasteLength = (maxCaretPos + 1) - selectionStart;
+    const replaceValue = pastedValue.replace(/[^0-9:]/g, "").slice(0, allowedPasteLength);
+    replaceValue.split('').forEach((char, i) => {
+      this.#inputChar(char, selectionStart + i);
     });
   }
 
@@ -613,7 +625,7 @@ export class JBTimeInputWebComponent extends HTMLElement implements WithValidati
   #onInputFocus(e: FocusEvent) {
     this.#valueOnInputFocus = this.value;
     this.showTimePicker = true;
-    const event = new FocusEvent("focus");
+    const event = new FocusEvent("focus",{...e});
     this.dispatchEvent(event);
   }
   #onInputBlur(e: FocusEvent) {
@@ -644,8 +656,6 @@ export class JBTimeInputWebComponent extends HTMLElement implements WithValidati
     const result = validationRegex.test(text);
     return result;
   }
-
-
   showValidationError(error: string) {
     this.#elements.input.showValidationError(error);
   }
@@ -701,6 +711,17 @@ export class JBTimeInputWebComponent extends HTMLElement implements WithValidati
   }
   #enableSecond() {
     this.value = `${this.hourString}:${this.minuteString}:${this.secondString}`;
+  }
+  #getValidationValue(): JBTimeInputValidationValue {
+    return {
+      displayValue: this.#elements.input.displayValue,
+      value: this.#elements.input.value,
+      valueObject: {
+        hour: this.hour,
+        minute: this.minute,
+        second: this.second
+      }
+    };
   }
 }
 const myElementNotExists = !customElements.get("jb-time-input");

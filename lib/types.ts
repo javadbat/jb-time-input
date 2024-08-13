@@ -11,7 +11,11 @@ export type JBTimeInputElements = {
         closeButton:HTMLButtonElement,
     },
 }
-export type JBTimeInputValidationValue = string;
+export type JBTimeInputValidationValue = {
+    value:string,
+    displayValue:string,
+    valueObject:{[key in TimeUnits]:number|null}
+};
 declare global {
     interface ElementInternals {
         setFormValue(value: string): void;
