@@ -147,6 +147,12 @@ if you want to tell user some units is optional and greyout the numbers in picke
 //it could be 'hour' or 'minute' or 'second'
 document.querySelector('jb-time-input').optionalUnits = ['hour'];
 ```
+### show persian number
+if you want to show persian number instead of english number chars. you can set `showPersianNumber`:
+```js 
+document.querySelector('jb-time-input').showPersianNumber = true
+```
+
 ### set custom style
 
 in some cases in your project you need to change default style of web-component for example you need zero margin or different border-radius and etc.
