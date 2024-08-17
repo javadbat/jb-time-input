@@ -2,16 +2,16 @@ import HTML from "./jb-time-input.html";
 import CSS from "./jb-time-input.scss";
 import "jb-time-picker";
 import "jb-input";
-// eslint-disable-next-line no-duplicate-imports
-import { JBInputWebComponent } from "jb-input";
-// eslint-disable-next-line no-duplicate-imports
-import { JBTimePickerWebComponent } from "jb-time-picker";
-import { JBTimeInputElements, JBTimeInputValidationValue, } from "./types";
-import { JBTimePickerValueObject, TimeUnitsString, SecondRange } from "jb-time-picker/types";
 import 'jb-popover';
-import { WithValidation } from "jb-validation/types";
+// eslint-disable-next-line no-duplicate-imports
+import { type JBInputWebComponent } from "jb-input";
+// eslint-disable-next-line no-duplicate-imports
+import { type JBTimePickerWebComponent } from "jb-time-picker";
+import { type JBTimeInputElements, type JBTimeInputValidationValue, } from "./types";
+import { type JBTimePickerValueObject, type TimeUnitsString, type SecondRange } from "jb-time-picker/types";
+import { type WithValidation } from "jb-validation/types";
 import { ValidationHelper } from "jb-validation";
-import { JBInputValue } from "jb-input/types";
+import { type JBInputValue } from "jb-input/types";
 import { enToFaDigits, faToEnDigits } from "../../../common/scripts/persian-helper";
 
 export class JBTimeInputWebComponent extends HTMLElement implements WithValidation<JBTimeInputValidationValue> {

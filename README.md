@@ -2,6 +2,7 @@
 
 [![Published on webcomponents.org](https://img.shields.io/badge/webcomponents.org-published-blue.svg)](https://www.webcomponents.org/element/jb-time-input)
 [![GitHub license](https://img.shields.io/badge/license-MIT-brightgreen.svg)](https://raw.githubusercontent.com/javadbat/jb-time-input/master/LICENSE)
+[![NPM Downloads](https://img.shields.io/npm/dw/jb-time-input)](https://www.npmjs.com/package/jb-time-input)
 
 in jb-time-input you can create a input specialy for time the advantage is:
 sample: <https://codepen.io/javadbat/pen/QWdxzKb>
@@ -158,25 +159,17 @@ document.querySelector('jb-time-input').showPersianNumber = true
 ```
 
 ### set custom style
+jb-time-input use [jb-input](https://github.com/javadbat/jb-input) and [jb-time-picker](https://github.com/javadbat/jb-time-picker) and [jb-popover](https://github.com/javadbat/jb-popover) underneath so to change the styles of your component read custom style section of these components.
+more than above here is the css variable that we use in jb-time-input itself:
 
-in some cases in your project you need to change default style of web-component for example you need zero margin or different border-radius and etc.
-if you want to set a custom style to this web-component all you need is to set this css variable in parent scope of web-component.
 | css variable name                       | description                                                                                              |
 | -------------                           | -------------                                                                                            |
-| --jb-time-input-label-font-size         | change font size of web component label default is `0.8em`                                               |
 | --jb-time-input-margin                  | outer margin of web component default is `12px 0`                                                        |
-| --jb-time-input-height                  | height of input element default is `40px`                                                                |
-| --jb-time-input-border-color            | input box border color default is `f7f6f6`                                                               |
-| --jb-time-input-bgcolor                 | background color of input box default is `#f7f6f6`                                                       |
-| --jb-time-input-border-botton-width     | border bottom width on input box default is `3px`                                                        |
-| --jb-time-input-border-radius           | input box border radius  default is `16px`                                                               |
-| --jb-time-input-border-color-focus      | input box border-color when user focus                                                                   |
-| --jb-time-input-input-padding           | inner padding of input element default is `2px 12px 0 12px`                                              |
-| --jb-time-input-value-font-size         | font size of input value default is `1.1em`                                                              |
-| --jb-time-input-value-color             | color of input value default is `#1f1735`                                                                |
-| --jb-time-input-placeholder-color       | color of input placeholder                                                                               |
-| --jb-time-input-placeholder-font-size   | font size of placeholder                                                                                 |
-| --jb-time-input-message-font-size       | message and error message under input box font size defaulyt is `0.7em`                                  |
-| --jb-time-input-message-box-display     | if you want to hide a error message under the inputbox and show message in your own way set it to `none` |
-| --jb-time-input-message-error-color     | color of message error default is `red` but you can change it to what you want                           |
-| --jb-time-input-label-color             | input label color                                                                                        |
+
+## Other Related Docs:
+
+- see [jb-time-input-react](https://github.com/javadbat/jb-time-input-react) if you want to use this component in ReactJS.
+
+- see [All JB Design system Component List](https://github.com/javadbat/design-system/blob/master/docs/component-list.md) for more components.
+
+- use [Contribution Guide](https://github.com/javadbat/design-system/blob/master/docs/contribution-guide.md) if you want to contribute in this component.
