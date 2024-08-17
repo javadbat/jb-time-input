@@ -75,30 +75,39 @@ to set value of time input you have 2 way:
 ```
 
 ### validation
+jb-time-input use [jb-validation](https://github.com/javadbat/jb-validation) inside to handle validation so for more information you can read it's documentation.  
 
 jb time input will check validation automatically and show error on user blur the input and hide error on user type and blur to use this feature you just have to set validation list of component.
 
 ```javascript
 document.querySelector('jb-time-input').validationList = [
+    //regex validator
     {
-    // custom validator with regex
-            validator: /^[1][1234].*$/g,
-            message:"market is only open on 11-14."
+      validator: /^[1][1234].*$/g,
+      message:"hour  must be between 11 and 14"
     },
-    //custom validator with function 
+    //callback function validator
     {
-            validator: (typedText)=>{typedText?return true : return false;},
-            message:"you must fill the time"
+      validator:({displayValue,value,valueObject})=>{
+        //display value is the value user see
+        //value is the value developer get by dom.value
+        //valueObject is the {hour:number,minute:number,second:number} object contain inputted value in number
+        if(valueObject.minute<30){
+          return false;
+        }
+        return true;
+      },
+      message:'minute must be 30 to 60'
     }
-]
+  ]
 ```
 
-you can trigger validation manually by calling `triggerInputValidation` function. for example you can call it when submit button clicked and check if value is valid or not.
+you can trigger validation manually by calling `checkValidity` function. for example you can call it when submit button clicked and check if value is valid or not.
 
 ```javascript
     // if you set showError false you can get validation result but component wont show error to user by itself its good when you want show error in your own way
     const showError = true;
-    const validationResult =  document.querySelector('jb-time-input').triggerInputValidation(showError);
+    const validationResult =  document.querySelector('jb-time-input').validation.checkValidity(showError);
     if(validationResult.isAllValid){
         alert('all validation are passed')
     }else{
@@ -110,16 +119,11 @@ you can trigger validation manually by calling `triggerInputValidation` function
 you can also get validation result of your time input by following way:
 
 ```javascript
-    document.querySelector('jb-time-input').validation
-    //in change event detail
-    document.querySelector('jb-time-input').addEventListener('change',(e)=>{
-        alert(e.detail.isValid);
-        console.log(e.detail.validationObject);
-    });
+    document.querySelector('jb-time-input').validation.resultSummary
 
 ```
 
-### configurabe attributes
+### configurable attributes
 
 you can change some attribute in html like label or message configurable attribute are:
 
