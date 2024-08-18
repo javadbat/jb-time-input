@@ -4,18 +4,18 @@
 [![GitHub license](https://img.shields.io/badge/license-MIT-brightgreen.svg)](https://raw.githubusercontent.com/javadbat/jb-time-input/master/LICENSE)
 [![NPM Downloads](https://img.shields.io/npm/dw/jb-time-input)](https://www.npmjs.com/package/jb-time-input)
 
-in jb-time-input you can create a input specialy for time the advantage is:
-sample: <https://codepen.io/javadbat/pen/QWdxzKb>
+in jb-time-input you can create a input special for time the advantage is:
 
 - validation so it only accept time value and not any other invalid format
 - support arrow key to increase and decrease time value
 - time picker
 - support both rtl and ltr direction
 - easy to use and can be used in any js framework like React, Vue, Angular,etc
-- can be used in purejs without any other dependancy
+- can be used in pure js without any other dependency
 - has a touch friendly time-picker
 - responsive and mobile friendly
 
+Demo : [codepen](https://codepen.io/javadbat/pen/QWdxzKb);
 ## instruction
 
 ### installation and usage
@@ -147,7 +147,7 @@ or
 <jb-time-input frontal-zero="true"></jb-time-input>
 ```
 ### optional units
-if you want to tell user some units is optional and greyout the numbers in picker you can set `optionalUnits`
+if you want to tell user some units is optional and grey the numbers in picker, you can set `optionalUnits`
 ```js
 //it could be 'hour' or 'minute' or 'second'
 document.querySelector('jb-time-input').optionalUnits = ['hour'];
@@ -159,7 +159,9 @@ document.querySelector('jb-time-input').showPersianNumber = true
 ```
 
 ### set custom style
-jb-time-input use [jb-input](https://github.com/javadbat/jb-input) and [jb-time-picker](https://github.com/javadbat/jb-time-picker) and [jb-popover](https://github.com/javadbat/jb-popover) underneath so to change the styles of your component read custom style section of these components.
+
+you can customize jb-time-input look  by setting css variable in your app.    
+jb-time-input use [jb-input](https://github.com/javadbat/jb-input) and [jb-time-picker](https://github.com/javadbat/jb-time-picker) and [jb-popover](https://github.com/javadbat/jb-popover) underneath so to change the styles of your component read custom style section of these components and set their css variable.
 more than above here is the css variable that we use in jb-time-input itself:
 
 | css variable name                       | description                                                                                              |
