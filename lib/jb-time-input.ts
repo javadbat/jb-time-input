@@ -14,6 +14,9 @@ import { ValidationHelper } from "jb-validation";
 import { type JBInputValue } from "jb-input/types";
 import { enToFaDigits, faToEnDigits } from "../../../common/scripts/persian-helper";
 
+//TODO: accept js Date value in value setter and extract time from date and return given date with a inputted time
+//TODO: add picker disabler
+//TODO: add placeholder handler like date input
 export class JBTimeInputWebComponent extends HTMLElement implements WithValidation<JBTimeInputValidationValue> {
   static get formAssociated() {
     return true;
