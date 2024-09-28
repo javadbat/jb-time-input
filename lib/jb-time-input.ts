@@ -15,7 +15,7 @@ import { type JBInputValue } from "jb-input/types";
 import { enToFaDigits, faToEnDigits } from "../../../common/scripts/persian-helper";
 
 //TODO: accept js Date value in value setter and extract time from date and return given date with a inputted time
-//TODO: add picker disabler
+//TODO: add picker disabler and handle virtual keyboard for it
 //TODO: add placeholder handler like date input
 export class JBTimeInputWebComponent extends HTMLElement implements WithValidation<JBTimeInputValidationValue> {
   static get formAssociated() {
@@ -284,6 +284,8 @@ export class JBTimeInputWebComponent extends HTMLElement implements WithValidati
         closeButton: shadowRoot.querySelector(".close-time-picker-button")!,
       },
     };
+    this.elements.input.elements.input.setAttribute("virtualkeyboardpolicy","manual");
+    this.elements.input.elements.input.setAttribute("inputmode","none");
     this.#registerEventListener();
   }
   #registerEventListener() {
