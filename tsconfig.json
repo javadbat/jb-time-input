@@ -1,7 +1,6 @@
 {
     "compilerOptions": {
-        "baseUrl": ".",
-        "moduleResolution": "Bundler"
+        "baseUrl": "."
     },
     "include": [
         "../global.d.ts",
