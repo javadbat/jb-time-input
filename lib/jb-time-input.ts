@@ -9,7 +9,7 @@ import { type JBInputWebComponent } from "jb-input";
 import { type JBTimePickerWebComponent } from "jb-time-picker";
 import { type JBTimeInputElements, type JBTimeInputValidationValue, } from "./types";
 import { type JBTimePickerValueObject, type TimeUnitsString, type SecondRange } from "jb-time-picker/types";
-import { type WithValidation } from "jb-validation/types";
+import { ValidationResult, type WithValidation } from "jb-validation/types";
 import { ValidationHelper } from "jb-validation";
 import { type JBInputValue } from "jb-input/types";
 import { enToFaDigits, faToEnDigits } from "../../../common/scripts/persian-helper";
@@ -39,15 +39,15 @@ export class JBTimeInputWebComponent extends HTMLElement implements WithValidati
  */
   get isAutoValidationDisabled(): boolean {
     //currently we only support disable-validation in attribute and only in initiate time but later we can add support for change of this
-    
+
     return (this.getAttribute('disable-auto-validation') === '' || this.getAttribute('disable-auto-validation') === 'true' ? true : false);
   }
-  #checkValidity(showError:boolean){
-    if(!this.isAutoValidationDisabled){
+  #checkValidity(showError: boolean) {
+    if (!this.isAutoValidationDisabled) {
       return this.#validation.checkValidity(showError);
     }
   }
-  #validation = new ValidationHelper<JBTimeInputValidationValue>(this.showValidationError.bind(this), this.clearValidationError.bind(this), ()=>this.#getValidationValue(), () => this.value, () => []);
+  #validation = new ValidationHelper<JBTimeInputValidationValue>(this.showValidationError.bind(this), this.clearValidationError.bind(this), () => this.#getValidationValue(), () => this.value, () => [], this.#setValidationResult.bind(this));
   get validation() {
     return this.#validation;
   }
@@ -232,6 +232,14 @@ export class JBTimeInputWebComponent extends HTMLElement implements WithValidati
     this.value = `${this.value}`;
   }
   #internals: ElementInternals | null = null;
+  #required = false;
+  set required(value:boolean){
+    this.#required = value;
+    this.#validation.checkValidity(false);
+  }
+  get required() {
+    return this.#required;
+  }
   #valueOnInputFocus: string | null = null;
   set optionalUnits(value: TimeUnitsString[]) {
     this.elements.timePicker.component.optionalUnits = value;
@@ -284,8 +292,8 @@ export class JBTimeInputWebComponent extends HTMLElement implements WithValidati
         closeButton: shadowRoot.querySelector(".close-time-picker-button")!,
       },
     };
-    this.elements.input.elements.input.setAttribute("virtualkeyboardpolicy","manual");
-    this.elements.input.elements.input.setAttribute("inputmode","none");
+    this.elements.input.elements.input.setAttribute("virtualkeyboardpolicy", "manual");
+    this.elements.input.elements.input.setAttribute("inputmode", "none");
     this.#registerEventListener();
   }
   #registerEventListener() {
@@ -303,7 +311,7 @@ export class JBTimeInputWebComponent extends HTMLElement implements WithValidati
   #initProp() {
     //set initial value to input
     this.#resetInputValue();
-    this.elements.input.addEventListener('init',()=>{
+    this.elements.input.addEventListener('init', () => {
       this.elements.input.addStandardValueCallback(this.#standardTimeValue.bind(this));
     });
   }
@@ -351,12 +359,12 @@ export class JBTimeInputWebComponent extends HTMLElement implements WithValidati
   }
   #standardTimeValue(inputtedString: string, oldValue: JBInputValue, prevResult: JBInputValue): JBInputValue {
     let displayValue = inputtedString;
-    if(this.showPersianNumber){
+    if (this.showPersianNumber) {
       displayValue = enToFaDigits(displayValue);
     }
     return {
       displayValue,
-      value:inputtedString
+      value: inputtedString
     };
   }
   /**
@@ -439,20 +447,20 @@ export class JBTimeInputWebComponent extends HTMLElement implements WithValidati
     }
   }
   #onInputKeyDown(e: KeyboardEvent) {
-    
-    const {hourRange, minuteRange, secondRange } = this.#inputRanges;
+
+    const { hourRange, minuteRange, secondRange } = this.#inputRanges;
     const caretPos = (e.target! as HTMLInputElement).selectionStart;
     if (e.keyCode == 38 || e.keyCode == 40) {
       //on up key and down key
       let interval = 0;
       if (e.keyCode == 38) {
         interval = 1;
-        
+
       }
       if (e.keyCode == 40) {
         interval = -1;
       }
-    
+
       // we use this [...hourRange,hourRange[1]+1] becuase we want up key work if carret was after the last number too like this=> 12|:39:43
       if (caretPos !== null && caretPos !== undefined && [...hourRange, hourRange[1] + 1].includes(caretPos)) {
         this.elements.timePicker.component.setTimeUnitFocus("hour");
@@ -462,7 +470,7 @@ export class JBTimeInputWebComponent extends HTMLElement implements WithValidati
       if (caretPos && [...minuteRange, minuteRange[1] + 1].includes(caretPos)) {
         this.elements.timePicker.component.setTimeUnitFocus("minute");
         this.addMinute(interval);
-        this.elements.input.setSelectionRange(minuteRange[0],minuteRange[1] + 1);
+        this.elements.input.setSelectionRange(minuteRange[0], minuteRange[1] + 1);
       }
       if (
         this.secondEnabled &&
@@ -471,7 +479,7 @@ export class JBTimeInputWebComponent extends HTMLElement implements WithValidati
       ) {
         this.elements.timePicker.component.setTimeUnitFocus("second");
         this.addSecond(interval);
-        this.elements.input.setSelectionRange(secondRange[0],secondRange[1] + 1);
+        this.elements.input.setSelectionRange(secondRange[0], secondRange[1] + 1);
       }
 
       e.preventDefault();
@@ -486,17 +494,17 @@ export class JBTimeInputWebComponent extends HTMLElement implements WithValidati
     const event = new KeyboardEvent("keydown", keyDownInitObj);
     this.dispatchEvent(event);
   }
-  #onInputInput(e:InputEvent){
+  #onInputInput(e: InputEvent) {
     this.#checkValidity(false);
     this.#dispatchInputEvent(e);
   }
-  #dispatchInputEvent(e:InputEvent){
+  #dispatchInputEvent(e: InputEvent) {
     //TODO: make it cancellable and fake it more because it raise from before input actually
-    const initObj:InputEventInit = {
+    const initObj: InputEventInit = {
       ...e,
-      cancelable:false
+      cancelable: false
     };
-    const event = new InputEvent('input',initObj);
+    const event = new InputEvent('input', initObj);
     this.dispatchEvent(event);
   }
   #onInputBeforeInput(e: InputEvent) {
@@ -655,7 +663,7 @@ export class JBTimeInputWebComponent extends HTMLElement implements WithValidati
   #onInputFocus(e: FocusEvent) {
     this.#valueOnInputFocus = this.value;
     this.showTimePicker = true;
-    const event = new FocusEvent("focus",{...e});
+    const event = new FocusEvent("focus", { ...e });
     this.dispatchEvent(event);
   }
   #onInputBlur(e: FocusEvent) {
@@ -752,6 +760,48 @@ export class JBTimeInputWebComponent extends HTMLElement implements WithValidati
         second: this.second
       }
     };
+  }
+  /**
+ * @public
+ * @description this method used to check for validity but doesn't show error to user and just return the result
+ * this method used by #internal of component
+ */
+  checkValidity(): boolean {
+    const validationResult = this.#validation.checkValidity(false);
+    if (!validationResult.isAllValid) {
+      const event = new CustomEvent('invalid');
+      this.dispatchEvent(event);
+    }
+    return validationResult.isAllValid;
+  }
+  reportValidity(): boolean {
+    const validationResult = this.#validation.checkValidity(true);
+    if (!validationResult.isAllValid) {
+      const event = new CustomEvent('invalid');
+      this.dispatchEvent(event);
+    }
+    return validationResult.isAllValid;
+  }
+  /**
+ * @description this method called on every checkValidity calls and update validation result of #internal
+ */
+  #setValidationResult(result: ValidationResult<JBTimeInputValidationValue>) {
+    if (result.isAllValid) {
+      this.#internals.setValidity({}, '');
+    } else {
+      const states: ValidityStateFlags = {};
+      let message = "";
+      result.validationList.forEach((res) => {
+        if (!res.isValid) {
+          if (res.validation.stateType) { states[res.validation.stateType] = true; }
+          if (message == '') { message = res.message; }
+        }
+      });
+      this.#internals.setValidity(states, message);
+    }
+  }
+  get validationMessage() {
+    return this.#internals.validationMessage;
   }
 }
 const myElementNotExists = !customElements.get("jb-time-input");
