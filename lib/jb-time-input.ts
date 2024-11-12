@@ -11,7 +11,7 @@ import { type JBTimeInputElements, type JBTimeInputValidationValue, } from "./ty
 import { type JBTimePickerValueObject, type TimeUnitsString, type SecondRange } from "jb-time-picker/types";
 import { ValidationResult, type WithValidation } from "jb-validation/types";
 import { ValidationHelper } from "jb-validation";
-import { type JBInputValue } from "jb-input/types";
+import { type JBInputValue } from "jb-input/types.js";
 import { enToFaDigits, faToEnDigits } from "../../../common/scripts/persian-helper";
 
 //TODO: accept js Date value in value setter and extract time from date and return given date with a inputted time
