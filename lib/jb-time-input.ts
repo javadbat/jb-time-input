@@ -4,14 +4,13 @@ import "jb-time-picker";
 import "jb-input";
 import 'jb-popover';
 // eslint-disable-next-line no-duplicate-imports
-import { type JBInputWebComponent } from "jb-input";
+import { type JBInputWebComponent, type JBInputValue } from "jb-input";
 // eslint-disable-next-line no-duplicate-imports
 import { type JBTimePickerWebComponent } from "jb-time-picker";
 import { type JBTimeInputElements, type JBTimeInputValidationValue, } from "./types";
 import { type JBTimePickerValueObject, type TimeUnitsString, type SecondRange } from "jb-time-picker/types";
-import { ValidationResult, type WithValidation } from "jb-validation/types";
+import { ValidationResult, type WithValidation } from "jb-validation";
 import { ValidationHelper } from "jb-validation";
-import { type JBInputValue } from "jb-input/types.js";
 import { enToFaDigits, faToEnDigits } from "../../../common/scripts/persian-helper";
 
 //TODO: accept js Date value in value setter and extract time from date and return given date with a inputted time
