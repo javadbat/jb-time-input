@@ -9,10 +9,10 @@ import { type JBInputWebComponent, type JBInputValue } from "jb-input";
 import { type JBTimePickerWebComponent } from "jb-time-picker";
 import { type JBTimeInputElements, type JBTimeInputValidationValue, } from "./types";
 import { type JBTimePickerValueObject, type TimeUnitsString, type SecondRange } from "jb-time-picker/types";
-import { ValidationResult, type WithValidation } from "jb-validation";
-import { ValidationHelper } from "jb-validation";
+import { ValidationResult, type WithValidation, ValidationHelper } from "jb-validation";
 import { enToFaDigits, faToEnDigits } from "../../../common/scripts/persian-helper";
 
+export * from './types';
 //TODO: accept js Date value in value setter and extract time from date and return given date with a inputted time
 //TODO: add picker disabler and handle virtual keyboard for it
 //TODO: add placeholder handler like date input
@@ -43,10 +43,17 @@ export class JBTimeInputWebComponent extends HTMLElement implements WithValidati
   }
   #checkValidity(showError: boolean) {
     if (!this.isAutoValidationDisabled) {
-      return this.#validation.checkValidity(showError);
+      return this.#validation.checkValidity({showError:showError});
     }
   }
-  #validation = new ValidationHelper<JBTimeInputValidationValue>(this.showValidationError.bind(this), this.clearValidationError.bind(this), () => this.#getValidationValue(), () => this.value, () => [], this.#setValidationResult.bind(this));
+  #validation = new ValidationHelper<JBTimeInputValidationValue>({
+    clearValidationError:this.clearValidationError.bind(this),
+    getInputtedValue:this.#getValidationValue.bind(this),
+    getInsideValidations:() => [],
+    getValueString:() => this.value,
+    setValidationResult:this.#setValidationResult.bind(this),
+    showValidationError:this.showValidationError.bind(this)
+  });
   get validation() {
     return this.#validation;
   }
@@ -234,7 +241,7 @@ export class JBTimeInputWebComponent extends HTMLElement implements WithValidati
   #required = false;
   set required(value:boolean){
     this.#required = value;
-    this.#validation.checkValidity(false);
+    this.#validation.checkValiditySync({showError:false});
   }
   get required() {
     return this.#required;
@@ -766,7 +773,7 @@ export class JBTimeInputWebComponent extends HTMLElement implements WithValidati
  * this method used by #internal of component
  */
   checkValidity(): boolean {
-    const validationResult = this.#validation.checkValidity(false);
+    const validationResult = this.#validation.checkValiditySync({showError:false});
     if (!validationResult.isAllValid) {
       const event = new CustomEvent('invalid');
       this.dispatchEvent(event);
@@ -774,7 +781,7 @@ export class JBTimeInputWebComponent extends HTMLElement implements WithValidati
     return validationResult.isAllValid;
   }
   reportValidity(): boolean {
-    const validationResult = this.#validation.checkValidity(true);
+    const validationResult = this.#validation.checkValiditySync({showError:true});
     if (!validationResult.isAllValid) {
       const event = new CustomEvent('invalid');
       this.dispatchEvent(event);
