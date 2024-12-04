@@ -48,8 +48,8 @@ export class JBTimeInputWebComponent extends HTMLElement implements WithValidati
   }
   #validation = new ValidationHelper<JBTimeInputValidationValue>({
     clearValidationError:this.clearValidationError.bind(this),
-    getInputtedValue:this.#getValidationValue.bind(this),
-    getInsideValidations:() => [],
+    getValue:this.#getValidationValue.bind(this),
+    getValidations:() => [],
     getValueString:() => this.value,
     setValidationResult:this.#setValidationResult.bind(this),
     showValidationError:this.showValidationError.bind(this)
