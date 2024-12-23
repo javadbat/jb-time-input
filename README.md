@@ -16,6 +16,11 @@ in jb-time-input you can create a input special for time the advantage is:
 - responsive and mobile friendly
 
 Demo : [codepen](https://codepen.io/javadbat/pen/QWdxzKb);
+
+## using with JS frameworks
+
+to use this component in **react** see [`jb-time-input/react`](https://github.com/javadbat/jb-time-input/tree/main/react);
+
 ## instruction
 
 ### installation and usage
@@ -170,7 +175,7 @@ more than above here is the css variable that we use in jb-time-input itself:
 
 ## Other Related Docs:
 
-- see [jb-time-input-react](https://github.com/javadbat/jb-time-input-react) if you want to use this component in ReactJS.
+- see [`jb-time-input/react`](https://github.com/javadbat/jb-time-input/tree/main/react) if you want to use this component in ReactJS.
 
 - see [All JB Design system Component List](https://github.com/javadbat/design-system/blob/master/docs/component-list.md) for more components.
 

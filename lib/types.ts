@@ -11,7 +11,7 @@ export type JBTimeInputElements = {
         closeButton:HTMLButtonElement,
     },
 }
-export type JBTimeInputValidationValue = {
+export type ValidationValue = {
     value:string,
     displayValue:string,
     valueObject:{[key in TimeUnits]:number|null}
