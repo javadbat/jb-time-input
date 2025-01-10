@@ -1,7 +1,7 @@
 # jb-time-input web component
 
 [![Published on webcomponents.org](https://img.shields.io/badge/webcomponents.org-published-blue.svg)](https://www.webcomponents.org/element/jb-time-input)
-[![GitHub license](https://img.shields.io/badge/license-MIT-brightgreen.svg)](https://raw.githubusercontent.com/javadbat/jb-time-input/master/LICENSE)
+[![GitHub license](https://img.shields.io/badge/license-MIT-brightgreen.svg)](https://raw.githubusercontent.com/javadbat/jb-time-input/main/LICENSE)
 [![NPM Downloads](https://img.shields.io/npm/dw/jb-time-input)](https://www.npmjs.com/package/jb-time-input)
 
 in jb-time-input you can create a input special for time the advantage is:
@@ -177,6 +177,6 @@ more than above here is the css variable that we use in jb-time-input itself:
 
 - see [`jb-time-input/react`](https://github.com/javadbat/jb-time-input/tree/main/react) if you want to use this component in ReactJS.
 
-- see [All JB Design system Component List](https://github.com/javadbat/design-system/blob/master/docs/component-list.md) for more components.
+- see [All JB Design system Component List](https://github.com/javadbat/design-system/blob/main/docs/component-list.md) for more components.
 
-- use [Contribution Guide](https://github.com/javadbat/design-system/blob/master/docs/contribution-guide.md) if you want to contribute in this component.
+- use [Contribution Guide](https://github.com/javadbat/design-system/blob/main/docs/contribution-guide.md) if you want to contribute in this component.
