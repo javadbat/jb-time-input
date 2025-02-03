@@ -25,5 +25,7 @@ export const reactComponentList: ReactComponentBuildConfig[] = [
       react: "React",
       "prop-types": "PropTypes",
     },
+    umdName: "JBTimeInputReact",
+    dir: "./react"
   },
 ];
