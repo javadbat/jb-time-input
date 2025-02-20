@@ -12,7 +12,7 @@ import { type JBTimePickerValueObject, type TimeUnitsString, type SecondRange } 
 import { ValidationResult, type WithValidation, ValidationHelper } from "jb-validation";
 import { enToFaDigits, faToEnDigits } from "../../../common/scripts/persian-helper";
 
-export * from './types';
+export * from './types.js';
 //TODO: accept js Date value in value setter and extract time from date and return given date with a inputted time
 //TODO: add picker disabler and handle virtual keyboard for it
 //TODO: add placeholder handler like date input
