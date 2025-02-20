@@ -10,7 +10,7 @@ import { type JBTimePickerWebComponent } from "jb-time-picker";
 import { type JBTimeInputElements, type ValidationValue, } from "./types";
 import { type JBTimePickerValueObject, type TimeUnitsString, type SecondRange } from "jb-time-picker/types";
 import { ValidationResult, type WithValidation, ValidationHelper } from "jb-validation";
-import { enToFaDigits, faToEnDigits } from "../../../common/scripts/persian-helper";
+import { enToFaDigits, faToEnDigits } from "jb-core";
 
 export * from './types.js';
 //TODO: accept js Date value in value setter and extract time from date and return given date with a inputted time
