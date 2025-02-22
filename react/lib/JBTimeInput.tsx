@@ -1,9 +1,8 @@
 import React, {useRef, useEffect, useImperativeHandle, useState} from 'react';
 import 'jb-time-input';
 // eslint-disable-next-line no-duplicate-imports
-import {JBTimeInputWebComponent} from 'jb-time-input';
+import {type JBTimeInputWebComponent, type ValidationValue, type TimeUnits } from 'jb-time-input';
 import { type ValidationItem } from 'jb-validation';
-import { type ValidationValue, type TimeUnits } from 'jb-time-input/types.js';
 import {EventProps,useEvents} from './events-hook.js';
 declare global {
   // eslint-disable-next-line @typescript-eslint/no-namespace
