@@ -6,9 +6,8 @@ import 'jb-popover';
 // eslint-disable-next-line no-duplicate-imports
 import { type JBInputWebComponent, type JBInputValue } from "jb-input";
 // eslint-disable-next-line no-duplicate-imports
-import { type JBTimePickerWebComponent } from "jb-time-picker";
+import { type JBTimePickerWebComponent, type JBTimePickerValueObject, type TimeUnitsString, type SecondRange } from "jb-time-picker";
 import { type JBTimeInputElements, type ValidationValue, } from "./types";
-import { type JBTimePickerValueObject, type TimeUnitsString, type SecondRange } from "jb-time-picker/types";
 import { ValidationResult, type WithValidation, ValidationHelper } from "jb-validation";
 import { enToFaDigits, faToEnDigits } from "jb-core";
 

@@ -26,7 +26,7 @@
     "dist/"
   ],
   "main": "index.js",
-  "types": "./dist/web-component/jb-time-input/react/lib/JBTimeInput.d.ts",
+  "types": "./dist/JBTimeInput.d.ts",
   "repository": {
 		"type": "git",
 		"url": "git@github.com:javadbat/jb-time-input-react.git"
