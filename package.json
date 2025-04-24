@@ -35,7 +35,7 @@
   "dependencies": {
     "jb-time-picker":">=2.2.2",
     "jb-validation":">=0.2.0",
-    "jb-popover":">=0.1.1",
+    "jb-popover":">=1.2.0",
     "jb-input":">=3.8.0",
     "jb-core":">=0.4.0"
   }
