@@ -8,9 +8,8 @@ import { type JBInputWebComponent, type JBInputValue } from "jb-input";
 // eslint-disable-next-line no-duplicate-imports
 import { type JBTimePickerWebComponent, type JBTimePickerValueObject, type TimeUnitsString, type SecondRange } from "jb-time-picker";
 import { type JBTimeInputElements, type ValidationValue, } from "./types";
-import { ValidationResult, type WithValidation, ValidationHelper } from "jb-validation";
+import { ValidationResult, type WithValidation, ValidationHelper, ShowValidationErrorParameters } from "jb-validation";
 import { enToFaDigits, faToEnDigits } from "jb-core";
-
 export * from './types.js';
 //TODO: accept js Date value in value setter and extract time from date and return given date with a inputted time
 //TODO: add picker disabler and handle virtual keyboard for it
@@ -701,7 +700,7 @@ export class JBTimeInputWebComponent extends HTMLElement implements WithValidati
     const result = validationRegex.test(text);
     return result;
   }
-  showValidationError(error: string) {
+  showValidationError(error: ShowValidationErrorParameters) {
     this.elements.input.showValidationError(error);
   }
   clearValidationError() {

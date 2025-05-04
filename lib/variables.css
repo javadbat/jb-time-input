@@ -1,0 +1,3 @@
+:host{
+  --close-button-border-radius:var(--jb-time-input-close-button-border-radius, var(--jb-radius-xs));
+}

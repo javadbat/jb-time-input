@@ -1,3 +1,4 @@
+@use './variables.css';
 :host(:focus), :host(:focus-visible){
     outline: none;
 }
@@ -11,7 +12,7 @@
             padding: 8px 16px;
             background-color: #2852bd00;
             border:none;
-            border-radius: 8px;
+            border-radius: var(--close-button-border-radius);
             font-family: inherit;
             cursor: pointer;
             transition: all 0.3s 0s ease;

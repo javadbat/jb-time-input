@@ -5,7 +5,7 @@ import JBTimeInputWebComponentEventTestPage from './samples/JBTimeInputWebCompon
 import type { Meta, StoryObj } from '@storybook/react';
 
 const meta: Meta<Props> = {
-  title: "Example/form elements/Inputs/JBTimeInput",
+  title: "Components/form elements/Inputs/JBTimeInput",
   component: JBTimeInput,
 };
 export default meta;
