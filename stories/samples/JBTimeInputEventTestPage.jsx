@@ -1,5 +1,4 @@
 import React, { useEffect, useRef, useState } from 'react';
-import PropTypes from 'prop-types';
 import {JBTimeInput} from 'jb-time-input/react';
 function JBTimeInputEventTestPage(props) {
   const element = useRef();
