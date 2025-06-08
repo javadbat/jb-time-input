@@ -1,4 +1,3 @@
-import HTML from "./jb-time-input.html";
 import CSS from "./jb-time-input.scss";
 import "jb-time-picker";
 import "jb-input";
@@ -10,6 +9,7 @@ import { type JBTimePickerWebComponent, type JBTimePickerValueObject, type TimeU
 import { type JBTimeInputElements, type ValidationValue, } from "./types";
 import { ValidationResult, type WithValidation, ValidationHelper, ShowValidationErrorParameters } from "jb-validation";
 import { enToFaDigits, faToEnDigits } from "jb-core";
+import { renderHTML } from "./render";
 export * from './types.js';
 //TODO: accept js Date value in value setter and extract time from date and return given date with a inputted time
 //TODO: add picker disabler and handle virtual keyboard for it
@@ -284,7 +284,7 @@ export class JBTimeInputWebComponent extends HTMLElement implements WithValidati
       mode: "open",
       delegatesFocus: true,
     });
-    const html = `<style>${CSS}</style>` + "\n" + HTML;
+    const html = `<style>${CSS}</style>` + "\n" + renderHTML();
     const element = document.createElement("template");
     element.innerHTML = html;
     shadowRoot.appendChild(element.content.cloneNode(true));
