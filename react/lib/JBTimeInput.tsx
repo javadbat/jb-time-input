@@ -1,10 +1,11 @@
+'use client'
 import React, {useRef, useEffect, useImperativeHandle, useState} from 'react';
 import 'jb-time-input';
 // eslint-disable-next-line no-duplicate-imports
 import {type JBTimeInputWebComponent, type ValidationValue, type TimeUnits } from 'jb-time-input';
 import { type ValidationItem } from 'jb-validation';
 import {EventProps,useEvents} from './events-hook.js';
-declare global {
+declare module "react" {
   // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace JSX {
     interface IntrinsicElements {
@@ -19,6 +20,7 @@ declare global {
     }
   }
 }
+
 // eslint-disable-next-line react/display-name
 const JBTimeInput = React.forwardRef((props:Props, ref)=>{
   const element = useRef<JBTimeInputWebComponent>(null);
