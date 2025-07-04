@@ -160,6 +160,6 @@ more than above here is the css variable that we use in jb-time-input itself:
 ## Other Related Docs:
 - see [jb-time-input](https://github.com/javadbat/jb-time-input) if you want to use this component as a pure-js web-component
 
-- see [All JB Design system Component List](https://github.com/javadbat/design-system/blob/main/docs/component-list.md) for more components
+- see [All JB Design system Component List](https://javadbat.github.io/design-system/) for more components
 
 - use [Contribution Guide](https://github.com/javadbat/design-system/blob/main/docs/contribution-guide.md) if you want to contribute in this component.
