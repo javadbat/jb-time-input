@@ -2,7 +2,9 @@
 
 jb-time-input react wrapper to use jb-time-input in react
 
- Demo: [codeSandbox preview](https://3f63dj.csb.app/samples/jb-time-input) for just see the demo and [codeSandbox editor](https://codesandbox.io/p/sandbox/jb-design-system-3f63dj?file=%2Fsrc%2Fsamples%2FJBTimeInput.tsx) if you want to see and play with code
+## Demo
+- [codeSandbox preview](https://3f63dj.csb.app/samples/jb-time-input) for just see the demo and [codeSandbox editor](https://codesandbox.io/p/sandbox/jb-design-system-3f63dj?file=%2Fsrc%2Fsamples%2FJBTimeInput.tsx) if you want to see and play with code
+- [storybook](https://javadbat.github.io/design-system/?path=/docs/components-form-elements-inputs-jbtimeinput)
 
 ## instruction
 
@@ -10,7 +12,7 @@ jb-time-input react wrapper to use jb-time-input in react
 
 with npm:
 
-```command
+```sh
     npm i jb-time-input
 ```
 

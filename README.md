@@ -15,7 +15,8 @@ in jb-time-input you can create a input special for time the advantage is:
 - has a touch friendly time-picker
 - responsive and mobile friendly
 
-Demo : [codepen](https://codepen.io/javadbat/pen/QWdxzKb);
+- [codepen](https://codepen.io/javadbat/pen/QWdxzKb);
+- [storybook](https://javadbat.github.io/design-system/?path=/docs/components-form-elements-inputs-jbtimeinput)
 
 ## using with JS frameworks
 
@@ -27,12 +28,12 @@ to use this component in **react** see [`jb-time-input/react`](https://github.co
 
 with npm:
 
-```command
-    npm i jb-time-input
+```sh
+npm i jb-time-input
 ```
 
 ```javascript
-    import 'jb-time-input'
+import 'jb-time-input'
 ```
 
 ```HTML
