@@ -239,6 +239,7 @@ export class JBTimeInputWebComponent extends HTMLElement implements WithValidati
   #required = false;
   set required(value: boolean) {
     this.#required = value;
+    this.#internals.ariaRequired = value?"true":"false";
     this.#validation.checkValiditySync({ showError: false });
   }
   get required() {
@@ -346,9 +347,11 @@ export class JBTimeInputWebComponent extends HTMLElement implements WithValidati
     switch (name) {
       case "label":
         this.elements.input.setAttribute('label', value);
+        this.#internals.ariaLabel = value;
         break;
-      case "message":
-        this.elements.input.setAttribute("message", value);
+        case "message":
+          this.elements.input.setAttribute("message", value);
+          this.#internals.ariaDescription = value;
         break;
       case "value":
         this.value = value;
