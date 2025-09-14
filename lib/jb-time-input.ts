@@ -1,4 +1,5 @@
-import CSS from "./jb-time-input.scss";
+import CSS from "./jb-time-input.css";
+import VariablesCSS from "./variables.css";
 import "jb-time-picker";
 import "jb-input";
 import 'jb-popover';
@@ -285,7 +286,7 @@ export class JBTimeInputWebComponent extends HTMLElement implements WithValidati
       mode: "open",
       delegatesFocus: true,
     });
-    const html = `<style>${CSS}</style>` + "\n" + renderHTML();
+    const html = `<style>${CSS} ${VariablesCSS}</style>` + "\n" + renderHTML();
     const element = document.createElement("template");
     element.innerHTML = html;
     shadowRoot.appendChild(element.content.cloneNode(true));
