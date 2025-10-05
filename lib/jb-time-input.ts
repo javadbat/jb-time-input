@@ -12,6 +12,7 @@ import { ValidationResult, type WithValidation, ValidationHelper, ShowValidation
 import { enToFaDigits, faToEnDigits } from "jb-core";
 import { renderHTML } from "./render";
 export * from './types.js';
+import {i18n} from 'jb-core/i18n'
 //TODO: accept js Date value in value setter and extract time from date and return given date with a inputted time
 //TODO: add picker disabler and handle virtual keyboard for it
 //TODO: add placeholder handler like date input
@@ -227,7 +228,7 @@ export class JBTimeInputWebComponent extends HTMLElement implements WithValidati
     }
   }
   //will show persian number even if user type en number but value will be passed as en number
-  #showPersianNumber = false;
+  #showPersianNumber = i18n.locale.numberingSystem == "arabext";
   get showPersianNumber() {
     return this.#showPersianNumber;
   }

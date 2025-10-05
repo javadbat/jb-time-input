@@ -5,7 +5,7 @@ export const webComponentList: WebComponentBuildConfig[] = [
     name: "jb-time-input",
     path: "./lib/jb-time-input.ts",
     outputPath: "./dist/jb-time-input.js",
-    external: ["jb-time-picker", "jb-input", "jb-popover", "jb-validation", "jb-core"],
+    external: ["jb-time-picker", "jb-input", "jb-popover", "jb-validation", "jb-core", "jb-core/theme", "jb-core/i18n"],
     umdName: "JBTimeInput",
     globals: {
       "jb-time-picker": "JBTimePicker",
@@ -13,6 +13,8 @@ export const webComponentList: WebComponentBuildConfig[] = [
       "jb-popover": "JBPopover",
       "jb-validation": "JBValidation",
       "jb-core":"JBCore",
+      "jb-core/theme":"JBCoreTheme",
+      "jb-core/i18n":"JBCoreI18N"
     },
   },
 ];
