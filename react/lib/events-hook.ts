@@ -17,7 +17,6 @@ export type EventProps = {
   onKeyDown?: (e: JBTimeInputEventType<KeyboardEvent>) => void,
   onKeyUp?: (e: JBTimeInputEventType<KeyboardEvent>) => void,
   onInput?: (e: JBTimeInputEventType<InputEvent>) => void,
-  onBeforeinput?: (e: JBTimeInputEventType<InputEvent>) => void,
   onKeyPress?: (e: JBTimeInputEventType<KeyboardEvent>) => void,
   /**
    * when user press enter key
@@ -35,7 +34,7 @@ export function useEvents(element: RefObject<JBTimeInputWebComponent>, props: Ev
   useEvent(element, 'keyup', props.onKeyUp);
   useEvent(element, 'focus', props.onFocus);
   useEvent(element, 'blur', props.onBlur);
-  useEvent(element, 'beforeinput', props.onBeforeinput);
+  useEvent(element, 'beforeinput', props.onBeforeInput);
   useEvent(element, 'keypress', props.onKeyPress);
   useEvent(element, 'enter', props.onEnter);
 }

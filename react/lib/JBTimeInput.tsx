@@ -1,18 +1,18 @@
 'use client'
-import React, {useRef, useEffect, useImperativeHandle, useState} from 'react';
+import React, {useRef, useImperativeHandle} from 'react';
 import 'jb-time-input';
 // eslint-disable-next-line no-duplicate-imports
-import {type JBTimeInputWebComponent, type ValidationValue, type TimeUnits } from 'jb-time-input';
-import { type ValidationItem } from 'jb-validation';
-import {EventProps,useEvents} from './events-hook.js';
+import type {JBTimeInputWebComponent } from 'jb-time-input';
+import {type EventProps,useEvents} from './events-hook.js';
+import { useJBTimeInputAttribute, type JBTimeInputAttributes } from './attributes-hook.js';
+import type { JBElementStandardProps } from 'jb-core/react';
+
 declare module "react" {
-  // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace JSX {
     interface IntrinsicElements {
       'jb-time-input': JBTimeInputType;
     }
     interface JBTimeInputType extends React.DetailedHTMLProps<React.HTMLAttributes<JBTimeInputWebComponent>, JBTimeInputWebComponent> {
-      "class"?: string,
       "type"?: string,
       "label"?:string,
       "message"?:string,
@@ -24,67 +24,27 @@ declare module "react" {
 // eslint-disable-next-line react/display-name
 const JBTimeInput = React.forwardRef((props:Props, ref)=>{
   const element = useRef<JBTimeInputWebComponent>(null);
-  const [refChangeCount, refChangeCountSetter] = useState(0);
   useImperativeHandle(
     ref,
-    () => (element?element.current:{}),
+    () => (element?element.current:undefined),
     [element],
   );
-  
-  useEffect(() => {
-    refChangeCountSetter(refChangeCount + 1);
-  }, [element.current]);
-  useEffect(() => {
-    let value = props.value;
-    if(props.value == null || props.value === undefined){
-      value = '00:00:00';
-    }
-    element.current.value = value;
-  }, [props.value]);
-  useEffect(()=>{
-    if(Array.isArray( props.validationList) && element.current){
-      element.current.validation.list = props.validationList;
-    }
-  },[props.validationList]);
-  useEffect(()=>{
-    if(element.current,props.secondEnabled !== null && props.secondEnabled !== undefined){
-      element.current.secondEnabled = props.secondEnabled;
-    }
-  },[props.secondEnabled]);
-  useEffect(() => {
-    if(typeof props.frontalZero == "boolean"){
-      element.current.frontalZero = props.frontalZero;
-    }
-  }, [props.frontalZero]);
-  useEffect(() => {
-    if(Array.isArray(props.optionalUnits)){
-      element.current.optionalUnits = props.optionalUnits;
-    }
-  }, [props.optionalUnits]);
-  useEffect(() => {
-    if(props.showPersianNumber !== null && props.showPersianNumber !== undefined){
-      element.current.showPersianNumber = props.showPersianNumber;
-    }
-  }, [props.showPersianNumber]);
-  useEvents(element, props);
+  // placeholder label message are in other Props
+  const {onBeforeInput,onBlur,onChange,onEnter,onFocus,onInit,onInput,onKeyDown,onKeyPress,onKeyUp,onLoad, frontalZero,optionalUnits,secondEnabled,showPersianNumber, children, ...otherProps} = props;
+  useEvents(element, {onBeforeInput,onBlur,onChange,onEnter,onFocus,onInit,onInput,onKeyDown,onKeyPress,onKeyUp,onLoad});
+  useJBTimeInputAttribute(element,{frontalZero,optionalUnits,secondEnabled,showPersianNumber});
   return (
-    <jb-time-input placeholder={props.placeholder} ref={element} class={props.className} label={props.label} message={props.message} close-button-text={props.closeButtonText}></jb-time-input>
+    <jb-time-input ref={element} close-button-text={props.closeButtonText} {...otherProps}>{children}</jb-time-input>
   );
 });
 
 JBTimeInput.displayName = "JBTimeInput";
-export type Props = EventProps &{
+type TimeInputProps = EventProps & JBTimeInputAttributes &{
   label?: string | null,
   closeButtonText?: string | null,
-  value?: string | null,
-  className?: string | null,
   placeholder?: string | null,
   message?:string | null,
-  validationList?: ValidationItem<ValidationValue>[] | null,
-  secondEnabled?: boolean,
-  frontalZero?: boolean,
-  optionalUnits?: TimeUnits[] | null,
-  showPersianNumber?:boolean,
 }
+export type Props= TimeInputProps & JBElementStandardProps<JBTimeInputWebComponent, keyof TimeInputProps>
 export {JBTimeInput};
 
