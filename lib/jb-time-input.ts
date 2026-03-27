@@ -286,6 +286,8 @@ export class JBTimeInputWebComponent extends HTMLElement implements WithValidati
     const shadowRoot = this.attachShadow({
       mode: "open",
       delegatesFocus: true,
+      clonable:true,
+      serializable:true
     });
     const html = `<style>${CSS} ${VariablesCSS}</style>` + "\n" + renderHTML();
     const element = document.createElement("template");
