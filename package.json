@@ -37,6 +37,6 @@
     "jb-validation":">=0.4.0",
     "jb-popover":">=1.3.0",
     "jb-input":">=3.11.0",
-    "jb-core":">=0.14.0"
+    "jb-core":">=0.25.0"
   }
 }
