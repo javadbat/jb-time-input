@@ -3,12 +3,10 @@ import VariablesCSS from "./variables.css";
 import "jb-time-picker";
 import "jb-input";
 import 'jb-popover';
-// eslint-disable-next-line no-duplicate-imports
-import { type JBInputWebComponent, type JBInputValue } from "jb-input";
-// eslint-disable-next-line no-duplicate-imports
-import { type JBTimePickerWebComponent, type JBTimePickerValueObject, type TimeUnitsString, type SecondRange } from "jb-time-picker";
-import { type JBTimeInputElements, type ValidationValue, } from "./types";
-import { ValidationResult, type WithValidation, ValidationHelper, ShowValidationErrorParameters } from "jb-validation";
+import type { JBInputWebComponent, JBInputValue } from "jb-input";
+import type { JBTimePickerWebComponent, JBTimePickerValueObject, TimeUnitsString, SecondRange } from "jb-time-picker";
+import type { JBTimeInputElements, ValidationValue, } from "./types";
+import { type ValidationResult, type WithValidation, ValidationHelper, type ShowValidationErrorParameters } from "jb-validation";
 import { enToFaDigits, faToEnDigits } from "jb-core";
 import { renderHTML } from "./render";
 export * from './types.js';
@@ -20,7 +18,7 @@ export class JBTimeInputWebComponent extends HTMLElement implements WithValidati
   static get formAssociated() {
     return true;
   }
-  elements: JBTimeInputElements;
+  elements!: JBTimeInputElements;
   get value() {
     return this.elements.input.value;
   }
@@ -39,7 +37,7 @@ export class JBTimeInputWebComponent extends HTMLElement implements WithValidati
   get isAutoValidationDisabled(): boolean {
     //currently we only support disable-validation in attribute and only in initiate time but later we can add support for change of this
 
-    return (this.getAttribute('disable-auto-validation') === '' || this.getAttribute('disable-auto-validation') === 'true' ? true : false);
+    return (!!(this.getAttribute('disable-auto-validation') === '' || this.getAttribute('disable-auto-validation') === 'true' ));
   }
   #checkValidity(showError: boolean) {
     if (!this.isAutoValidationDisabled) {
@@ -241,8 +239,8 @@ export class JBTimeInputWebComponent extends HTMLElement implements WithValidati
   #required = false;
   set required(value: boolean) {
     this.#required = value;
-    this.#internals.ariaRequired = value?"true":"false";
     this.#validation.checkValiditySync({ showError: false });
+    this.#internals!.ariaRequired = value?"true":"false";
   }
   get required() {
     return this.#required;
@@ -289,7 +287,7 @@ export class JBTimeInputWebComponent extends HTMLElement implements WithValidati
       clonable:true,
       serializable:true
     });
-    const html = `<style>${CSS} ${VariablesCSS}</style>` + "\n" + renderHTML();
+    const html = `<style>${CSS} ${VariablesCSS}</style>\n${renderHTML()}`;
     const element = document.createElement("template");
     element.innerHTML = html;
     shadowRoot.appendChild(element.content.cloneNode(true));
@@ -351,11 +349,11 @@ export class JBTimeInputWebComponent extends HTMLElement implements WithValidati
     switch (name) {
       case "label":
         this.elements.input.setAttribute('label', value);
-        this.#internals.ariaLabel = value;
+        this.#internals!.ariaLabel = value;
         break;
         case "message":
           this.elements.input.setAttribute("message", value);
-          this.#internals.ariaDescription = value;
+          this.#internals!.ariaDescription = value;
         break;
       case "value":
         this.value = value;
@@ -588,7 +586,7 @@ export class JBTimeInputWebComponent extends HTMLElement implements WithValidati
         }
       }
     };
-    const inputtedString = faToEnDigits(e.data);
+    const inputtedString = faToEnDigits(e.data??"");
     if (['deleteContentBackward', 'deleteContentForward', 'delete', 'deleteByCut', 'deleteByDrag'].includes(e.inputType)) {
       //in delete mode
       if (caretPos == null || caretPos == 0) {
@@ -720,12 +718,12 @@ export class JBTimeInputWebComponent extends HTMLElement implements WithValidati
     //public method
     this.elements.input.focus();
   }
-  #onTimePickerChange(e: CustomEvent) {
+  #onTimePickerChange(e: Event) {
     const { hour, minute, second } = (e.target as JBTimePickerWebComponent).value;
     this.hour = hour;
     this.minute = minute;
     if (this.secondEnabled) {
-      this.second = second;
+      this.second = second??null;
     }
   }
   #onTimePickerBlur(e: FocusEvent) {
@@ -735,7 +733,7 @@ export class JBTimeInputWebComponent extends HTMLElement implements WithValidati
       if (this.#valueOnInputFocus !== this.value) {
         this.#onInputChange();
       }
-      // call onchnage event
+      // call onchange event
     }
   }
   /**
@@ -800,21 +798,21 @@ export class JBTimeInputWebComponent extends HTMLElement implements WithValidati
  */
   #setValidationResult(result: ValidationResult<ValidationValue>) {
     if (result.isAllValid) {
-      this.#internals.setValidity({}, '');
+      this.#internals?.setValidity({}, '');
     } else {
       const states: ValidityStateFlags = {};
       let message = "";
       result.validationList.forEach((res) => {
         if (!res.isValid) {
           if (res.validation.stateType) { states[res.validation.stateType] = true; }
-          if (message == '') { message = res.message; }
+          if (message == '') { message = res.message??""; }
         }
       });
-      this.#internals.setValidity(states, message);
+      this.#internals?.setValidity(states, message);
     }
   }
   get validationMessage() {
-    return this.#internals.validationMessage;
+    return this.#internals?.validationMessage??"";
   }
 }
 const myElementNotExists = !customElements.get("jb-time-input");
