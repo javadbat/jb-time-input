@@ -6,6 +6,7 @@
     margin: var(--jb-time-input-margin ,  12px 0);
     position: relative;
     jb-popover{
+        --jb-popover-top:4rem;
         .close-time-picker-button{
             width: auto;
             padding: 8px 16px;
