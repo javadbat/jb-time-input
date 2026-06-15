@@ -2,7 +2,8 @@
 
 [![Published on webcomponents.org](https://img.shields.io/badge/webcomponents.org-published-blue.svg)](https://www.webcomponents.org/element/jb-time-input)
 [![GitHub license](https://img.shields.io/badge/license-MIT-brightgreen.svg)](https://raw.githubusercontent.com/javadbat/jb-time-input/main/LICENSE)
-[![NPM Downloads](https://img.shields.io/npm/dw/jb-time-input)](https://www.npmjs.com/package/jb-time-input)
+[![NPM Version](https://img.shields.io/npm/v/jb-time-input)](https://www.npmjs.com/package/jb-time-input)
+![GitHub Created At](https://img.shields.io/github/created-at/javadbat/jb-time-input)
 
 in jb-time-input you can create a input special for time the advantage is:
 

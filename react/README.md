@@ -1,5 +1,10 @@
 # jb-time-input react component
 
+[![Published on webcomponents.org](https://img.shields.io/badge/webcomponents.org-published-blue.svg)](https://www.webcomponents.org/element/jb-time-input)
+[![GitHub license](https://img.shields.io/badge/license-MIT-brightgreen.svg)](https://raw.githubusercontent.com/javadbat/jb-time-input/main/LICENSE)
+[![NPM Version](https://img.shields.io/npm/v/jb-time-input-react)](https://www.npmjs.com/package/jb-time-input-react)
+![GitHub Created At](https://img.shields.io/github/created-at/javadbat/jb-time-input)
+
 jb-time-input react wrapper to use jb-time-input in react
 
 ## Demo
