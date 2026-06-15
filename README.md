@@ -21,7 +21,7 @@ in jb-time-input you can create a input special for time the advantage is:
 
 ## using with JS frameworks
 
-to use this component in **react** see [`jb-time-input/react`](https://github.com/javadbat/jb-time-input/tree/main/react);
+- [<img src="https://img.shields.io/badge/React.js-jb--time--input%2Freact-000.svg?logo=react&logoColor=%2361DAFB" height="30" />](https://github.com/javadbat/jb-time-input/tree/main/react)
 
 ## instruction
 
