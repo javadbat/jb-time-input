@@ -13,8 +13,7 @@ jb-time-input react wrapper to use jb-time-input in react
 
 ## instruction
 
-### installation and usage
-
+### Installation and Usage
 with npm:
 
 ```sh
@@ -157,14 +156,19 @@ if you want to show persian number instead of english number chars. you can set 
 ### set custom style
 
 jb-time-input use [jb-input](https://github.com/javadbat/jb-input) and [jb-time-picker](https://github.com/javadbat/jb-time-picker) and [jb-popover](https://github.com/javadbat/jb-popover) underneath so to change the styles of your component read custom style section of these components.
-more than above here is the css variable that we use in jb-time-input itself:
+more than above here is the CSS variable that we use in jb-time-input itself:
 
-| css variable name                       | description                                                                                              |
+| CSS variable name                       | description                                                                                              |
 | -------------                           | -------------                                                                                            |
 | --jb-time-input-margin                  | outer margin of web component default is `12px 0`                                                        |
 
 
-## Other Related Docs:
+
+## Shared Documentation
+
+For web-component behavior, events, slots, and CSS variables, see [`jb-time-input`](https://github.com/javadbat/jb-time-input).
+
+## Related Docs
 - see [jb-time-input](https://github.com/javadbat/jb-time-input) if you want to use this component as a pure-js web-component
 
 - see [All JB Design system Component List](https://javadbat.github.io/design-system/) for more components

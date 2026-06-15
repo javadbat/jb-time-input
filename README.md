@@ -19,14 +19,12 @@ in jb-time-input you can create a input special for time the advantage is:
 - [codepen](https://codepen.io/javadbat/pen/QWdxzKb);
 - [storybook](https://javadbat.github.io/design-system/?path=/docs/components-form-elements-inputs-jbtimeinput)
 
-## using with JS frameworks
-
+## Using With JS Frameworks
 - [<img src="https://img.shields.io/badge/React.js-jb--time--input%2Freact-000.svg?logo=react&logoColor=%2361DAFB" height="30" />](https://github.com/javadbat/jb-time-input/tree/main/react)
 
 ## instruction
 
-### installation and usage
-
+### Installation and Usage
 with npm:
 
 ```sh
@@ -49,10 +47,10 @@ like any other javascript DOM element you can bind event to web component with `
 
 ```javascript
     //when default property are defined best time for impl your config
-    document.querySelector('jb-date-input').addEventListener('init',this.onCalendarElementInitiated);
+    document.querySelector('jb-time-input').addEventListener('init',this.onTimeInputElementInitiated);
 
     //when calendar init all property and function and dom created and bind successully
-    document.querySelector('jb-date-input').addEventListener('load',this.onCalendarElementLoaded);
+    document.querySelector('jb-time-input').addEventListener('load',this.onTimeInputElementLoaded);
 
     //keyboard event
     document.querySelector('jb-time-input').addEventListener('keydown',()=>{});
@@ -79,7 +77,7 @@ to set value of time input you have 2 way:
 - by javascript
 
 ```javascript
-    document.querySelector('jb-date-input').value = "01:11:12";
+    document.querySelector('jb-time-input').value = "01:11:12";
 ```
 
 ### validation
@@ -88,7 +86,7 @@ jb-time-input use [jb-validation](https://github.com/javadbat/jb-validation) ins
 jb time input will check validation automatically and show error on user blur the input and hide error on user type and blur to use this feature you just have to set validation list of component.
 
 ```javascript
-document.querySelector('jb-time-input').validationList = [
+document.querySelector('jb-time-input').validation.list = [
     //regex validator
     {
       validator: /^[1][1234].*$/g,
@@ -167,16 +165,20 @@ document.querySelector('jb-time-input').showPersianNumber = true
 
 ### set custom style
 
-you can customize jb-time-input look  by setting css variable in your app.    
-jb-time-input use [jb-input](https://github.com/javadbat/jb-input) and [jb-time-picker](https://github.com/javadbat/jb-time-picker) and [jb-popover](https://github.com/javadbat/jb-popover) underneath so to change the styles of your component read custom style section of these components and set their css variable.
-more than above here is the css variable that we use in jb-time-input itself:
+you can customize jb-time-input look  by setting CSS variable in your app.    
+jb-time-input use [jb-input](https://github.com/javadbat/jb-input) and [jb-time-picker](https://github.com/javadbat/jb-time-picker) and [jb-popover](https://github.com/javadbat/jb-popover) underneath so to change the styles of your component read custom style section of these components and set their CSS variable.
+more than above here is the CSS variable that we use in jb-time-input itself:
 
-| css variable name                       | description                                                                                              |
+## Styling Dependencies
+
+`jb-time-input` uses `jb-input`, `jb-time-picker`, and `jb-popover` internally. Their CSS variables also apply when styling the composed time input.
+
+| CSS variable name                       | description                                                                                              |
 | -------------                           | -------------                                                                                            |
 | --jb-time-input-margin                  | outer margin of web component default is `12px 0`                                                        |
+| --jb-time-input-close-button-border-radius | Customize close button border radius. |
 
-## Other Related Docs:
-
+## Related Docs
 - see [`jb-time-input/react`](https://github.com/javadbat/jb-time-input/tree/main/react) if you want to use this component in ReactJS.
 
 - see [All JB Design system Component List](https://javadbat.github.io/design-system/) for more components.
