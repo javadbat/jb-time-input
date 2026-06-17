@@ -83,7 +83,7 @@ export class JBTimeInputWebComponent extends HTMLElement implements WithValidati
    */
   get hour(): number {
     let val = this.hourString;
-    if (isNaN(Number(val))) {
+    if (Number.isNaN(Number(val))) {
       val = "0";
     }
     return Number(val);
@@ -432,7 +432,7 @@ export class JBTimeInputWebComponent extends HTMLElement implements WithValidati
       .split(/[,\s]+/g)
       .filter((unit): unit is TimeUnitsString => ["hour", "minute", "second"].includes(unit));
   }
-  #standardTimeValue(inputtedString: string, oldValue: JBInputValue, prevResult: JBInputValue): JBInputValue {
+  #standardTimeValue(inputtedString: string, _oldValue: JBInputValue, prevResult: JBInputValue): JBInputValue {
     let displayValue = inputtedString;
     if (this.showPersianNumber) {
       displayValue = enToFaDigits(displayValue);
@@ -618,7 +618,7 @@ export class JBTimeInputWebComponent extends HTMLElement implements WithValidati
             ) {
               inputtedChar = "4";
             }
-            const headChar: string = isNaN(
+            const headChar: string = Number.isNaN(
               Number(this.elements.input.value[hourRange[0]])
             )
               ? "0"
