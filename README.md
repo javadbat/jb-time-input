@@ -1,186 +1,236 @@
-# jb-time-input web component
+# jb-time-input
 
 [![Published on webcomponents.org](https://img.shields.io/badge/webcomponents.org-published-blue.svg)](https://www.webcomponents.org/element/jb-time-input)
 [![GitHub license](https://img.shields.io/badge/license-MIT-brightgreen.svg)](https://raw.githubusercontent.com/javadbat/jb-time-input/main/LICENSE)
 [![NPM Version](https://img.shields.io/npm/v/jb-time-input)](https://www.npmjs.com/package/jb-time-input)
 ![GitHub Created At](https://img.shields.io/github/created-at/javadbat/jb-time-input)
 
-in jb-time-input you can create a input special for time the advantage is:
+`jb-time-input` is a form-associated time input web component with a typed input surface and a touch-friendly `jb-time-picker` popover.
 
-- validation so it only accept time value and not any other invalid format
-- support arrow key to increase and decrease time value
-- time picker
-- support both rtl and ltr direction
-- easy to use and can be used in any js framework like React, Vue, Angular,etc
-- can be used in pure js without any other dependency
-- has a touch friendly time-picker
-- responsive and mobile friendly
+- Accepts and submits 24-hour time strings.
+- Supports `HH:mm:ss` and hour/minute-only `HH:mm` mode.
+- Opens a visual time picker on focus.
+- Supports ArrowUp and ArrowDown to increase or decrease the focused time unit.
+- Accepts Persian digits and stores English digits.
+- Supports custom validation through `jb-validation`.
+- Uses `jb-input`, `jb-popover`, and `jb-time-picker` internally.
 
-- [codepen](https://codepen.io/javadbat/pen/QWdxzKb);
-- [storybook](https://javadbat.github.io/design-system/?path=/docs/components-form-elements-inputs-jbtimeinput)
+## When to use
+
+Use `jb-time-input` when users should type or edit a time value and may also benefit from a visual time picker.
+
+Use [`jb-time-picker`](https://github.com/javadbat/jb-time-picker) when you need only the visual wheel picker without an input field.
+
+## Demo
+
+- [CodePen](https://codepen.io/javadbat/pen/QWdxzKb)
+- [Storybook](https://javadbat.github.io/design-system/?path=/docs/components-form-elements-inputs-jbtimeinput)
 
 ## Using With JS Frameworks
+
 - [<img src="https://img.shields.io/badge/React.js-jb--time--input%2Freact-000.svg?logo=react&logoColor=%2361DAFB" height="30" />](https://github.com/javadbat/jb-time-input/tree/main/react)
 
-## instruction
-
-### Installation and Usage
-with npm:
+## Installation
 
 ```sh
 npm i jb-time-input
 ```
 
-```javascript
-import 'jb-time-input'
+```js
+import 'jb-time-input';
 ```
-
-```HTML
-    <div>
-        <jb-time-input/>
-    <div>
-```
-
-### event
-
-like any other javascript DOM element you can bind event to web component with `DOM.addEventListener` the supported event is:
-
-```javascript
-    //when default property are defined best time for impl your config
-    document.querySelector('jb-time-input').addEventListener('init',this.onTimeInputElementInitiated);
-
-    //when calendar init all property and function and dom created and bind successully
-    document.querySelector('jb-time-input').addEventListener('load',this.onTimeInputElementLoaded);
-
-    //keyboard event
-    document.querySelector('jb-time-input').addEventListener('keydown',()=>{});
-    document.querySelector('jb-time-input').addEventListener('keyup',()=>{});
-    document.querySelector('jb-time-input').addEventListener('keypress',()=>{});
-    document.querySelector('jb-time-input').addEventListener('change',()=>{});
-    // when user press enter on type good for situation you want so submit form or call search function on user press enter. 
-    document.querySelector('jb-time-input').addEventListener('enter',()=>{});
-    //focus event
-    document.querySelector('jb-time-input').addEventListener('focus',()=>{});
-    document.querySelector('jb-time-input').addEventListener('blur',()=>{});
-```
-
-### set value
-
-to set value of time input you have 2 way:
-
-- by html as a attribute:
 
 ```html
-<jb-time-input value="14:34:63">
+<jb-time-input label="Time"></jb-time-input>
 ```
 
-- by javascript
+## API reference
 
-```javascript
-    document.querySelector('jb-time-input').value = "01:11:12";
-```
+`jb-time-input` uses [`jb-input`](https://github.com/javadbat/jb-input), [`jb-popover`](https://github.com/javadbat/jb-popover), and [`jb-time-picker`](https://github.com/javadbat/jb-time-picker) internally. For the full inner input styling and behavior model, see the [`jb-input` API](https://github.com/javadbat/jb-input#api-reference).
 
-### validation
-jb-time-input use [jb-validation](https://github.com/javadbat/jb-validation) inside to handle validation so for more information you can read it's documentation.  
+### Attributes
 
-jb time input will check validation automatically and show error on user blur the input and hide error on user type and blur to use this feature you just have to set validation list of component.
+| name | type | default | description |
+| --- | --- | --- | --- |
+| `value` | `string` | `00:00:00` | Time value. Use `HH:mm:ss` when seconds are enabled and `HH:mm` when `second-enabled="false"`. |
+| `label` | `string` | `""` | Label forwarded to the inner `jb-input` and host aria label. |
+| `message` | `string` | `""` | Helper message forwarded to the inner `jb-input` and host aria description. |
+| `name` | `string` | `""` | Form field name forwarded to the inner `jb-input`. |
+| `placeholder` | `string` | `""` | Placeholder forwarded to the inner `jb-input`. |
+| `close-button-text` | `string` | localized `Close` | Text inside the popover close button. |
+| `second-enabled` | `boolean` | `true` | Enables the second unit. Empty attribute and `"true"` mean true; `"false"` means false. |
+| `frontal-zero` | `boolean` | `false` | Displays picker numbers below 10 with a leading zero. |
+| `optional-units` | `string` | `""` | Comma or space separated picker units shown as optional: `hour`, `minute`, `second`. |
+| `show-persian-number` | `boolean` | locale based | Displays Persian digits while `.value` remains English digits. |
+| `required` | `boolean \| string` | `false` | Enables required validation. A string value is used as the error message. |
+| `error` | `string` | `""` | External validation error message. |
+| `disabled` | `boolean` | `false` | Disables the inner input and sets disabled state on the host. |
+| `readonly` | `boolean` | `false` | Forwarded to the inner `jb-input`. |
+| `autocomplete` | `string` | browser default | Forwarded to the inner `jb-input`. |
+| `size` | `'xs' \| 'sm' \| 'md' \| 'lg' \| 'xl'` | `md` style defaults | Forwarded to the inner `jb-input`. |
 
-```javascript
-document.querySelector('jb-time-input').validation.list = [
-    //regex validator
-    {
-      validator: /^[1][1234].*$/g,
-      message:"hour  must be between 11 and 14"
-    },
-    //callback function validator
-    {
-      validator:({displayValue,value,valueObject})=>{
-        //display value is the value user see
-        //value is the value developer get by dom.value
-        //valueObject is the {hour:number,minute:number,second:number} object contain inputted value in number
-        if(valueObject.minute<30){
-          return false;
-        }
-        return true;
-      },
-      message:'minute must be 30 to 60'
-    }
-  ]
-```
+### Properties
 
-you can trigger validation manually by calling `checkValidity` function. for example you can call it when submit button clicked and check if value is valid or not.
+| name | type | readonly | description |
+| --- | --- | --- | --- |
+| `value` | `string` | no | Canonical time value submitted with forms. |
+| `hour` | `number` | no | Hour value from `0` to `24`. |
+| `minute` | `number` | no | Minute value from `0` to `59`. |
+| `second` | `number \| null` | no | Second value from `0` to `59`, or `null` when seconds are disabled. |
+| `secondEnabled` | `boolean` | no | Enables or disables the second unit. |
+| `frontalZero` | `boolean` | no | Displays picker numbers below 10 with a leading zero. |
+| `optionalUnits` | `Array<'hour' \| 'minute' \| 'second'>` | no | Time picker units shown as optional/muted. |
+| `showPersianNumber` | `boolean` | no | Displays Persian digits in the input and picker. |
+| `required` | `boolean` | no | Enables required validation. |
+| `disabled` | `boolean` | no | Enables or disables the inner input. |
+| `validation` | `ValidationHelper<ValidationValue>` | yes | Validation helper from `jb-validation`; set `validation.list` for custom rules. |
+| `validationMessage` | `string` | yes | Current validation message from `ElementInternals`. |
 
-```javascript
-    // if you set showError false you can get validation result but component wont show error to user by itself its good when you want show error in your own way
-    const showError = true;
-    const validationResult =  document.querySelector('jb-time-input').validation.checkValidity(showError);
-    if(validationResult.isAllValid){
-        alert('all validation are passed')
-    }else{
-        alert('validation error!');
-    }
+### Methods
 
-```
+| name | returns | description |
+| --- | --- | --- |
+| `checkValidity()` | `boolean` | Runs validation without showing the error message. Dispatches `invalid` when invalid. |
+| `reportValidity()` | `boolean` | Runs validation and shows the first error message. Dispatches `invalid` when invalid. |
+| `focus()` | `void` | Focuses the inner `jb-input`. |
+| `addHour(interval)` | `void` | Adds `interval` to the hour value. Use a negative number to subtract. |
+| `addMinute(interval)` | `void` | Adds `interval` to the minute value. Use a negative number to subtract. |
+| `addSecond(interval)` | `void` | Adds `interval` to the second value. Use a negative number to subtract. |
+| `clearValidationError()` | `void` | Clears the visible validation error. |
 
-you can also get validation result of your time input by following way:
+### Events
 
-```javascript
-    document.querySelector('jb-time-input').validation.resultSummary
+| event | description |
+| --- | --- |
+| `load` | Dispatched from `connectedCallback` before initialization. |
+| `init` | Dispatched from `connectedCallback` after initialization. |
+| `input` | Dispatched after user input changes the time value. |
+| `beforeinput` | Re-dispatched from the inner input before user input is applied. |
+| `change` | Dispatched when the committed time value changes after blur or picker interaction. |
+| `focus` | Re-dispatched when the inner input receives focus. |
+| `blur` | Re-dispatched when the inner input loses focus. |
+| `keydown` | Re-dispatched from the inner input. |
+| `keyup` | Re-dispatched from the inner input. |
+| `keypress` | Re-dispatched from the inner input. |
+| `enter` | Dispatched when Enter is pressed. |
+| `invalid` | Dispatched when validation fails. |
 
-```
+## Value
 
-### configurable attributes
-
-you can change some attribute in html like label or message configurable attribute are:
-
-```HTML
-<jb-time-input close-button-text="بستن"></jb-time-input>
-```
-
-### disable second
-if you want to just input minute and hour and disable second in picker and input just set `secondEnabled` to `false`
-```javascript
-    document.querySelector('jb-time-input').secondEnabled = false;
-```
-### frontal zero
-if you want picker to show `02` instead of `2` when number is less than 10 just set `frontalZero` of time picker default is `false`.    
 ```js
-document.querySelector('jb-time-input').frontalZero = true;
+const timeInput = document.querySelector('jb-time-input');
+
+timeInput.value = '14:34:13';
+console.log(timeInput.value); // "14:34:13"
+console.log(timeInput.hour); // 14
+console.log(timeInput.minute); // 34
+console.log(timeInput.second); // 13
 ```
-or
+
+For hour/minute-only input, disable seconds and use `HH:mm`.
+
 ```html
-<jb-time-input frontal-zero="true"></jb-time-input>
+<jb-time-input second-enabled="false" value="14:34"></jb-time-input>
 ```
-### optional units
-if you want to tell user some units is optional and grey the numbers in picker, you can set `optionalUnits`
+
 ```js
-//it could be 'hour' or 'minute' or 'second'
-document.querySelector('jb-time-input').optionalUnits = ['hour'];
-```
-### show persian number
-if you want to show persian number instead of english number chars. you can set `showPersianNumber`:
-```js 
-document.querySelector('jb-time-input').showPersianNumber = true
+timeInput.secondEnabled = false;
+timeInput.value = '14:34';
 ```
 
-### set custom style
+## Keyboard and picker
 
-you can customize jb-time-input look  by setting CSS variable in your app.    
-jb-time-input use [jb-input](https://github.com/javadbat/jb-input) and [jb-time-picker](https://github.com/javadbat/jb-time-picker) and [jb-popover](https://github.com/javadbat/jb-popover) underneath so to change the styles of your component read custom style section of these components and set their CSS variable.
-more than above here is the CSS variable that we use in jb-time-input itself:
+When the input is focused, the time picker opens in a popover. Use ArrowUp and ArrowDown to change the time unit at the current caret position.
 
-## Styling Dependencies
+```js
+timeInput.addHour(1);
+timeInput.addMinute(-5);
+timeInput.addSecond(10);
+```
 
-`jb-time-input` uses `jb-input`, `jb-time-picker`, and `jb-popover` internally. Their CSS variables also apply when styling the composed time input.
+## Validation
 
-| CSS variable name                       | description                                                                                              |
-| -------------                           | -------------                                                                                            |
-| --jb-time-input-margin                  | outer margin of web component default is `12px 0`                                                        |
-| --jb-time-input-close-button-border-radius | Customize close button border radius. |
+`jb-time-input` uses [`jb-validation`](https://github.com/javadbat/jb-validation). Custom validators receive `value`, `displayValue`, and `valueObject`.
+
+```js
+const timeInput = document.querySelector('jb-time-input');
+
+timeInput.validation.list = [
+  {
+    validator: ({ valueObject }) => valueObject.hour >= 9 && valueObject.hour <= 17,
+    message: 'Time must be during working hours',
+  },
+  {
+    validator: ({ valueObject }) => valueObject.minute >= 30,
+    message: 'Minute must be 30 or later',
+  },
+];
+```
+
+## Display options
+
+```html
+<jb-time-input
+  frontal-zero
+  optional-units="second"
+  show-persian-number
+></jb-time-input>
+```
+
+```js
+timeInput.frontalZero = true;
+timeInput.optionalUnits = ['second'];
+timeInput.showPersianNumber = true;
+```
+
+`optionalUnits` only makes picker units visually muted. It does not remove a unit or change `.value`.
+
+## CSS parts and variables
+
+| part | description |
+| --- | --- |
+| `wrapper` | Root wrapper inside the shadow DOM. |
+| `input` | Internal `jb-input`. |
+| `popover` | Internal `jb-popover`. |
+| `time-picker` | Internal `jb-time-picker`. |
+| `close-button` | Popover close button. |
+
+| CSS variable name | description |
+| --- | --- |
+| `--jb-time-input-margin` | Host component margin. |
+| `--jb-time-input-close-button-border-radius` | Popover close button border radius. |
+
+Internal `jb-input`, `jb-popover`, and `jb-time-picker` CSS variables also apply.
+
+```css
+jb-time-input {
+  --jb-time-input-margin: 8px 0;
+  --jb-time-input-close-button-border-radius: 8px;
+  --jb-time-picker-hour-color: #2563eb;
+}
+```
+
+## Accessibility notes
+
+- The component is form-associated and submits `.value`.
+- `label` maps to host aria label and the inner `jb-input` label.
+- `message` maps to host aria description and the inner helper message.
+- The inner input uses `inputmode="none"` and `virtualkeyboardpolicy="manual"` to favor the custom time editing UI.
 
 ## Related Docs
-- see [`jb-time-input/react`](https://github.com/javadbat/jb-time-input/tree/main/react) if you want to use this component in ReactJS.
 
-- see [All JB Design system Component List](https://javadbat.github.io/design-system/) for more components.
+- See [`jb-time-input/react`](https://github.com/javadbat/jb-time-input/tree/main/react) if you want to use this component in React.
+- See [`jb-input`](https://github.com/javadbat/jb-input), [`jb-time-picker`](https://github.com/javadbat/jb-time-picker), and [`jb-popover`](https://github.com/javadbat/jb-popover) for composed component APIs.
+- See [All JB Design System Component List](https://javadbat.github.io/design-system/) for more components.
+- Use [Contribution Guide](https://github.com/javadbat/design-system/blob/main/docs/contribution-guide.md) if you want to contribute to this component.
 
-- use [Contribution Guide](https://github.com/javadbat/design-system/blob/main/docs/contribution-guide.md) if you want to contribute in this component.
+## AI agent notes
+
+- Import `jb-time-input` once before using `<jb-time-input>`.
+- Use `.value` for the canonical submitted value: `HH:mm:ss` when seconds are enabled, `HH:mm` when seconds are disabled.
+- Use `second-enabled="false"` or `secondEnabled = false` before setting an hour/minute-only value.
+- Use `validation.list` for custom validation; validators receive `{ value, displayValue, valueObject }`.
+- Use `show-persian-number` only for display. `.value` remains English digits.
+- Use `optional-units` only for visual emphasis in the picker.
+- This package includes [`custom-elements.json`](./custom-elements.json) and points to it with the package.json `customElements` field. The field is documented by the Custom Elements Manifest project in [Referencing manifests from npm packages](https://github.com/webcomponents/custom-elements-manifest#referencing-manifests-from-npm-packages).
+- In `custom-elements.json`, `exports.kind: "js"` describes JavaScript/TypeScript exports and `exports.kind: "custom-element-definition"` maps the `jb-time-input` tag name to `JBTimeInputWebComponent`.

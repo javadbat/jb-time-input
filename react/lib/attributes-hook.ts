@@ -10,37 +10,37 @@ export type JBTimeInputAttributes = {
   optionalUnits?: TimeUnits[] | null,
   showPersianNumber?: boolean,
 }
-export function useJBTimeInputAttribute(element: RefObject<JBTimeInputWebComponent>, props: JBTimeInputAttributes) {
+export function useJBTimeInputAttribute(element: RefObject<JBTimeInputWebComponent | null>, props: JBTimeInputAttributes) {
   useEffect(() => {
-    let value = props.value;
-    if (props.value == null || props.value === undefined) {
-      value = '00:00:00';
+    if (!element.current) {
+      return;
     }
+    const value = props.value ?? '00:00:00';
     element.current.value = value;
-  }, [props.value, element.current]);
+  }, [props.value, element]);
   useEffect(() => {
     if (Array.isArray(props.validationList) && element.current) {
       element.current.validation.list = props.validationList;
     }
-  }, [props.validationList, element.current]);
+  }, [props.validationList, element]);
   useEffect(() => {
-    if (element.current, props.secondEnabled !== null && props.secondEnabled !== undefined) {
+    if (element.current && props.secondEnabled !== null && props.secondEnabled !== undefined) {
       element.current.secondEnabled = props.secondEnabled;
     }
-  }, [props.secondEnabled, element.current]);
+  }, [props.secondEnabled, element]);
   useEffect(() => {
-    if (typeof props.frontalZero == "boolean") {
+    if (element.current && typeof props.frontalZero == "boolean") {
       element.current.frontalZero = props.frontalZero;
     }
-  }, [props.frontalZero, element.current]);
+  }, [props.frontalZero, element]);
   useEffect(() => {
-    if (Array.isArray(props.optionalUnits)) {
+    if (element.current && Array.isArray(props.optionalUnits)) {
       element.current.optionalUnits = props.optionalUnits;
     }
-  }, [props.optionalUnits, element.current]);
+  }, [props.optionalUnits, element]);
   useEffect(() => {
-    if (props.showPersianNumber !== null && props.showPersianNumber !== undefined) {
+    if (element.current && props.showPersianNumber !== null && props.showPersianNumber !== undefined) {
       element.current.showPersianNumber = props.showPersianNumber;
     }
-  }, [props.showPersianNumber, element.current]);
+  }, [props.showPersianNumber, element]);
 }

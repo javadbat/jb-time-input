@@ -30,11 +30,20 @@ const JBTimeInput = React.forwardRef((props:Props, ref)=>{
     [element],
   );
   // placeholder label message are in other Props
-  const {onBeforeInput,onBlur,onChange,onEnter,onFocus,onInit,onInput,onKeyDown,onKeyPress,onKeyUp,onLoad, frontalZero,optionalUnits,secondEnabled,showPersianNumber, children, ...otherProps} = props;
+  const {onBeforeInput,onBlur,onChange,onEnter,onFocus,onInit,onInput,onKeyDown,onKeyPress,onKeyUp,onLoad, frontalZero,optionalUnits,secondEnabled,showPersianNumber,value,validationList,closeButtonText,label,message,placeholder, children, ...otherProps} = props;
   useEvents(element, {onBeforeInput,onBlur,onChange,onEnter,onFocus,onInit,onInput,onKeyDown,onKeyPress,onKeyUp,onLoad});
-  useJBTimeInputAttribute(element,{frontalZero,optionalUnits,secondEnabled,showPersianNumber});
+  useJBTimeInputAttribute(element,{frontalZero,optionalUnits,secondEnabled,showPersianNumber,value,validationList});
   return (
-    <jb-time-input ref={element} close-button-text={props.closeButtonText} {...otherProps}>{children}</jb-time-input>
+    <jb-time-input
+      ref={element}
+      close-button-text={closeButtonText ?? undefined}
+      label={label ?? undefined}
+      message={message ?? undefined}
+      placeholder={placeholder ?? undefined}
+      {...otherProps}
+    >
+      {children}
+    </jb-time-input>
   );
 });
 

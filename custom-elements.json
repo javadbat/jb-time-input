@@ -1,0 +1,378 @@
+{
+  "schemaVersion": "1.0.0",
+  "readme": "README.md",
+  "modules": [
+    {
+      "kind": "javascript-module",
+      "path": "lib/jb-time-input.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Form-associated 24-hour time input web component with jb-input editing, jb-time-picker popover, keyboard stepping, Persian digit display, and jb-validation support.",
+          "name": "JBTimeInputWebComponent",
+          "tagName": "jb-time-input",
+          "customElement": true,
+          "superclass": {
+            "name": "HTMLElement"
+          },
+          "attributes": [
+            {
+              "name": "value",
+              "description": "Canonical time value. Use HH:mm:ss when seconds are enabled and HH:mm when second-enabled is false.",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "label",
+              "description": "Label forwarded to the inner jb-input and host aria label.",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "message",
+              "description": "Helper message forwarded to the inner jb-input and host aria description.",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "name",
+              "description": "Form field name forwarded to the inner jb-input.",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "placeholder",
+              "description": "Placeholder forwarded to the inner jb-input.",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "close-button-text",
+              "description": "Text shown inside the time picker popover close button.",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "second-enabled",
+              "description": "Enables the second unit. Empty attribute and true mean enabled; false disables seconds.",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "true"
+            },
+            {
+              "name": "frontal-zero",
+              "description": "Displays picker values below 10 with a leading zero.",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false"
+            },
+            {
+              "name": "optional-units",
+              "description": "Comma or space separated list of picker units displayed as optional: hour, minute, second.",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "show-persian-number",
+              "description": "Displays Persian digits while keeping value in English digits.",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "name": "required",
+              "description": "Enables required validation. A string value is used as the validation message.",
+              "type": {
+                "text": "boolean | string"
+              }
+            },
+            {
+              "name": "error",
+              "description": "External validation error message.",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "disabled",
+              "description": "Disables the inner input and sets disabled state on the host.",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "name": "readonly",
+              "description": "Forwarded to the inner jb-input.",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "name": "autocomplete",
+              "description": "Forwarded to the inner jb-input.",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "size",
+              "description": "Visual size forwarded to the inner jb-input.",
+              "type": {
+                "text": "'xs' | 'sm' | 'md' | 'lg' | 'xl'"
+              }
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "value",
+              "description": "Canonical time value submitted with forms.",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "hour",
+              "description": "Hour value from 0 to 24.",
+              "type": {
+                "text": "number"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "minute",
+              "description": "Minute value from 0 to 59.",
+              "type": {
+                "text": "number"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "second",
+              "description": "Second value from 0 to 59, or null when seconds are disabled.",
+              "type": {
+                "text": "number | null"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "secondEnabled",
+              "description": "Enables or disables the second unit.",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "frontalZero",
+              "description": "Displays picker values below 10 with a leading zero.",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "optionalUnits",
+              "description": "Picker units displayed as optional/muted.",
+              "type": {
+                "text": "Array<'hour' | 'minute' | 'second'>"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "showPersianNumber",
+              "description": "Displays Persian digits in the input and picker.",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "required",
+              "description": "Enables required validation.",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "disabled",
+              "description": "Enables or disables the inner input.",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "validation",
+              "description": "jb-validation helper. Set validation.list for custom validation rules.",
+              "type": {
+                "text": "ValidationHelper<ValidationValue>"
+              },
+              "readonly": true
+            },
+            {
+              "kind": "field",
+              "name": "validationMessage",
+              "description": "Current validation message from ElementInternals.",
+              "type": {
+                "text": "string"
+              },
+              "readonly": true
+            }
+          ],
+          "methods": [
+            {
+              "name": "checkValidity",
+              "description": "Runs validation without showing the error message and returns whether the input is valid.",
+              "return": {
+                "type": {
+                  "text": "boolean"
+                }
+              }
+            },
+            {
+              "name": "reportValidity",
+              "description": "Runs validation, shows the first error message, and returns whether the input is valid.",
+              "return": {
+                "type": {
+                  "text": "boolean"
+                }
+              }
+            },
+            {
+              "name": "focus",
+              "description": "Focuses the inner jb-input."
+            },
+            {
+              "name": "addHour",
+              "description": "Adds an interval to the hour value. Use a negative number to subtract."
+            },
+            {
+              "name": "addMinute",
+              "description": "Adds an interval to the minute value. Use a negative number to subtract."
+            },
+            {
+              "name": "addSecond",
+              "description": "Adds an interval to the second value. Use a negative number to subtract."
+            },
+            {
+              "name": "clearValidationError",
+              "description": "Clears the visible validation error."
+            }
+          ],
+          "events": [
+            {
+              "name": "load",
+              "description": "Dispatched from connectedCallback before initialization."
+            },
+            {
+              "name": "init",
+              "description": "Dispatched from connectedCallback after initialization."
+            },
+            {
+              "name": "input",
+              "description": "Dispatched after user input changes the time value."
+            },
+            {
+              "name": "beforeinput",
+              "description": "Re-dispatched from the inner input before user input is applied."
+            },
+            {
+              "name": "change",
+              "description": "Dispatched when the committed time value changes."
+            },
+            {
+              "name": "focus",
+              "description": "Re-dispatched when the inner input receives focus."
+            },
+            {
+              "name": "blur",
+              "description": "Re-dispatched when the inner input loses focus."
+            },
+            {
+              "name": "keydown",
+              "description": "Re-dispatched from the inner input."
+            },
+            {
+              "name": "keyup",
+              "description": "Re-dispatched from the inner input."
+            },
+            {
+              "name": "keypress",
+              "description": "Re-dispatched from the inner input."
+            },
+            {
+              "name": "enter",
+              "description": "Dispatched when Enter is pressed."
+            },
+            {
+              "name": "invalid",
+              "description": "Dispatched when validation fails."
+            }
+          ],
+          "cssParts": [
+            {
+              "name": "wrapper",
+              "description": "Root wrapper inside the shadow DOM."
+            },
+            {
+              "name": "input",
+              "description": "Internal jb-input."
+            },
+            {
+              "name": "popover",
+              "description": "Internal jb-popover."
+            },
+            {
+              "name": "time-picker",
+              "description": "Internal jb-time-picker."
+            },
+            {
+              "name": "close-button",
+              "description": "Popover close button."
+            }
+          ],
+          "cssProperties": [
+            {
+              "name": "--jb-time-input-margin",
+              "description": "Host component margin."
+            },
+            {
+              "name": "--jb-time-input-close-button-border-radius",
+              "description": "Popover close button border radius."
+            }
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "JBTimeInputWebComponent",
+          "declaration": {
+            "name": "JBTimeInputWebComponent",
+            "module": "lib/jb-time-input.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "jb-time-input",
+          "declaration": {
+            "name": "JBTimeInputWebComponent",
+            "module": "lib/jb-time-input.ts"
+          }
+        }
+      ]
+    }
+  ]
+}
