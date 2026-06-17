@@ -6,8 +6,8 @@ import 'jb-popover';
 import type { JBInputWebComponent, JBInputValue } from "jb-input";
 import type { JBTimePickerWebComponent, JBTimePickerValueObject, TimeUnitsString, SecondRange } from "jb-time-picker";
 import type { JBTimeInputElements, ValidationValue, } from "./types";
-import { type ValidationResult, type WithValidation, ValidationHelper, type ShowValidationErrorParameters } from "jb-validation";
-import { enToFaDigits, faToEnDigits } from "jb-core";
+import { type ValidationItem, type ValidationResult, type WithValidation, ValidationHelper, type ShowValidationErrorParameters } from "jb-validation";
+import { enToFaDigits, faToEnDigits, parseBooleanAttribute } from "jb-core";
 import { renderHTML } from "./render";
 export * from './types.js';
 import {i18n} from 'jb-core/i18n'
@@ -26,9 +26,7 @@ export class JBTimeInputWebComponent extends HTMLElement implements WithValidati
     const isValid = this.#checkTimeFormatValidation(value);
     if (isValid) {
       this.elements.input.value = value;
-      if (this.#internals) {
-        this.#internals.setFormValue(value);
-      }
+      this.#setFormValue();
     }
   }
   /**
@@ -47,7 +45,7 @@ export class JBTimeInputWebComponent extends HTMLElement implements WithValidati
   #validation = new ValidationHelper<ValidationValue>({
     clearValidationError: this.clearValidationError.bind(this),
     getValue: this.#getValidationValue.bind(this),
-    getValidations: () => [],
+    getValidations: this.#getInsideValidations.bind(this),
     getValueString: () => this.value,
     setValidationResult: this.#setValidationResult.bind(this),
     showValidationError: this.showValidationError.bind(this)
@@ -104,6 +102,7 @@ export class JBTimeInputWebComponent extends HTMLElement implements WithValidati
       this.elements.input.value = `${hourString}${this.elements.input.value.slice(
         this.#inputRanges.hourRange[1] + 1
       )}`;
+      this.#setFormValue();
       this.updateTimePickerValue(hour, this.minute, this.second);
     }
   }
@@ -144,6 +143,7 @@ export class JBTimeInputWebComponent extends HTMLElement implements WithValidati
       )}${minuteString}${this.elements.input.value.slice(
         this.#inputRanges.minuteRange[1] + 1
       )}`;
+      this.#setFormValue();
       this.updateTimePickerValue(this.hour, minute, this.second);
     }
   }
@@ -193,6 +193,7 @@ export class JBTimeInputWebComponent extends HTMLElement implements WithValidati
             0,
             this.#inputRanges.secondRange[0]
           )}${secondString}`;
+          this.#setFormValue();
           this.updateTimePickerValue(this.hour, this.minute, second);
         }
       }
@@ -236,6 +237,21 @@ export class JBTimeInputWebComponent extends HTMLElement implements WithValidati
     this.value = `${this.value}`;
   }
   #internals: ElementInternals | null = null;
+  #disabled = false;
+  get disabled() {
+    return this.#disabled;
+  }
+  set disabled(value: boolean) {
+    this.#disabled = value;
+    this.elements.input.disabled = value;
+    if (value) {
+      this.#internals?.states?.add("disabled");
+      this.#internals!.ariaDisabled = "true";
+    } else {
+      this.#internals?.states?.delete("disabled");
+      this.#internals!.ariaDisabled = "false";
+    }
+  }
   #required = false;
   set required(value: boolean) {
     this.#required = value;
@@ -325,9 +341,9 @@ export class JBTimeInputWebComponent extends HTMLElement implements WithValidati
     });
   }
   #resetInputValue() {
-    const value = "00:00";
+    let value = "00:00";
     if (this.secondEnabled) {
-      value.concat(":00");
+      value = `${value}:00`;
     }
     this.value = value;
   }
@@ -337,36 +353,84 @@ export class JBTimeInputWebComponent extends HTMLElement implements WithValidati
       "message",
       "value",
       "name",
+      "placeholder",
+      "autocomplete",
+      "readonly",
+      "disabled",
+      "required",
+      "error",
+      "size",
       "close-button-text",
       "frontal-zero",
+      "second-enabled",
+      "optional-units",
+      "show-persian-number",
     ];
   }
-  attributeChangedCallback(name: string, oldValue: string, newValue: string) {
+  attributeChangedCallback(name: string, oldValue: string | null, newValue: string | null) {
     // do something when an attribute has changed
+    if (oldValue === newValue) {
+      return;
+    }
     this.#onAttributeChange(name, newValue);
   }
-  #onAttributeChange(name: string, value: string) {
+  #onAttributeChange(name: string, value: string | null) {
     switch (name) {
       case "label":
-        this.elements.input.setAttribute('label', value);
-        this.#internals!.ariaLabel = value;
+        this.elements.input.setAttribute('label', value ?? "");
+        this.#internals!.ariaLabel = value ?? "";
         break;
         case "message":
-          this.elements.input.setAttribute("message", value);
-          this.#internals!.ariaDescription = value;
+          this.elements.input.setAttribute("message", value ?? "");
+          this.#internals!.ariaDescription = value ?? "";
         break;
       case "value":
-        this.value = value;
+        this.value = value ?? "";
         break;
       case "name":
-        this.elements.input.setAttribute("name", value);
+      case "placeholder":
+      case "autocomplete":
+      case "readonly":
+      case "size":
+        if (value === null) {
+          this.elements.input.removeAttribute(name);
+        } else {
+          this.elements.input.setAttribute(name, value);
+        }
         break;
       case "close-button-text":
-        this.elements.timePicker.closeButton.innerHTML = value;
+        this.elements.timePicker.closeButton.innerHTML = value ?? "";
         break;
       case "frontal-zero":
-        this.frontalZero = Boolean(value);
+        this.frontalZero = parseBooleanAttribute(value, false);
+        break;
+      case "second-enabled":
+        this.secondEnabled = parseBooleanAttribute(value, true);
+        break;
+      case "optional-units":
+        this.optionalUnits = this.#parseOptionalUnits(value);
+        break;
+      case "show-persian-number":
+        this.showPersianNumber = parseBooleanAttribute(value, false);
+        break;
+      case "disabled":
+        this.disabled = parseBooleanAttribute(value, false);
+        break;
+      case "required":
+        this.required = parseBooleanAttribute(value, false);
+        break;
+      case "error":
+        this.reportValidity();
+        break;
     }
+  }
+  #parseOptionalUnits(value: string | null) {
+    if (!value) {
+      return [];
+    }
+    return value
+      .split(/[,\s]+/g)
+      .filter((unit): unit is TimeUnitsString => ["hour", "minute", "second"].includes(unit));
   }
   #standardTimeValue(inputtedString: string, oldValue: JBInputValue, prevResult: JBInputValue): JBInputValue {
     let displayValue = inputtedString;
@@ -617,7 +681,7 @@ export class JBTimeInputWebComponent extends HTMLElement implements WithValidati
   }
   /**@description handle paste on beforeInput */
   #handlePaste(pastedValue: string) {
-    const selectionStart = this.elements.input.selectionStart;
+    const selectionStart = this.elements.input.selectionStart ?? 0;
     const { maxCaretPos } = this.#inputRanges;
     const allowedPasteLength = (maxCaretPos + 1) - selectionStart;
     const replaceValue = pastedValue.replace(/[^0-9:]/g, "").slice(0, allowedPasteLength);
@@ -771,6 +835,29 @@ export class JBTimeInputWebComponent extends HTMLElement implements WithValidati
         second: this.second
       }
     };
+  }
+  #setFormValue() {
+    this.#internals?.setFormValue(this.value);
+  }
+  #getInsideValidations(): ValidationItem<ValidationValue>[] {
+    const validationList: ValidationItem<ValidationValue>[] = [];
+    const errorAttribute = this.getAttribute("error");
+    if (errorAttribute && errorAttribute.trim().length > 0) {
+      validationList.push({
+        validator: undefined,
+        message: errorAttribute,
+        stateType: "customError"
+      });
+    }
+    if (this.required) {
+      const requiredAttribute = this.getAttribute("required");
+      validationList.push({
+        validator: ({ value }) => this.#checkTimeFormatValidation(value),
+        message: requiredAttribute && !["", "true"].includes(requiredAttribute) ? requiredAttribute : "Please enter a complete time",
+        stateType: "valueMissing"
+      });
+    }
+    return validationList;
   }
   /**
  * @public

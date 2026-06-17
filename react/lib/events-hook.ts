@@ -25,7 +25,7 @@ export type EventProps = {
   onBeforeInput?: (e: JBTimeInputEventType<InputEvent>) => void,
 
 }
-export function useEvents(element: RefObject<JBTimeInputWebComponent>, props: EventProps) {
+export function useEvents(element: RefObject<JBTimeInputWebComponent | null>, props: EventProps) {
   useEvent(element, 'load', props.onLoad, true);
   useEvent(element, 'init', props.onInit, true);
   useEvent(element, 'change', props.onChange);
