@@ -1,0 +1,18 @@
+import {Meta, Title, Story, Controls, Stories, Source} from '@storybook/blocks';
+import * as TimeInputStories from './JBTimeInput.stories';
+
+<Meta of={TimeInputStories}/>
+
+<Title>JB Time Input</Title>
+
+Time input component with picker behavior, validation, Persian numbers, and optional time units.
+
+<Story of={TimeInputStories.withValue}/>
+<Controls of={TimeInputStories.withValue}/>
+<Source of={TimeInputStories.withValue}/>
+
+## Validation
+<Story of={TimeInputStories.ValidationSample}/>
+
+## Other samples & variants
+<Stories/>
