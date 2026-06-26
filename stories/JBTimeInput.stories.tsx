@@ -1,15 +1,15 @@
 import React from 'react';
-import { JBTimeInput, Props } from 'jb-time-input/react';
+import { JBTimeInput } from 'jb-time-input/react';
 import JBTimeInputEventTestPage from './samples/JBTimeInputEventTestPage';
 import JBTimeInputWebComponentEventTestPage from './samples/JBTimeInputWebComponentEventTestPage';
 import type { Meta, StoryObj } from '@storybook/react';
 
-const meta: Meta<Props> = {
+const meta = {
   title: "Components/form elements/Inputs/JBTimeInput",
   component: JBTimeInput,
-};
+} satisfies Meta<typeof JBTimeInput>;
 export default meta;
-type Story = StoryObj<typeof JBTimeInput>;
+type Story = StoryObj<typeof meta>;
 
 export const Normal: Story = {
   args: {
