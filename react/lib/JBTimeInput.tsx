@@ -6,20 +6,7 @@ import type {JBTimeInputWebComponent } from 'jb-time-input';
 import {type EventProps,useEvents} from './events-hook.js';
 import { useJBTimeInputAttribute, type JBTimeInputAttributes } from './attributes-hook.js';
 import type { JBElementStandardProps } from 'jb-core/react';
-
-declare module "react" {
-  namespace JSX {
-    interface IntrinsicElements {
-      'jb-time-input': JBTimeInputType;
-    }
-    interface JBTimeInputType extends React.DetailedHTMLProps<React.HTMLAttributes<JBTimeInputWebComponent>, JBTimeInputWebComponent> {
-      "type"?: string,
-      "label"?:string,
-      "message"?:string,
-      "placeholder"?:string,
-    }
-  }
-}
+import './module-declaration.js';
 
 // eslint-disable-next-line react/display-name
 const JBTimeInput = React.forwardRef((props:Props, ref)=>{
