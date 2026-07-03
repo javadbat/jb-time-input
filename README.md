@@ -205,8 +205,8 @@ Internal `jb-input`, `jb-popover`, and `jb-time-picker` CSS variables also apply
 
 ```css
 jb-time-input {
-  --jb-time-input-margin: 8px 0;
-  --jb-time-input-close-button-border-radius: 8px;
+  --jb-time-input-margin: 0.5rem 0;
+  --jb-time-input-close-button-border-radius: 0.5rem;
   --jb-time-picker-hour-color: #2563eb;
 }
 ```

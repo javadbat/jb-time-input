@@ -3,13 +3,13 @@
 }
 .jb-time-input-web-component{
     width: 100%;
-    margin: var(--jb-time-input-margin ,  12px 0);
+    margin: var(--jb-time-input-margin ,  0.75rem 0);
     position: relative;
     jb-popover{
         --jb-popover-top:4rem;
         .close-time-picker-button{
             width: auto;
-            padding: 8px 16px;
+            padding: 0.5rem 1rem;
             background-color: #2852bd00;
             border:none;
             border-radius: var(--close-button-border-radius);
