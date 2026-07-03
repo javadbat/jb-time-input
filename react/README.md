@@ -25,6 +25,12 @@ import { JBTimeInput } from 'jb-time-input/react';
 <JBTimeInput label="Time" />;
 ```
 
+## When to use
+
+Use `JBTimeInput` when a React form needs typed time entry plus picker behavior, validation, optional seconds, Persian digit display, or form value support.
+
+Use `JBTimePicker` when you need only the inline time picker without the input field.
+
 ## Props
 
 | prop | type | description |
@@ -57,6 +63,10 @@ For hour/minute-only input:
 <JBTimeInput secondEnabled={false} value="14:34" />;
 ```
 
+## Keyboard and picker
+
+The input supports keyboard entry and an attached time picker. Set `secondEnabled={false}` before using `HH:mm` values.
+
 ## Validation
 
 ```jsx
@@ -86,9 +96,21 @@ const validationList = [
 | `onKeyPress` | Keyboard event from the inner input. |
 | `onEnter` | Called when Enter is pressed. |
 
+## Display options
+
+Use `frontalZero`, `optionalUnits`, and `showPersianNumber` to control picker display. The canonical value remains English digits.
+
 ## Styling
 
 The React component uses the same CSS variables and CSS parts as the web component. For styling details, see [`jb-time-input`](https://github.com/javadbat/jb-time-input).
+
+## CSS parts and variables
+
+Use the same CSS parts and variables as the web component. The `Styling` section above shows the React class-based pattern.
+
+## Accessibility notes
+
+Set `label` for the field name. Use `message` for time-format hints, especially when seconds are disabled or optional units are shown.
 
 ## Shared Documentation
 
