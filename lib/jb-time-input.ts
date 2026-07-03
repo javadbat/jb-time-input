@@ -10,7 +10,7 @@ import { type ValidationItem, type ValidationResult, type WithValidation, Valida
 import { enToFaDigits, faToEnDigits, parseBooleanAttribute } from "jb-core";
 import { renderHTML } from "./render";
 export * from './types.js';
-import {i18n} from 'jb-core/i18n'
+import { i18n } from 'jb-core/i18n'
 //TODO: accept js Date value in value setter and extract time from date and return given date with a inputted time
 //TODO: add picker disabler and handle virtual keyboard for it
 //TODO: add placeholder handler like date input
@@ -35,10 +35,14 @@ export class JBTimeInputWebComponent extends HTMLElement implements WithValidati
   get isAutoValidationDisabled(): boolean {
     //currently we only support disable-validation in attribute and only in initiate time but later we can add support for change of this
 
-    return (!!(this.getAttribute('disable-auto-validation') === '' || this.getAttribute('disable-auto-validation') === 'true' ));
+    return (!!(this.getAttribute('disable-auto-validation') === '' || this.getAttribute('disable-auto-validation') === 'true'));
   }
   #checkValidity(showError: boolean) {
     if (!this.isAutoValidationDisabled) {
+      if (this.#internals?.states.has("invalid")) {
+        // if we currently showing error to user it make sure error get updated (when failed validation changed of function return different string as an error) 
+        showError = true;
+      }
       return this.#validation.checkValidity({ showError: showError });
     }
   }
@@ -256,7 +260,7 @@ export class JBTimeInputWebComponent extends HTMLElement implements WithValidati
   set required(value: boolean) {
     this.#required = value;
     this.#validation.checkValiditySync({ showError: false });
-    this.#internals!.ariaRequired = value?"true":"false";
+    this.#internals!.ariaRequired = value ? "true" : "false";
   }
   get required() {
     return this.#required;
@@ -300,8 +304,8 @@ export class JBTimeInputWebComponent extends HTMLElement implements WithValidati
     const shadowRoot = this.attachShadow({
       mode: "open",
       delegatesFocus: true,
-      clonable:true,
-      serializable:true
+      clonable: true,
+      serializable: true
     });
     const html = `<style>${CSS} ${VariablesCSS}</style>\n${renderHTML()}`;
     const element = document.createElement("template");
@@ -315,7 +319,7 @@ export class JBTimeInputWebComponent extends HTMLElement implements WithValidati
         closeButton: shadowRoot.querySelector(".close-time-picker-button")!,
       },
     };
-    
+
     this.elements.input.setAttribute("inputmode", "none");
     this.elements.input.setAttribute("virtualkeyboardpolicy", "manual");
 
@@ -380,9 +384,9 @@ export class JBTimeInputWebComponent extends HTMLElement implements WithValidati
         this.elements.input.setAttribute('label', value ?? "");
         this.#internals!.ariaLabel = value ?? "";
         break;
-        case "message":
-          this.elements.input.setAttribute("message", value ?? "");
-          this.#internals!.ariaDescription = value ?? "";
+      case "message":
+        this.elements.input.setAttribute("message", value ?? "");
+        this.#internals!.ariaDescription = value ?? "";
         break;
       case "value":
         this.value = value ?? "";
@@ -650,7 +654,7 @@ export class JBTimeInputWebComponent extends HTMLElement implements WithValidati
         }
       }
     };
-    const inputtedString = faToEnDigits(e.data??"");
+    const inputtedString = faToEnDigits(e.data ?? "");
     if (['deleteContentBackward', 'deleteContentForward', 'delete', 'deleteByCut', 'deleteByDrag'].includes(e.inputType)) {
       //in delete mode
       if (caretPos == null || caretPos == 0) {
@@ -787,7 +791,7 @@ export class JBTimeInputWebComponent extends HTMLElement implements WithValidati
     this.hour = hour;
     this.minute = minute;
     if (this.secondEnabled) {
-      this.second = second??null;
+      this.second = second ?? null;
     }
   }
   #onTimePickerBlur(e: FocusEvent) {
@@ -892,14 +896,14 @@ export class JBTimeInputWebComponent extends HTMLElement implements WithValidati
       result.validationList.forEach((res) => {
         if (!res.isValid) {
           if (res.validation.stateType) { states[res.validation.stateType] = true; }
-          if (message == '') { message = res.message??""; }
+          if (message == '') { message = res.message ?? ""; }
         }
       });
       this.#internals?.setValidity(states, message);
     }
   }
   get validationMessage() {
-    return this.#internals?.validationMessage??"";
+    return this.#internals?.validationMessage ?? "";
   }
 }
 const myElementNotExists = !customElements.get("jb-time-input");
