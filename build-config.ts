@@ -3,8 +3,9 @@ import type { ReactComponentBuildConfig, WebComponentBuildConfig } from "../../t
 export const webComponentList: WebComponentBuildConfig[] = [
   {
     name: "jb-time-input",
-    path: "./lib/jb-time-input.ts",
-    outputPath: "./dist/jb-time-input.js",
+    path: "./web-component/lib/jb-time-input.ts",
+    outputPath: "./web-component/dist/jb-time-input.js",
+    tsConfigPath: "./web-component/tsconfig.json",
     external: ["jb-time-picker", "jb-input", "jb-popover", "jb-validation", "jb-core", "jb-core/theme", "jb-core/i18n"],
     umdName: "JBTimeInput",
     globals: {

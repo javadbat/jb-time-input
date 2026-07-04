@@ -1,1 +1,1 @@
-export * from './dist/jb-time-input.js';
+export * from './web-component/dist/jb-time-input.js';

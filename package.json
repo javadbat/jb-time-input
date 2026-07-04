@@ -20,16 +20,16 @@
   "files": [
     "LICENSE",
     "README.md",
-    "custom-elements.json",
-    "lib/",
-    "dist/",
+    "web-component/custom-elements.json",
+    "web-component/lib/",
+    "web-component/dist/",
     "react/",
     "react/dist"
   ],
   "main": "index.js",
   "homepage": "https://github.com/javadbat/jb-time-input",
-  "types": "./dist/jb-time-input.d.ts",
-  "customElements": "custom-elements.json",
+  "types": "./web-component/dist/jb-time-input.d.ts",
+  "customElements": "web-component/custom-elements.json",
   "repository": {
 		"type": "git",
 		"url": "https://github.com/javadbat/jb-time-input"
