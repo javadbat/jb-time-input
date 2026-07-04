@@ -1,3 +1,6 @@
 :host{
+  /* Size */
   --close-button-border-radius:var(--jb-time-input-close-button-border-radius, var(--jb-radius-xs));
+  /* Other */
+  --margin: var(--jb-time-input-margin, 0.75rem 0);
 }

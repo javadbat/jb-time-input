@@ -3,7 +3,7 @@
 }
 .jb-time-input-web-component{
     width: 100%;
-    margin: var(--jb-time-input-margin ,  0.75rem 0);
+    margin: var(--margin);
     position: relative;
     jb-popover{
         --jb-popover-top:4rem;
