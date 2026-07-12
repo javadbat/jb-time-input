@@ -131,6 +131,7 @@ export const Gallery: Story = {
   ),
 };
 
+export const Default: Story = { name: "Default", render: () => <TimeInputStyleSample className="" /> };
 export const Carbon: Story = { name: "Carbon", render: () => <TimeInputStyleSample className="carbon-style" /> };
 export const Aurora: Story = { name: "Aurora", render: () => <TimeInputStyleSample className="aurora-style" /> };
 export const Forest: Story = { name: "Forest", render: () => <TimeInputStyleSample className="forest-style" /> };
