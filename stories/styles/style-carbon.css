@@ -1,0 +1,12 @@
+jb-time-input.carbon-style {
+    --jb-time-input-popover-z-index: 1000;
+    --jb-time-input-close-button-color: var(--jb-text-primary);
+    --jb-time-input-close-button-bg-color-hover: var(--jb-surface-hover);
+    --jb-time-input-close-button-border-color: var(--jb-text-disabled);
+    --jb-time-input-close-button-border-radius: 0;
+}
+
+jb-time-input.carbon-style::part(time-picker) {
+    background: transparent;
+    box-shadow: none;
+}

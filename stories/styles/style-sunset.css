@@ -1,0 +1,12 @@
+jb-time-input.sunset-style {
+    --jb-time-input-popover-z-index: 1000;
+    --jb-time-input-close-button-color: #fff1f4;
+    --jb-time-input-close-button-bg-color-hover: rgb(255 217 102 / 0.16);
+    --jb-time-input-close-button-border-color: rgb(255 217 102 / 0.52);
+    --jb-time-input-close-button-border-radius: 999rem;
+}
+
+jb-time-input.sunset-style::part(time-picker) {
+    background: transparent;
+    box-shadow: none;
+}

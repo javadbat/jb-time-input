@@ -1,0 +1,13 @@
+jb-time-input.cupertino-style {
+    --jb-time-input-popover-z-index: 1000;
+    --jb-time-input-close-button-color: var(--jb-focus-color);
+    --jb-time-input-close-button-bg-color-hover: rgb(0 122 255 / 0.08);
+    --jb-time-input-close-button-border-color: transparent;
+    --jb-time-input-close-button-border-radius: 999rem;
+    --jb-time-input-close-button-font-weight: 600;
+}
+
+jb-time-input.cupertino-style::part(time-picker) {
+    background: transparent;
+    box-shadow: none;
+}

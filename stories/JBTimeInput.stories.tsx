@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 import { useState } from 'react';
 import { JBTimeInput } from 'jb-time-input/react';
 import { expect, fn, userEvent, waitFor } from 'storybook/test';

@@ -1,0 +1,12 @@
+jb-time-input.candy-style {
+    --jb-time-input-popover-z-index: 1000;
+    --jb-time-input-close-button-color: #a31359;
+    --jb-time-input-close-button-bg-color-hover: rgb(236 72 153 / 0.1);
+    --jb-time-input-close-button-border-color: #f9a8d4;
+    --jb-time-input-close-button-border-radius: 1.25rem;
+}
+
+jb-time-input.candy-style::part(time-picker) {
+    background: transparent;
+    box-shadow: none;
+}

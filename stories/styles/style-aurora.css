@@ -1,0 +1,26 @@
+jb-time-input.aurora-style {
+    --jb-time-input-popover-z-index: 1000;
+    --jb-time-input-close-button-color: #eaf2ff;
+    --jb-time-input-close-button-bg-color-hover: rgb(125 211 252 / 0.16);
+    --jb-time-input-close-button-border-color: rgb(147 197 253 / 0.42);
+    --jb-time-input-close-button-border-radius: 1rem;
+    --jb-popover-bg-color: var(--jb-surface);
+    --jb-popover-border-radius: 1.25rem;
+    --jb-popover-padding: 1rem;
+    --jb-popover-margin-top: 0.625rem;
+    --jb-popover-back-bg-color: rgb(8 13 28 / 0.68);
+    --jb-popover-box-shadow:
+        0 0.125rem 0.375rem rgb(0 0 0 / 0.28),
+        0 0.75rem 1.75rem rgb(0 0 0 / 0.22),
+        0 1.5rem 3.5rem rgb(79 70 229 / 0.12);
+}
+
+jb-time-input.aurora-style::part(popover-content) {
+    overflow: hidden;
+    border: 1px solid rgb(255 255 255 / 0.14);
+}
+
+jb-time-input.aurora-style::part(time-picker) {
+    background: transparent;
+    box-shadow: none;
+}

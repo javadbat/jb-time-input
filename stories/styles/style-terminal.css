@@ -1,0 +1,13 @@
+jb-time-input.terminal-style {
+    --jb-time-input-popover-z-index: 1000;
+    --jb-time-input-close-button-color: #7cffb2;
+    --jb-time-input-close-button-bg-color-hover: rgb(124 255 178 / 0.12);
+    --jb-time-input-close-button-border-color: #144d2f;
+    --jb-time-input-close-button-border-radius: 0;
+    --jb-time-input-close-button-font-weight: 700;
+}
+
+jb-time-input.terminal-style::part(time-picker) {
+    background: transparent;
+    box-shadow: none;
+}

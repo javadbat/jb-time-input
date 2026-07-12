@@ -1,3 +1,7 @@
+:host {
+    display: block;
+}
+
 :host(:focus), :host(:focus-visible){
     outline: none;
 }
@@ -6,18 +10,33 @@
     margin: var(--margin);
     position: relative;
     jb-popover{
-        --jb-popover-top:4rem;
+        --jb-popover-top: 0;
+        --jb-popover-z-index: var(--popover-z-index);
+        position: relative;
+        z-index: var(--popover-z-index);
+        jb-time-picker {
+            display: block;
+            width: max-content;
+            justify-self: center;
+            margin-inline: auto;
+        }
         .close-time-picker-button{
+            display: var(--close-button-display);
+            align-items: center;
+            justify-content: center;
+            justify-self: center;
             width: auto;
-            padding: 0.5rem 1rem;
-            background-color: #2852bd00;
-            border:none;
+            padding: var(--close-button-padding);
+            color: var(--close-button-color);
+            background-color: var(--close-button-bg-color);
+            border: 1px solid var(--close-button-border-color);
             border-radius: var(--close-button-border-radius);
             font-family: inherit;
+            font-weight: var(--close-button-font-weight);
             cursor: pointer;
             transition: all 0.3s 0s ease;
             &:hover{
-                background-color: #2852bd0f;
+                background-color: var(--close-button-bg-color-hover);
             }
             &:focus{
                 outline: none;

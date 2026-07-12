@@ -7,6 +7,7 @@ declare module "react" {
     }
     interface JBTimeInputType extends React.DetailedHTMLProps<React.HTMLAttributes<JBTimeInputWebComponent>, JBTimeInputWebComponent> {
       "type"?: string,
+      "error"?: string,
       "label"?:string,
       "message"?:string,
       "placeholder"?:string,

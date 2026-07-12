@@ -50,7 +50,7 @@ export class JBTimeInputWebComponent extends HTMLElement implements WithValidati
     clearValidationError: this.clearValidationError.bind(this),
     getValue: this.#getValidationValue.bind(this),
     getValidations: this.#getInsideValidations.bind(this),
-    getValueString: () => this.value,
+    getValueString: () => this.value??"",
     setValidationResult: this.#setValidationResult.bind(this),
     showValidationError: this.showValidationError.bind(this)
   });
@@ -74,10 +74,10 @@ export class JBTimeInputWebComponent extends HTMLElement implements WithValidati
    * @description return hour in string base on input value
    */
   get hourString(): string {
-    const val = this.elements.input.value.slice(
+    const val = this.elements.input.value?.slice(
       this.#inputRanges.hourRange[0],
       this.#inputRanges.hourRange[1] + 1
-    );
+    )??"";
     return val;
   }
   /**
@@ -103,7 +103,7 @@ export class JBTimeInputWebComponent extends HTMLElement implements WithValidati
         hour = 24;
       }
       const hourString = hour > 9 ? `${hour}` : `0${hour}`;
-      this.elements.input.value = `${hourString}${this.elements.input.value.slice(
+      this.elements.input.value = `${hourString}${this.elements.input.value?.slice(
         this.#inputRanges.hourRange[1] + 1
       )}`;
       this.#setFormValue();
@@ -114,10 +114,10 @@ export class JBTimeInputWebComponent extends HTMLElement implements WithValidati
    * @description return minute in string base on input value
    */
   get minuteString(): string {
-    const val = this.elements.input.value.slice(
+    const val = this.elements.input.value?.slice(
       this.#inputRanges.minuteRange[0],
       this.#inputRanges.minuteRange[1] + 1
-    );
+    )??"";
     return val;
   }
   /**
@@ -126,10 +126,10 @@ export class JBTimeInputWebComponent extends HTMLElement implements WithValidati
    */
   get minute(): number {
     let val = this.minuteString;
-    if (isNaN(Number(val))) {
+    if (Number.isNaN(Number(val))) {
       val = "0";
     }
-    return parseInt(val);
+    return Number(val);
   }
   set minute(value: number) {
     if (this.minute !== value) {
@@ -141,10 +141,10 @@ export class JBTimeInputWebComponent extends HTMLElement implements WithValidati
         minute = 59;
       }
       const minuteString = minute > 9 ? `${minute}` : `0${minute}`;
-      this.elements.input.value = `${this.elements.input.value.slice(
+      this.elements.input.value = `${this.elements.input.value?.slice(
         0,
         this.#inputRanges.minuteRange[0]
-      )}${minuteString}${this.elements.input.value.slice(
+      )}${minuteString}${this.elements.input.value?.slice(
         this.#inputRanges.minuteRange[1] + 1
       )}`;
       this.#setFormValue();
@@ -159,10 +159,10 @@ export class JBTimeInputWebComponent extends HTMLElement implements WithValidati
       this.#inputRanges.secondRange[0] !== null &&
       this.#inputRanges.secondRange[1] !== null
     ) {
-      const val = this.elements.input.value.slice(
+      const val = this.elements.input.value?.slice(
         this.#inputRanges.secondRange[0],
         this.#inputRanges.secondRange[1] + 1
-      );
+      )??"";
       return val;
     }
     return "";
@@ -174,7 +174,7 @@ export class JBTimeInputWebComponent extends HTMLElement implements WithValidati
   get second(): number | null {
     if (this.secondEnabled) {
       let val = this.secondString;
-      if (isNaN(Number(val))) {
+      if (Number.isNaN(Number(val))) {
         val = "0";
       }
       return parseInt(val);
@@ -193,7 +193,7 @@ export class JBTimeInputWebComponent extends HTMLElement implements WithValidati
         }
         const secondString = second > 9 ? `${second}` : `0${second}`;
         if (this.#inputRanges.secondRange[0]) {
-          this.elements.input.value = `${this.elements.input.value.slice(
+          this.elements.input.value = `${this.elements.input.value?.slice(
             0,
             this.#inputRanges.secondRange[0]
           )}${secondString}`;
@@ -210,8 +210,10 @@ export class JBTimeInputWebComponent extends HTMLElement implements WithValidati
   set showTimePicker(value) {
     this.#showTimePicker = value;
     if (value == true) {
+      this.#internals?.states?.add("open");
       this.elements.timePicker.wrapper.open();
     } else {
+      this.#internals?.states?.delete("open");
       this.elements.timePicker.wrapper.close();
     }
   }
@@ -480,48 +482,48 @@ export class JBTimeInputWebComponent extends HTMLElement implements WithValidati
       }
     }
     if (hourRange[0] == pos) {
-      const tailChar = isNaN(Number(this.elements.input.value[hourRange[1]]))
+      const tailChar = isNaN(Number(this.elements.input.value?.[hourRange[1]]))
         ? "0"
         : this.elements.input.value[hourRange[1]];
-      this.hour = parseInt(char + tailChar);
+      this.hour = Number(char + tailChar);
       return;
     }
     if (hourRange[1] == pos) {
-      const headChar = isNaN(Number(this.elements.input.value[hourRange[0]]))
+      const headChar = isNaN(Number(this.elements.input.value?.[hourRange[0]]))
         ? "0"
-        : this.elements.input.value[hourRange[0]];
-      this.hour = parseInt(headChar + char);
+        : this.elements.input.value?.[hourRange[0]];
+      this.hour = Number(headChar + char);
     }
     if (minuteRange[0] == pos) {
-      const tailChar = isNaN(Number(this.elements.input.value[minuteRange[1]]))
+      const tailChar = isNaN(Number(this.elements.input.value?.[minuteRange[1]]))
         ? "0"
-        : this.elements.input.value[minuteRange[1]];
-      this.minute = parseInt(char + tailChar);
+        : this.elements.input.value?.[minuteRange[1]];
+      this.minute = Number(char + tailChar);
       return;
     }
     if (minuteRange[1] == pos) {
-      const headChar = isNaN(Number(this.elements.input.value[minuteRange[0]]))
+      const headChar = Number.isNaN(Number(this.elements.input.value?.[minuteRange[0]]))
         ? "0"
-        : this.elements.input.value[minuteRange[0]];
-      this.minute = parseInt(headChar + char);
+        : this.elements.input.value?.[minuteRange[0]];
+      this.minute = Number(headChar + char);
     }
     if (this.secondEnabled) {
       if (secondRange[0] == pos && secondRange[1] !== null) {
-        const tailChar = isNaN(
-          Number(this.elements.input.value[secondRange[1]])
+        const tailChar = Number.isNaN(
+          Number(this.elements.input.value?.[secondRange[1]])
         )
           ? "0"
-          : this.elements.input.value[secondRange[1]];
-        this.second = parseInt(char + tailChar);
+          : this.elements.input.value?.[secondRange[1]];
+        this.second = Number(char + tailChar);
         return;
       }
       if (secondRange[1] == pos && secondRange[0] !== null) {
-        const headChar = isNaN(
-          Number(this.elements.input.value[secondRange[0]])
+        const headChar = Number.isNaN(
+          Number(this.elements.input.value?.[secondRange[0]])
         )
           ? "0"
-          : this.elements.input.value[secondRange[0]];
-        this.second = parseInt(headChar + char);
+          : this.elements.input.value?.[secondRange[0]];
+        this.second = Number(headChar + char);
       }
     }
   }
@@ -540,7 +542,7 @@ export class JBTimeInputWebComponent extends HTMLElement implements WithValidati
         interval = -1;
       }
 
-      // we use this [...hourRange,hourRange[1]+1] becuase we want up key work if carret was after the last number too like this=> 12|:39:43
+      // we use this [...hourRange,hourRange[1]+1] because we want up key work if caret was after the last number too like this=> 12|:39:43
       if (caretPos !== null && caretPos !== undefined && [...hourRange, hourRange[1] + 1].includes(caretPos)) {
         this.elements.timePicker.component.setTimeUnitFocus("hour");
         this.addHour(interval);
@@ -608,26 +610,26 @@ export class JBTimeInputWebComponent extends HTMLElement implements WithValidati
               this.hour = Number(inputtedChar);
               caretPos++;
             } else {
-              const tailNum: string = isNaN(
-                Number(this.elements.input.value[hourRange[1]])
+              const tailNum: string = Number.isNaN(
+                Number(this.elements.input.value?.[hourRange[1]])
               )
                 ? "0"
-                : this.elements.input.value[hourRange[1]];
-              this.hour = parseInt(inputtedChar + tailNum);
+                : this.elements.input.value?.[hourRange[1]];
+              this.hour = Number(inputtedChar + tailNum);
             }
           } else {
             if (
               inputtedChar > "4" &&
-              this.elements.input.value[hourRange[0]] == "2"
+              this.elements.input.value?.[hourRange[0]] == "2"
             ) {
               inputtedChar = "4";
             }
             const headChar: string = Number.isNaN(
-              Number(this.elements.input.value[hourRange[0]])
+              Number(this.elements.input.value?.[hourRange[0]])
             )
               ? "0"
-              : this.elements.input.value[hourRange[0]];
-            this.hour = parseInt(headChar + inputtedChar);
+              : this.elements.input.value?.[hourRange[0]];
+            this.hour = Number(headChar + inputtedChar);
           }
         }
         //handle minute
@@ -723,7 +725,7 @@ export class JBTimeInputWebComponent extends HTMLElement implements WithValidati
   #onInputChange() {
     const inputText = this.value;
     this.#checkValidity(true);
-    const isTimeValid = this.#checkTimeFormatValidation(inputText);
+    const isTimeValid = this.#checkTimeFormatValidation(inputText??"");
     //TODO: add on paste so component handle paste more smartly
     if (!isTimeValid) {
       if (this.#valueOnInputFocus) {
@@ -774,9 +776,11 @@ export class JBTimeInputWebComponent extends HTMLElement implements WithValidati
     return result;
   }
   showValidationError(error: ShowValidationErrorParameters) {
-    this.elements.input.showValidationError(error);
+    this.#internals?.states?.add("invalid");
+    this.elements.input.showValidationError?.(error);
   }
   clearValidationError() {
+    this.#internals?.states?.delete("invalid");
     this.elements.input.clearValidationError();
   }
   /**

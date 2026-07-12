@@ -1,0 +1,12 @@
+jb-time-input.fluent-style {
+    --jb-time-input-popover-z-index: 1000;
+    --jb-time-input-close-button-color: var(--jb-primary-pressed);
+    --jb-time-input-close-button-bg-color-hover: rgb(0 120 212 / 0.08);
+    --jb-time-input-close-button-border-color: #d1d1d1;
+    --jb-time-input-close-button-border-radius: 0.25rem;
+}
+
+jb-time-input.fluent-style::part(time-picker) {
+    background: transparent;
+    box-shadow: none;
+}

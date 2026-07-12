@@ -1,0 +1,337 @@
+import { Meta, Source, Story, Title } from '@storybook/addon-docs/blocks';
+import * as StyleStories from './Styles.stories';
+import antDesignThemeCss from '../../../docs/styles/ant-design.css?raw';
+import auroraThemeCss from '../../../docs/styles/aurora.css?raw';
+import bootstrapThemeCss from '../../../docs/styles/bootstrap.css?raw';
+import candyThemeCss from '../../../docs/styles/candy.css?raw';
+import carbonThemeCss from '../../../docs/styles/carbon.css?raw';
+import cupertinoThemeCss from '../../../docs/styles/cupertino.css?raw';
+import fluentThemeCss from '../../../docs/styles/fluent.css?raw';
+import forestThemeCss from '../../../docs/styles/forest.css?raw';
+import materialThemeCss from '../../../docs/styles/material.css?raw';
+import porcelainThemeCss from '../../../docs/styles/porcelain.css?raw';
+import sunsetThemeCss from '../../../docs/styles/sunset.css?raw';
+import terminalThemeCss from '../../../docs/styles/terminal.css?raw';
+import antDesignInputCss from '../../jb-input/stories/styles/style-ant-design.css?raw';
+import auroraInputCss from '../../jb-input/stories/styles/style-aurora.css?raw';
+import bootstrapInputCss from '../../jb-input/stories/styles/style-bootstrap.css?raw';
+import candyInputCss from '../../jb-input/stories/styles/style-candy.css?raw';
+import carbonInputCss from '../../jb-input/stories/styles/style-carbon.css?raw';
+import cupertinoInputCss from '../../jb-input/stories/styles/style-cupertino.css?raw';
+import fluentInputCss from '../../jb-input/stories/styles/style-fluent.css?raw';
+import forestInputCss from '../../jb-input/stories/styles/style-forest.css?raw';
+import materialInputCss from '../../jb-input/stories/styles/style-material.css?raw';
+import porcelainInputCss from '../../jb-input/stories/styles/style-porcelain.css?raw';
+import sunsetInputCss from '../../jb-input/stories/styles/style-sunset.css?raw';
+import terminalInputCss from '../../jb-input/stories/styles/style-terminal.css?raw';
+import antDesignPopoverCss from '../../jb-popover/stories/styles/style-ant-design.css?raw';
+import auroraPopoverCss from '../../jb-popover/stories/styles/style-aurora.css?raw';
+import bootstrapPopoverCss from '../../jb-popover/stories/styles/style-bootstrap.css?raw';
+import candyPopoverCss from '../../jb-popover/stories/styles/style-candy.css?raw';
+import carbonPopoverCss from '../../jb-popover/stories/styles/style-carbon.css?raw';
+import cupertinoPopoverCss from '../../jb-popover/stories/styles/style-cupertino.css?raw';
+import fluentPopoverCss from '../../jb-popover/stories/styles/style-fluent.css?raw';
+import forestPopoverCss from '../../jb-popover/stories/styles/style-forest.css?raw';
+import materialPopoverCss from '../../jb-popover/stories/styles/style-material.css?raw';
+import porcelainPopoverCss from '../../jb-popover/stories/styles/style-porcelain.css?raw';
+import sunsetPopoverCss from '../../jb-popover/stories/styles/style-sunset.css?raw';
+import terminalPopoverCss from '../../jb-popover/stories/styles/style-terminal.css?raw';
+import antDesignTimePickerCss from '../../jb-time-picker/stories/styles/style-ant-design.css?raw';
+import auroraTimePickerCss from '../../jb-time-picker/stories/styles/style-aurora.css?raw';
+import bootstrapTimePickerCss from '../../jb-time-picker/stories/styles/style-bootstrap.css?raw';
+import candyTimePickerCss from '../../jb-time-picker/stories/styles/style-candy.css?raw';
+import carbonTimePickerCss from '../../jb-time-picker/stories/styles/style-carbon.css?raw';
+import cupertinoTimePickerCss from '../../jb-time-picker/stories/styles/style-cupertino.css?raw';
+import fluentTimePickerCss from '../../jb-time-picker/stories/styles/style-fluent.css?raw';
+import forestTimePickerCss from '../../jb-time-picker/stories/styles/style-forest.css?raw';
+import materialTimePickerCss from '../../jb-time-picker/stories/styles/style-material.css?raw';
+import porcelainTimePickerCss from '../../jb-time-picker/stories/styles/style-porcelain.css?raw';
+import sunsetTimePickerCss from '../../jb-time-picker/stories/styles/style-sunset.css?raw';
+import terminalTimePickerCss from '../../jb-time-picker/stories/styles/style-terminal.css?raw';
+import antDesignTimeInputCss from './styles/style-ant-design.css?raw';
+import auroraTimeInputCss from './styles/style-aurora.css?raw';
+import bootstrapTimeInputCss from './styles/style-bootstrap.css?raw';
+import candyTimeInputCss from './styles/style-candy.css?raw';
+import carbonTimeInputCss from './styles/style-carbon.css?raw';
+import cupertinoTimeInputCss from './styles/style-cupertino.css?raw';
+import fluentTimeInputCss from './styles/style-fluent.css?raw';
+import forestTimeInputCss from './styles/style-forest.css?raw';
+import materialTimeInputCss from './styles/style-material.css?raw';
+import porcelainTimeInputCss from './styles/style-porcelain.css?raw';
+import sunsetTimeInputCss from './styles/style-sunset.css?raw';
+import terminalTimeInputCss from './styles/style-terminal.css?raw';
+
+<Meta title="Components/form elements/Inputs/JBTimeInput/Styling" />
+
+<Title>Styling</Title>
+
+`JBTimeInput` is a composed component. The time-input host owns the popover shell and close button, while the inner `JBInput`, `JBPopover`, and `JBTimePicker` keep their own reusable styling recipes and APIs.
+
+## Live Gallery
+
+<Story of={StyleStories.Gallery} />
+
+<Source of={StyleStories.Gallery} />
+
+## Common Design Tokens
+
+Use the core theme docs as the source of truth for shared design-system variables:
+
+- [Theme Colors](../../jb-core/theme/stories/colors.mdx) explains the general color palette variables, default colors, customization approaches, and color generation helpers.
+- [Theme Sizes](../../jb-core/theme/stories/sizes.mdx) explains shared size and radius variables.
+- [Theme Custom Galleries](https://javadbat.github.io/design-system/?path=/docs/theme-custom-material--docs) gathers the shared custom style recipes across components.
+
+Time-input recipes should use those common tokens where possible, then compose the existing `JBInput`, `JBPopover`, and `JBTimePicker` recipes instead of copying their variable blocks.
+
+## Styling Model
+
+Use four layers when styling time-input examples:
+
+- Common design tokens are documented in [Theme Colors](../../jb-core/theme/stories/colors.mdx) and [Theme Sizes](../../jb-core/theme/stories/sizes.mdx).
+- Reusable example theme packs live in [`docs/styles`](https://github.com/javadbat/design-system/tree/main/docs/styles) and can be shared across components.
+- Component recipe files live in [`modules/jb-time-input/stories/styles`](https://github.com/javadbat/design-system/tree/main/modules/jb-time-input/stories/styles).
+- Input recipes are reused from [`modules/jb-input/stories/styles`](https://github.com/javadbat/design-system/tree/main/modules/jb-input/stories/styles).
+- Popover recipes are reused from [`modules/jb-popover/stories/styles`](https://github.com/javadbat/design-system/tree/main/modules/jb-popover/stories/styles).
+- Time-picker recipes are reused from [`modules/jb-time-picker/stories/styles`](https://github.com/javadbat/design-system/tree/main/modules/jb-time-picker/stories/styles).
+- Public time-input variables use `--jb-time-input-*` on the host. Use [JBInput Styling](../../jb-input/stories/Styling.mdx), [JBPopover Styling](../../jb-popover/stories/Styling.mdx), and [JBTimePicker Styling](../../jb-time-picker/stories/Styling.mdx) as the source of truth for child component variables.
+
+Each example uses one shared example theme pack from [`docs/styles`](https://github.com/javadbat/design-system/tree/main/docs/styles), one existing `JBInput` recipe, one existing `JBPopover` recipe, one existing `JBTimePicker` recipe, and one small time-input-specific shell recipe.
+
+## Recommended Customization Path
+
+1. Use `--jb-time-input-*` variables first for host margin, popover stacking, and close-button style.
+2. Reuse an existing `JBInput` recipe for the text-field layer. See [JBInput Styling](../../jb-input/stories/Styling.mdx) for the full input API.
+3. Reuse an existing `JBPopover` recipe for the overlay shell. See [JBPopover Styling](../../jb-popover/stories/Styling.mdx) for background, radius, padding, shadow, and overlay behavior.
+4. Reuse an existing `JBTimePicker` recipe for the wheel picker content. See [JBTimePicker Styling](../../jb-time-picker/stories/Styling.mdx) for the full picker API.
+5. Use common theme variables from [Theme Colors](../../jb-core/theme/stories/colors.mdx) and [Theme Sizes](../../jb-core/theme/stories/sizes.mdx) when the style should align with the design system.
+6. Put reusable theme-pack values in [`docs/styles`](https://github.com/javadbat/design-system/tree/main/docs/styles) only when they should be shared by multiple component demos.
+7. Add a new time-input variable only when a needed host or close-button surface cannot be customized with current public variables or official parts.
+
+## Parts And States
+
+<table>
+  <thead>
+    <tr>
+      <th>Part</th>
+      <th>Element</th>
+      <th>Notes</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td><code>wrapper</code></td><td>Root wrapper</td><td>Use for host shadow-root layout overrides when variables are not enough.</td></tr>
+    <tr><td><code>input</code></td><td>Internal <code>jb-input</code></td><td>Prefer reusable recipes and the API in <a href="../../jb-input/stories/Styling.mdx">JBInput Styling</a> for label, field, helper message, border, radius, and input states.</td></tr>
+    <tr><td><code>popover</code></td><td>Internal <code>jb-popover</code></td><td>Use for targeted popover overrides. Prefer <a href="../../jb-popover/stories/Styling.mdx">JBPopover Styling</a> for the full overlay API.</td></tr>
+    <tr><td><code>time-picker</code></td><td>Internal <code>jb-time-picker</code></td><td>Use for targeted picker overrides. Prefer <a href="../../jb-time-picker/stories/Styling.mdx">JBTimePicker Styling</a> for the wheel picker API.</td></tr>
+    <tr><td><code>close-button</code></td><td>Popover close button</td><td>Use for final close-button overrides after trying the public close-button variables.</td></tr>
+  </tbody>
+</table>
+
+<table>
+  <thead>
+    <tr>
+      <th>Custom State</th>
+      <th>Meaning</th>
+      <th>Example Selector</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td><code>disabled</code></td><td>Applied when the time input is disabled.</td><td><code>jb-time-input:state(disabled)::part(input)</code></td></tr>
+    <tr><td><code>invalid</code></td><td>Applied while validation error text is visible.</td><td><code>jb-time-input:state(invalid)::part(input)</code></td></tr>
+    <tr><td><code>open</code></td><td>Applied while the time picker popover is open.</td><td><code>jb-time-input:state(open)::part(popover)</code></td></tr>
+  </tbody>
+</table>
+
+## CSS Variables
+
+These variables belong to `JBTimeInput` itself. The text field, popover, and picker keep their own single source of truth in [JBInput Styling](../../jb-input/stories/Styling.mdx), [JBPopover Styling](../../jb-popover/stories/Styling.mdx), and [JBTimePicker Styling](../../jb-time-picker/stories/Styling.mdx).
+
+<table>
+  <thead>
+    <tr>
+      <th>Variable</th>
+      <th>Category</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td><code>--jb-time-input-close-button-padding</code></td><td>Size</td><td>Popover close button padding.</td></tr>
+    <tr><td><code>--jb-time-input-close-button-border-radius</code></td><td>Size</td><td>Popover close button border radius.</td></tr>
+    <tr><td><code>--jb-time-input-close-button-color</code></td><td>Theme/Color</td><td>Popover close button text color.</td></tr>
+    <tr><td><code>--jb-time-input-close-button-bg-color</code></td><td>Theme/Color</td><td>Popover close button background color.</td></tr>
+    <tr><td><code>--jb-time-input-close-button-bg-color-hover</code></td><td>Theme/Color</td><td>Popover close button hover background color.</td></tr>
+    <tr><td><code>--jb-time-input-close-button-border-color</code></td><td>Theme/Color</td><td>Popover close button border color.</td></tr>
+    <tr><td><code>--jb-time-input-margin</code></td><td>Other</td><td>Host component margin.</td></tr>
+    <tr><td><code>--jb-time-input-popover-z-index</code></td><td>Other</td><td>Z-index used by the internal time picker popover.</td></tr>
+    <tr><td><code>--jb-time-input-close-button-font-weight</code></td><td>Other</td><td>Popover close button font weight.</td></tr>
+    <tr><td><code>--jb-time-input-close-button-display</code></td><td>Other</td><td>Popover close button display value.</td></tr>
+  </tbody>
+</table>
+
+## Starter Recipe
+
+```css
+jb-time-input.brand-time-input {
+  --jb-time-input-popover-z-index: 1000;
+  --jb-time-input-close-button-color: #2563eb;
+  --jb-time-input-close-button-bg-color-hover: rgb(37 99 235 / 0.08);
+  --jb-time-input-close-button-border-radius: 999rem;
+}
+
+jb-time-input.brand-time-input::part(time-picker) {
+  background: transparent;
+  box-shadow: none;
+}
+```
+
+## Style Recipes
+
+### Carbon
+
+<Story of={StyleStories.Carbon} />
+<Source of={StyleStories.Carbon} />
+<Source code={carbonThemeCss} language="css" />
+<Source code={carbonInputCss} language="css" />
+<Source code={carbonPopoverCss} language="css" />
+<Source code={carbonTimePickerCss} language="css" />
+<Source code={carbonTimeInputCss} language="css" />
+
+### Aurora
+
+<Story of={StyleStories.Aurora} />
+<Source of={StyleStories.Aurora} />
+<Source code={auroraThemeCss} language="css" />
+<Source code={auroraInputCss} language="css" />
+<Source code={auroraPopoverCss} language="css" />
+<Source code={auroraTimePickerCss} language="css" />
+<Source code={auroraTimeInputCss} language="css" />
+
+### Forest
+
+<Story of={StyleStories.Forest} />
+<Source of={StyleStories.Forest} />
+<Source code={forestThemeCss} language="css" />
+<Source code={forestInputCss} language="css" />
+<Source code={forestPopoverCss} language="css" />
+<Source code={forestTimePickerCss} language="css" />
+<Source code={forestTimeInputCss} language="css" />
+
+### Sunset
+
+<Story of={StyleStories.Sunset} />
+<Source of={StyleStories.Sunset} />
+<Source code={sunsetThemeCss} language="css" />
+<Source code={sunsetInputCss} language="css" />
+<Source code={sunsetPopoverCss} language="css" />
+<Source code={sunsetTimePickerCss} language="css" />
+<Source code={sunsetTimeInputCss} language="css" />
+
+### Porcelain
+
+<Story of={StyleStories.Porcelain} />
+<Source of={StyleStories.Porcelain} />
+<Source code={porcelainThemeCss} language="css" />
+<Source code={porcelainInputCss} language="css" />
+<Source code={porcelainPopoverCss} language="css" />
+<Source code={porcelainTimePickerCss} language="css" />
+<Source code={porcelainTimeInputCss} language="css" />
+
+### Candy
+
+<Story of={StyleStories.Candy} />
+<Source of={StyleStories.Candy} />
+<Source code={candyThemeCss} language="css" />
+<Source code={candyInputCss} language="css" />
+<Source code={candyPopoverCss} language="css" />
+<Source code={candyTimePickerCss} language="css" />
+<Source code={candyTimeInputCss} language="css" />
+
+### Terminal
+
+<Story of={StyleStories.Terminal} />
+<Source of={StyleStories.Terminal} />
+<Source code={terminalThemeCss} language="css" />
+<Source code={terminalInputCss} language="css" />
+<Source code={terminalPopoverCss} language="css" />
+<Source code={terminalTimePickerCss} language="css" />
+<Source code={terminalTimeInputCss} language="css" />
+
+### Material
+
+<Story of={StyleStories.Material} />
+<Source of={StyleStories.Material} />
+<Source code={materialThemeCss} language="css" />
+<Source code={materialInputCss} language="css" />
+<Source code={materialPopoverCss} language="css" />
+<Source code={materialTimePickerCss} language="css" />
+<Source code={materialTimeInputCss} language="css" />
+
+### Fluent
+
+<Story of={StyleStories.Fluent} />
+<Source of={StyleStories.Fluent} />
+<Source code={fluentThemeCss} language="css" />
+<Source code={fluentInputCss} language="css" />
+<Source code={fluentPopoverCss} language="css" />
+<Source code={fluentTimePickerCss} language="css" />
+<Source code={fluentTimeInputCss} language="css" />
+
+### Bootstrap
+
+<Story of={StyleStories.Bootstrap} />
+<Source of={StyleStories.Bootstrap} />
+<Source code={bootstrapThemeCss} language="css" />
+<Source code={bootstrapInputCss} language="css" />
+<Source code={bootstrapPopoverCss} language="css" />
+<Source code={bootstrapTimePickerCss} language="css" />
+<Source code={bootstrapTimeInputCss} language="css" />
+
+### Cupertino
+
+<Story of={StyleStories.Cupertino} />
+<Source of={StyleStories.Cupertino} />
+<Source code={cupertinoThemeCss} language="css" />
+<Source code={cupertinoInputCss} language="css" />
+<Source code={cupertinoPopoverCss} language="css" />
+<Source code={cupertinoTimePickerCss} language="css" />
+<Source code={cupertinoTimeInputCss} language="css" />
+
+### Ant Design
+
+<Story of={StyleStories.AntDesign} />
+<Source of={StyleStories.AntDesign} />
+<Source code={antDesignThemeCss} language="css" />
+<Source code={antDesignInputCss} language="css" />
+<Source code={antDesignPopoverCss} language="css" />
+<Source code={antDesignTimePickerCss} language="css" />
+<Source code={antDesignTimeInputCss} language="css" />
+
+## Theme File Pattern
+
+Use [Theme Colors](../../jb-core/theme/stories/colors.mdx) and [Theme Sizes](../../jb-core/theme/stories/sizes.mdx) as the common design-token guides. Theme-pack files should keep reusable demo variables in [`docs/styles`](https://github.com/javadbat/design-system/tree/main/docs/styles). Composed components should reuse child component recipes instead of copying their variables into the parent recipe.
+
+```css
+/* https://github.com/javadbat/design-system/blob/main/docs/styles/carbon.css */
+.theme-name-style {
+  /* shared design-system variables */
+}
+
+/* https://github.com/javadbat/design-system/blob/main/modules/jb-input/stories/styles/style-carbon.css */
+.theme-name-input {
+  /* reusable jb-input recipe */
+}
+
+/* https://github.com/javadbat/design-system/blob/main/modules/jb-popover/stories/styles/style-carbon.css */
+jb-popover.theme-name-popover {
+  /* reusable jb-popover recipe */
+}
+
+/* https://github.com/javadbat/design-system/blob/main/modules/jb-time-picker/stories/styles/style-carbon.css */
+.theme-name-time-picker {
+  /* reusable jb-time-picker recipe */
+}
+
+/* https://github.com/javadbat/design-system/blob/main/modules/jb-time-input/stories/styles/style-carbon.css */
+.theme-name-time-input {
+  /* time-input host variables */
+}
+```

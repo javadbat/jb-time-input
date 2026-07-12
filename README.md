@@ -188,28 +188,9 @@ timeInput.showPersianNumber = true;
 
 ## CSS parts and variables
 
-| part | description |
-| --- | --- |
-| `wrapper` | Root wrapper inside the shadow DOM. |
-| `input` | Internal `jb-input`. |
-| `popover` | Internal `jb-popover`. |
-| `time-picker` | Internal `jb-time-picker`. |
-| `close-button` | Popover close button. |
+For complete styling guidance, live examples, CSS parts, custom states, and copyable style recipes, see [Styling](https://javadbat.github.io/design-system/?path=/docs/components-form-elements-inputs-jbtimeinput-styling).
 
-| CSS variable name | description |
-| --- | --- |
-| `--jb-time-input-margin` | Host component margin. |
-| `--jb-time-input-close-button-border-radius` | Popover close button border radius. |
-
-Internal `jb-input`, `jb-popover`, and `jb-time-picker` CSS variables also apply.
-
-```css
-jb-time-input {
-  --jb-time-input-margin: 0.5rem 0;
-  --jb-time-input-close-button-border-radius: 0.5rem;
-  --jb-time-picker-hour-color: #2563eb;
-}
-```
+`jb-time-input` composes `jb-input`, `jb-popover`, and `jb-time-picker`, so their styling APIs also apply to the internal parts.
 
 ## Accessibility notes
 
