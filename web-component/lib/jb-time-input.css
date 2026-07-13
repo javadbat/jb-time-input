@@ -2,9 +2,6 @@
     display: block;
 }
 
-:host(:focus), :host(:focus-visible){
-    outline: none;
-}
 .jb-time-input-web-component{
     width: 100%;
     margin: var(--margin);
@@ -38,8 +35,9 @@
             &:hover{
                 background-color: var(--close-button-bg-color-hover);
             }
-            &:focus{
-                outline: none;
+            &:focus-visible{
+                outline: 2px solid var(--jb-time-input-focus-ring-color, Highlight);
+                outline-offset: 2px;
             }
         }
     }

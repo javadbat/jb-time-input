@@ -211,9 +211,14 @@ export class JBTimeInputWebComponent extends HTMLElement implements WithValidati
     this.#showTimePicker = value;
     if (value == true) {
       this.#internals?.states?.add("open");
+      if (this.#internals) this.#internals.ariaExpanded = "true";
+      this.elements.input.setAttribute("aria-expanded", "true");
+      this.elements.input.setAttribute("aria-haspopup", "dialog");
       this.elements.timePicker.wrapper.open();
     } else {
       this.#internals?.states?.delete("open");
+      if (this.#internals) this.#internals.ariaExpanded = "false";
+      this.elements.input.setAttribute("aria-expanded", "false");
       this.elements.timePicker.wrapper.close();
     }
   }
@@ -285,6 +290,9 @@ export class JBTimeInputWebComponent extends HTMLElement implements WithValidati
     if (typeof this.attachInternals == "function") {
       //some browser dont support attachInternals
       this.#internals = this.attachInternals();
+      this.#internals.role = "combobox";
+      this.#internals.ariaHasPopup = "dialog";
+      this.#internals.ariaExpanded = "false";
     }
     this.#initWebComponent();
   }
