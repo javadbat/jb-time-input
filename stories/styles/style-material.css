@@ -1,13 +1,13 @@
 jb-time-input.material-style {
     --jb-time-input-popover-z-index: 1000;
     --jb-time-input-close-button-color: var(--jb-focus-color);
-    --jb-time-input-close-button-bg-color-hover: rgb(25 103 210 / 0.08);
+    --jb-time-input-close-button-bg-color-hover: var(--jb-state-hover);
     --jb-time-input-close-button-border-color: transparent;
-    --jb-time-input-close-button-border-radius: 999rem;
+    --jb-time-input-close-button-border-radius: 999px;
     --jb-time-input-close-button-font-weight: 600;
 }
 
 jb-time-input.material-style::part(time-picker) {
-    background: transparent;
+    background: var(--jb-surface-container-low);
     box-shadow: none;
 }
