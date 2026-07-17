@@ -24,7 +24,7 @@ export class JBTimeInputWebComponent extends HTMLElement implements WithValidati
   }
   set value(value) {
     const isValid = this.#checkTimeFormatValidation(value);
-    if (isValid) {
+    if (isValid && this.elements.input.value !==undefined) {
       this.elements.input.value = value;
       this.#setFormValue();
     }
