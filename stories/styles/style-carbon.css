@@ -4,6 +4,17 @@ jb-time-input.carbon-style {
     --jb-time-input-close-button-bg-color-hover: var(--jb-surface-hover);
     --jb-time-input-close-button-border-color: var(--jb-text-disabled);
     --jb-time-input-close-button-border-radius: 0;
+    --jb-popover-bg-color: var(--jb-surface);
+    --jb-popover-border-radius: 0;
+    --jb-popover-padding: 1rem;
+    --jb-popover-margin-top: 0.5rem;
+    --jb-popover-back-bg-color: rgb(0 0 0 / 0.58);
+    --jb-popover-box-shadow: 0 0.5rem 1rem rgb(0 0 0 / 0.28);
+}
+
+jb-time-input.carbon-style::part(popover-content) {
+    overflow: hidden;
+    border: 1px solid var(--jb-border-color);
 }
 
 jb-time-input.carbon-style::part(time-picker) {
