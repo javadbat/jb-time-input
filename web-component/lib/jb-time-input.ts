@@ -2,6 +2,7 @@ import CSS from "./jb-time-input.css";
 import VariablesCSS from "./variables.css";
 import "jb-time-picker";
 import "jb-input";
+import "jb-button";
 import 'jb-popover';
 import type { JBInputWebComponent, JBInputValue } from "jb-input";
 import type { JBTimePickerWebComponent, JBTimePickerValueObject, TimeUnitsString, SecondRange } from "jb-time-picker";

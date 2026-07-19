@@ -392,7 +392,7 @@
             },
             {
               "name": "close-button",
-              "description": "Popover close button."
+              "description": "Internal jb-button used to close the popover."
             }
           ],
           "cssProperties": [
@@ -403,38 +403,6 @@
             {
               "name": "--jb-time-input-popover-z-index",
               "description": "Z-index used by the internal time picker popover."
-            },
-            {
-              "name": "--jb-time-input-close-button-padding",
-              "description": "Popover close button padding."
-            },
-            {
-              "name": "--jb-time-input-close-button-border-radius",
-              "description": "Popover close button border radius."
-            },
-            {
-              "name": "--jb-time-input-close-button-color",
-              "description": "Popover close button text color."
-            },
-            {
-              "name": "--jb-time-input-close-button-bg-color",
-              "description": "Popover close button background color."
-            },
-            {
-              "name": "--jb-time-input-close-button-bg-color-hover",
-              "description": "Popover close button hover background color."
-            },
-            {
-              "name": "--jb-time-input-close-button-border-color",
-              "description": "Popover close button border color."
-            },
-            {
-              "name": "--jb-time-input-close-button-font-weight",
-              "description": "Popover close button font weight."
-            },
-            {
-              "name": "--jb-time-input-close-button-display",
-              "description": "Popover close button display value."
             }
           ],
           "cssStates": [

@@ -1,10 +1,25 @@
 jb-time-input.terminal-style {
     --jb-time-input-popover-z-index: 1000;
-    --jb-time-input-close-button-color: #7cffb2;
-    --jb-time-input-close-button-bg-color-hover: rgb(124 255 178 / 0.12);
-    --jb-time-input-close-button-border-color: #144d2f;
-    --jb-time-input-close-button-border-radius: 0;
-    --jb-time-input-close-button-font-weight: 700;
+    --jb-popover-bg-color: #020617;
+    --jb-popover-border-radius: 0;
+    --jb-popover-padding: 1rem;
+    --jb-popover-margin-top: 0.5rem;
+    --jb-popover-back-bg-color: rgb(2 6 23 / 0.72);
+    --jb-popover-box-shadow: 0 0 0 1px #22c55e, 0 0.5rem 0.75rem rgb(0 0 0 / 0.32);
+}
+
+jb-time-input.terminal-style::part(popover-content) {
+    overflow: hidden;
+    border: 1px solid #22c55e;
+}
+
+jb-time-input.terminal-style::part(close-button) {
+    --jb-button-color-ghost: #7cffb2;
+    --jb-button-bg-color-ghost-hover: rgb(124 255 178 / 0.12);
+    --jb-button-border-color: #144d2f;
+    --jb-button-border-width-ghost: 1px;
+    --jb-button-border-radius: 0;
+    --jb-button-font-weight: 700;
 }
 
 jb-time-input.terminal-style::part(time-picker) {

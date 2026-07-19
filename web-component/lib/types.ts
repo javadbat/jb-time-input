@@ -1,4 +1,5 @@
 import { type JBTimePickerWebComponent } from "jb-time-picker";
+import type { JBButtonWebComponent } from "jb-button";
 import {type JBPopoverWebComponent} from 'jb-popover';
 import {type JBInputWebComponent} from 'jb-input';
 import type {EventTypeWithTarget} from 'jb-core';
@@ -8,7 +9,7 @@ export type JBTimeInputElements = {
     timePicker:{
         wrapper:JBPopoverWebComponent,
         component:JBTimePickerWebComponent,
-        closeButton:HTMLButtonElement,
+        closeButton:JBButtonWebComponent,
     },
 }
 export type ValidationValue = {

@@ -3,9 +3,9 @@
   "description": "time input web component",
   "type": "module",
   "author": {
-		"name": "mohammad javad bathaei",
-		"email": "javadbat@gmail.com"
-	},
+    "name": "mohammad javad bathaei",
+    "email": "javadbat@gmail.com"
+  },
   "keywords": [
     "jb",
     "jb-time-input",
@@ -14,7 +14,7 @@
     "time",
     "web component"
   ],
-  "version": "1.7.0",
+  "version": "1.8.0",
   "bugs": "https://github.com/javadbat/jb-time-input/issues",
   "license": "MIT",
   "files": [
@@ -42,14 +42,15 @@
   },
   "customElements": "web-component/custom-elements.json",
   "repository": {
-		"type": "git",
-		"url": "https://github.com/javadbat/jb-time-input"
+    "type": "git",
+    "url": "git+https://github.com/javadbat/jb-time-input.git"
   },
   "dependencies": {
-    "jb-time-picker":">=2.3.0",
-    "jb-validation":">=0.4.0",
-    "jb-popover":">=1.3.0",
-    "jb-input":">=3.11.0",
-    "jb-core":">=0.25.0"
+    "jb-button": ">=3.10.0",
+    "jb-time-picker": ">=2.3.1",
+    "jb-validation": ">=1.0.0",
+    "jb-popover": ">=1.13.0",
+    "jb-input": ">=3.17.0",
+    "jb-core": ">=0.30.0"
   }
 }

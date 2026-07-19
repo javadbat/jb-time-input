@@ -1,10 +1,26 @@
 jb-time-input.cupertino-style {
     --jb-time-input-popover-z-index: 1000;
-    --jb-time-input-close-button-color: var(--jb-focus-color);
-    --jb-time-input-close-button-bg-color-hover: rgb(0 122 255 / 0.08);
-    --jb-time-input-close-button-border-color: transparent;
-    --jb-time-input-close-button-border-radius: 999rem;
-    --jb-time-input-close-button-font-weight: 600;
+    --jb-popover-bg-color: rgb(255 255 255 / 0.92);
+    --jb-popover-border-radius: 1rem;
+    --jb-popover-padding: 1rem;
+    --jb-popover-margin-top: 0.625rem;
+    --jb-popover-back-bg-color: rgb(29 29 31 / 0.36);
+    --jb-popover-box-shadow: 0 1rem 2rem rgb(0 0 0 / 0.16);
+}
+
+jb-time-input.cupertino-style::part(popover-content) {
+    overflow: hidden;
+    border: 1px solid rgb(60 60 67 / 0.18);
+    backdrop-filter: blur(0.75rem);
+}
+
+jb-time-input.cupertino-style::part(close-button) {
+    --jb-button-color-ghost: var(--jb-focus-color);
+    --jb-button-bg-color-ghost-hover: rgb(0 122 255 / 0.08);
+    --jb-button-border-color: transparent;
+    --jb-button-border-width-ghost: 1px;
+    --jb-button-border-radius: 999rem;
+    --jb-button-font-weight: 600;
 }
 
 jb-time-input.cupertino-style::part(time-picker) {

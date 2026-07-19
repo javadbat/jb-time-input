@@ -1,9 +1,24 @@
 jb-time-input.ant-design-style{
     --jb-time-input-popover-z-index: 1000;
-    --jb-time-input-close-button-color: var(--jb-focus-color);
-    --jb-time-input-close-button-bg-color-hover: rgb(22 119 255 / 0.08);
-    --jb-time-input-close-button-border-color: #d9d9d9;
-    --jb-time-input-close-button-border-radius: 0.375rem;
+    --jb-popover-bg-color: var(--jb-surface);
+    --jb-popover-border-radius: 0.5rem;
+    --jb-popover-padding: 1rem;
+    --jb-popover-margin-top: 0.5rem;
+    --jb-popover-back-bg-color: rgb(0 0 0 / 0.32);
+    --jb-popover-box-shadow: 0 0.375rem 1rem rgb(0 0 0 / 0.08), 0 0.1875rem 0.375rem -0.25rem rgb(0 0 0 / 0.12);
+}
+
+jb-time-input.ant-design-style::part(popover-content) {
+    overflow: hidden;
+    border: 1px solid rgb(5 5 5 / 0.06);
+}
+
+jb-time-input.ant-design-style::part(close-button) {
+    --jb-button-color-ghost: var(--jb-focus-color);
+    --jb-button-bg-color-ghost-hover: rgb(22 119 255 / 0.08);
+    --jb-button-border-color: #d9d9d9;
+    --jb-button-border-width-ghost: 1px;
+    --jb-button-border-radius: 0.375rem;
 }
 
 jb-time-input.ant-design-style::part(time-picker) {

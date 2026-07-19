@@ -1,9 +1,24 @@
 jb-time-input.candy-style {
     --jb-time-input-popover-z-index: 1000;
-    --jb-time-input-close-button-color: #a31359;
-    --jb-time-input-close-button-bg-color-hover: rgb(236 72 153 / 0.1);
-    --jb-time-input-close-button-border-color: #f9a8d4;
-    --jb-time-input-close-button-border-radius: 1.25rem;
+    --jb-popover-bg-color: var(--jb-background);
+    --jb-popover-border-radius: 1.25rem;
+    --jb-popover-padding: 1rem;
+    --jb-popover-margin-top: 0.625rem;
+    --jb-popover-back-bg-color: rgb(131 24 67 / 0.36);
+    --jb-popover-box-shadow: 0 0.75rem 1.75rem rgb(236 72 153 / 0.18);
+}
+
+jb-time-input.candy-style::part(popover-content) {
+    overflow: hidden;
+    border: 1px solid var(--jb-border-color);
+}
+
+jb-time-input.candy-style::part(close-button) {
+    --jb-button-color-ghost: #a31359;
+    --jb-button-bg-color-ghost-hover: rgb(236 72 153 / 0.1);
+    --jb-button-border-color: #f9a8d4;
+    --jb-button-border-width-ghost: 1px;
+    --jb-button-border-radius: 1.25rem;
 }
 
 jb-time-input.candy-style::part(time-picker) {

@@ -65,7 +65,7 @@ import terminalTimeInputCss from './styles/style-terminal.css?raw';
 
 <Title>Styling</Title>
 
-`JBTimeInput` is a composed component. The time-input host owns the popover shell and close button, while the inner `JBInput`, `JBPopover`, and `JBTimePicker` keep their own reusable styling recipes and APIs.
+`JBTimeInput` is a composed component. The time-input host owns the popover shell and renders a `JBButton` close action, while the inner `JBInput`, `JBPopover`, `JBTimePicker`, and `JBButton` keep their own reusable styling APIs.
 
 ## Live Gallery
 
@@ -81,11 +81,11 @@ Use the core theme docs as the source of truth for shared design-system variable
 - [Theme Sizes](../../jb-core/theme/stories/sizes.mdx) explains shared size and radius variables.
 - [Theme Custom Galleries](https://javadbat.github.io/design-system/?path=/docs/theme-custom-material--docs) gathers the shared custom style recipes across components.
 
-Time-input recipes should use those common tokens where possible, then compose the existing `JBInput`, `JBPopover`, and `JBTimePicker` recipes instead of copying their variable blocks.
+Time-input recipes should use those common tokens where possible, then compose the existing `JBInput`, `JBPopover`, `JBTimePicker`, and `JBButton` APIs instead of recreating child component internals.
 
 ## Styling Model
 
-Use four layers when styling time-input examples:
+Use these layers when styling time-input examples:
 
 - Common design tokens are documented in [Theme Colors](../../jb-core/theme/stories/colors.mdx) and [Theme Sizes](../../jb-core/theme/stories/sizes.mdx).
 - Reusable example theme packs live in [`docs/styles`](https://github.com/javadbat/design-system/tree/main/docs/styles) and can be shared across components.
@@ -93,19 +93,21 @@ Use four layers when styling time-input examples:
 - Input recipes are reused from [`modules/jb-input/stories/styles`](https://github.com/javadbat/design-system/tree/main/modules/jb-input/stories/styles).
 - Popover recipes are reused from [`modules/jb-popover/stories/styles`](https://github.com/javadbat/design-system/tree/main/modules/jb-popover/stories/styles).
 - Time-picker recipes are reused from [`modules/jb-time-picker/stories/styles`](https://github.com/javadbat/design-system/tree/main/modules/jb-time-picker/stories/styles).
-- Public time-input variables use `--jb-time-input-*` on the host. Use [JBInput Styling](../../jb-input/stories/Styling.mdx), [JBPopover Styling](../../jb-popover/stories/Styling.mdx), and [JBTimePicker Styling](../../jb-time-picker/stories/Styling.mdx) as the source of truth for child component variables.
+- The close action uses `JBButton`; customize its exported `close-button` part with `--jb-button-*` variables documented in [JBButton Styling](../../jb-button/stories/Styling.mdx).
+- Public time-input variables use `--jb-time-input-*` on the host. Use [JBInput Styling](../../jb-input/stories/Styling.mdx), [JBPopover Styling](../../jb-popover/stories/Styling.mdx), [JBTimePicker Styling](../../jb-time-picker/stories/Styling.mdx), and [JBButton Styling](../../jb-button/stories/Styling.mdx) as the source of truth for child component variables.
 
-Each example uses one shared example theme pack from [`docs/styles`](https://github.com/javadbat/design-system/tree/main/docs/styles), one existing `JBInput` recipe, one existing `JBPopover` recipe, one existing `JBTimePicker` recipe, and one small time-input-specific shell recipe.
+Each example uses one shared theme pack, the existing `JBInput` and `JBTimePicker` recipes, and a time-input recipe that maps the matching `JBPopover` shell values and `JBButton` close-action variables onto exported parts.
 
 ## Recommended Customization Path
 
-1. Use `--jb-time-input-*` variables first for host margin, popover stacking, and close-button style.
+1. Use `--jb-time-input-*` variables for host margin and popover stacking.
 2. Reuse an existing `JBInput` recipe for the text-field layer. See [JBInput Styling](../../jb-input/stories/Styling.mdx) for the full input API.
 3. Reuse an existing `JBPopover` recipe for the overlay shell. See [JBPopover Styling](../../jb-popover/stories/Styling.mdx) for background, radius, padding, shadow, and overlay behavior.
 4. Reuse an existing `JBTimePicker` recipe for the wheel picker content. See [JBTimePicker Styling](../../jb-time-picker/stories/Styling.mdx) for the full picker API.
-5. Use common theme variables from [Theme Colors](../../jb-core/theme/stories/colors.mdx) and [Theme Sizes](../../jb-core/theme/stories/sizes.mdx) when the style should align with the design system.
-6. Put reusable theme-pack values in [`docs/styles`](https://github.com/javadbat/design-system/tree/main/docs/styles) only when they should be shared by multiple component demos.
-7. Add a new time-input variable only when a needed host or close-button surface cannot be customized with current public variables or official parts.
+5. Style the close action through `::part(close-button)` with `--jb-button-*` variables. See [JBButton Styling](../../jb-button/stories/Styling.mdx) for its ghost-variant, size, border, and state variables.
+6. Use common theme variables from [Theme Colors](../../jb-core/theme/stories/colors.mdx) and [Theme Sizes](../../jb-core/theme/stories/sizes.mdx) when the style should align with the design system.
+7. Put reusable theme-pack values in [`docs/styles`](https://github.com/javadbat/design-system/tree/main/docs/styles) only when they should be shared by multiple component demos.
+8. Add a new time-input variable only when a needed host surface cannot be customized with current public variables or official parts.
 
 ## Parts And States
 
@@ -122,7 +124,7 @@ Each example uses one shared example theme pack from [`docs/styles`](https://git
     <tr><td><code>input</code></td><td>Internal <code>jb-input</code></td><td>Prefer reusable recipes and the API in <a href="../../jb-input/stories/Styling.mdx">JBInput Styling</a> for label, field, helper message, border, radius, and input states.</td></tr>
     <tr><td><code>popover</code></td><td>Internal <code>jb-popover</code></td><td>Use for targeted popover overrides. Prefer <a href="../../jb-popover/stories/Styling.mdx">JBPopover Styling</a> for the full overlay API.</td></tr>
     <tr><td><code>time-picker</code></td><td>Internal <code>jb-time-picker</code></td><td>Use for targeted picker overrides. Prefer <a href="../../jb-time-picker/stories/Styling.mdx">JBTimePicker Styling</a> for the wheel picker API.</td></tr>
-    <tr><td><code>close-button</code></td><td>Popover close button</td><td>Use for final close-button overrides after trying the public close-button variables.</td></tr>
+    <tr><td><code>close-button</code></td><td>Internal <code>jb-button</code></td><td>Shown at the mobile breakpoint (30rem and below). Set <code>--jb-button-*</code> variables on this part to customize the popover close action.</td></tr>
   </tbody>
 </table>
 
@@ -143,7 +145,7 @@ Each example uses one shared example theme pack from [`docs/styles`](https://git
 
 ## CSS Variables
 
-These variables belong to `JBTimeInput` itself. The text field, popover, and picker keep their own single source of truth in [JBInput Styling](../../jb-input/stories/Styling.mdx), [JBPopover Styling](../../jb-popover/stories/Styling.mdx), and [JBTimePicker Styling](../../jb-time-picker/stories/Styling.mdx).
+These variables belong to `JBTimeInput` itself. The text field, popover, picker, and close action keep their own single source of truth in [JBInput Styling](../../jb-input/stories/Styling.mdx), [JBPopover Styling](../../jb-popover/stories/Styling.mdx), [JBTimePicker Styling](../../jb-time-picker/stories/Styling.mdx), and [JBButton Styling](../../jb-button/stories/Styling.mdx).
 
 <table>
   <thead>
@@ -154,16 +156,8 @@ These variables belong to `JBTimeInput` itself. The text field, popover, and pic
     </tr>
   </thead>
   <tbody>
-    <tr><td><code>--jb-time-input-close-button-padding</code></td><td>Size</td><td>Popover close button padding.</td></tr>
-    <tr><td><code>--jb-time-input-close-button-border-radius</code></td><td>Size</td><td>Popover close button border radius.</td></tr>
-    <tr><td><code>--jb-time-input-close-button-color</code></td><td>Theme/Color</td><td>Popover close button text color.</td></tr>
-    <tr><td><code>--jb-time-input-close-button-bg-color</code></td><td>Theme/Color</td><td>Popover close button background color.</td></tr>
-    <tr><td><code>--jb-time-input-close-button-bg-color-hover</code></td><td>Theme/Color</td><td>Popover close button hover background color.</td></tr>
-    <tr><td><code>--jb-time-input-close-button-border-color</code></td><td>Theme/Color</td><td>Popover close button border color.</td></tr>
     <tr><td><code>--jb-time-input-margin</code></td><td>Other</td><td>Host component margin.</td></tr>
     <tr><td><code>--jb-time-input-popover-z-index</code></td><td>Other</td><td>Z-index used by the internal time picker popover.</td></tr>
-    <tr><td><code>--jb-time-input-close-button-font-weight</code></td><td>Other</td><td>Popover close button font weight.</td></tr>
-    <tr><td><code>--jb-time-input-close-button-display</code></td><td>Other</td><td>Popover close button display value.</td></tr>
   </tbody>
 </table>
 
@@ -172,9 +166,15 @@ These variables belong to `JBTimeInput` itself. The text field, popover, and pic
 ```css
 jb-time-input.brand-time-input {
   --jb-time-input-popover-z-index: 1000;
-  --jb-time-input-close-button-color: #2563eb;
-  --jb-time-input-close-button-bg-color-hover: rgb(37 99 235 / 0.08);
-  --jb-time-input-close-button-border-radius: 999rem;
+  --jb-popover-bg-color: #ffffff;
+  --jb-popover-border-radius: 1rem;
+  --jb-popover-padding: 1rem;
+}
+
+jb-time-input.brand-time-input::part(close-button) {
+  --jb-button-color-ghost: #2563eb;
+  --jb-button-bg-color-ghost-hover: rgb(37 99 235 / 0.08);
+  --jb-button-border-radius: 999rem;
 }
 
 jb-time-input.brand-time-input::part(time-picker) {
@@ -332,6 +332,10 @@ jb-popover.theme-name-popover {
 
 /* https://github.com/javadbat/design-system/blob/main/modules/jb-time-input/stories/styles/style-carbon.css */
 .theme-name-time-input {
-  /* time-input host variables */
+  /* time-input host and jb-popover shell variables */
+}
+
+.theme-name-time-input::part(close-button) {
+  /* jb-button variables for the close action */
 }
 ```

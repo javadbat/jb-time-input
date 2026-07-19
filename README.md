@@ -13,7 +13,7 @@
 - Supports ArrowUp and ArrowDown to increase or decrease the focused time unit.
 - Accepts Persian digits and stores English digits.
 - Supports custom validation through `jb-validation`.
-- Uses `jb-input`, `jb-popover`, and `jb-time-picker` internally.
+- Uses `jb-input`, `jb-popover`, `jb-time-picker`, and `jb-button` internally.
 - Framework friendly: use it in pure JavaScript or in frameworks such as React, Vue, and Angular.
 
 ## When to use
@@ -47,7 +47,7 @@ import 'jb-time-input';
 
 ## API reference
 
-`jb-time-input` uses [`jb-input`](https://github.com/javadbat/jb-input), [`jb-popover`](https://github.com/javadbat/jb-popover), and [`jb-time-picker`](https://github.com/javadbat/jb-time-picker) internally. For the full inner input styling and behavior model, see the [`jb-input` API](https://github.com/javadbat/jb-input#api-reference).
+`jb-time-input` uses [`jb-input`](https://github.com/javadbat/jb-input), [`jb-popover`](https://github.com/javadbat/jb-popover), [`jb-time-picker`](https://github.com/javadbat/jb-time-picker), and [`jb-button`](https://github.com/javadbat/jb-button) internally. For the full inner input styling and behavior model, see the [`jb-input` API](https://github.com/javadbat/jb-input#api-reference).
 
 ### Attributes
 
@@ -190,7 +190,7 @@ timeInput.showPersianNumber = true;
 
 For complete styling guidance, live examples, CSS parts, custom states, and copyable style recipes, see [Styling](https://javadbat.github.io/design-system/?path=/docs/components-form-elements-inputs-jbtimeinput-styling).
 
-`jb-time-input` composes `jb-input`, `jb-popover`, and `jb-time-picker`, so their styling APIs also apply to the internal parts.
+`jb-time-input` composes `jb-input`, `jb-popover`, `jb-time-picker`, and `jb-button`. Style the exported `close-button` part with `--jb-button-*` variables instead of the removed `--jb-time-input-close-button-*` variables.
 
 ## Accessibility notes
 
@@ -202,7 +202,7 @@ For complete styling guidance, live examples, CSS parts, custom states, and copy
 ## Related Docs
 
 - See [`jb-time-input/react`](https://github.com/javadbat/jb-time-input/tree/main/react) if you want to use this component in React.
-- See [`jb-input`](https://github.com/javadbat/jb-input), [`jb-time-picker`](https://github.com/javadbat/jb-time-picker), and [`jb-popover`](https://github.com/javadbat/jb-popover) for composed component APIs.
+- See [`jb-input`](https://github.com/javadbat/jb-input), [`jb-time-picker`](https://github.com/javadbat/jb-time-picker), [`jb-popover`](https://github.com/javadbat/jb-popover), and [`jb-button`](https://github.com/javadbat/jb-button) for composed component APIs.
 - See [All JB Design System Component List](https://javadbat.github.io/design-system/) for more components.
 - Use [Contribution Guide](https://github.com/javadbat/design-system/blob/main/docs/contribution-guide.md) if you want to contribute to this component.
 

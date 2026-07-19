@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## [1.8.0] - 2026-07-19
 
 ### Added
 
@@ -10,8 +10,16 @@
 
 - Removed child class injection from style stories and standardized composed theming on the time-input host and exported parts.
 - Refined Aurora popover elevation through the shared popover shadow API.
+- Replaced the native popover close button with `jb-button` and updated style recipes to use `--jb-button-*` variables on the exported `close-button` part.
+- Added complete popover shell styling to every time-input theme recipe.
+- Limited the popover close button to mobile viewports at 30rem and below.
+- Prevented the internal mobile popover host from widening time inputs beyond their container.
 
-## 1.7.0
+### Removed
+
+- Removed the legacy `--jb-time-input-close-button-*` variables; use the `JBButton` styling API through `::part(close-button)` instead.
+
+## [1.7.0]
 
 ### Added
 

@@ -1,6 +1,5 @@
-import React, { useEffect, useRef } from 'react';
+import type React from 'react';
 import { JBTimeInput } from 'jb-time-input/react';
-import type { JBTimeInputWebComponent } from 'jb-time-input';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import '../../../docs/styles/ant-design.css';
 import '../../../docs/styles/aurora.css';
@@ -14,6 +13,30 @@ import '../../../docs/styles/material.css';
 import '../../../docs/styles/porcelain.css';
 import '../../../docs/styles/sunset.css';
 import '../../../docs/styles/terminal.css';
+import '../../jb-input/stories/styles/style-ant-design.css';
+import '../../jb-input/stories/styles/style-aurora.css';
+import '../../jb-input/stories/styles/style-bootstrap.css';
+import '../../jb-input/stories/styles/style-candy.css';
+import '../../jb-input/stories/styles/style-carbon.css';
+import '../../jb-input/stories/styles/style-cupertino.css';
+import '../../jb-input/stories/styles/style-fluent.css';
+import '../../jb-input/stories/styles/style-forest.css';
+import '../../jb-input/stories/styles/style-material.css';
+import '../../jb-input/stories/styles/style-porcelain.css';
+import '../../jb-input/stories/styles/style-sunset.css';
+import '../../jb-input/stories/styles/style-terminal.css';
+import '../../jb-time-picker/stories/styles/style-ant-design.css';
+import '../../jb-time-picker/stories/styles/style-aurora.css';
+import '../../jb-time-picker/stories/styles/style-bootstrap.css';
+import '../../jb-time-picker/stories/styles/style-candy.css';
+import '../../jb-time-picker/stories/styles/style-carbon.css';
+import '../../jb-time-picker/stories/styles/style-cupertino.css';
+import '../../jb-time-picker/stories/styles/style-fluent.css';
+import '../../jb-time-picker/stories/styles/style-forest.css';
+import '../../jb-time-picker/stories/styles/style-material.css';
+import '../../jb-time-picker/stories/styles/style-porcelain.css';
+import '../../jb-time-picker/stories/styles/style-sunset.css';
+import '../../jb-time-picker/stories/styles/style-terminal.css';
 import './styles/style-ant-design.css';
 import './styles/style-aurora.css';
 import './styles/style-bootstrap.css';
@@ -62,11 +85,8 @@ function StyledTimeInput({
 }
 
 function OpenTimePickerInput({ className }: TimeInputStyleSampleProps) {
-  const ref = useRef<JBTimeInputWebComponent | null>(null);
-
   return (
     <JBTimeInput
-      ref={ref}
       className={className}
       label="Open picker"
       value="09:24:36"

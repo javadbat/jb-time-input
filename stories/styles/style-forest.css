@@ -1,9 +1,24 @@
 jb-time-input.forest-style {
     --jb-time-input-popover-z-index: 1000;
-    --jb-time-input-close-button-color: #f7f1d2;
-    --jb-time-input-close-button-bg-color-hover: rgb(247 209 84 / 0.12);
-    --jb-time-input-close-button-border-color: rgb(247 209 84 / 0.45);
-    --jb-time-input-close-button-border-radius: 0.85rem;
+    --jb-popover-bg-color: var(--jb-surface);
+    --jb-popover-border-radius: 1rem;
+    --jb-popover-padding: 1rem;
+    --jb-popover-margin-top: 0.625rem;
+    --jb-popover-back-bg-color: rgb(22 48 36 / 0.62);
+    --jb-popover-box-shadow: 0 1rem 2.5rem rgb(20 83 45 / 0.24);
+}
+
+jb-time-input.forest-style::part(popover-content) {
+    overflow: hidden;
+    border: 1px solid rgb(246 211 101 / 0.28);
+}
+
+jb-time-input.forest-style::part(close-button) {
+    --jb-button-color-ghost: #f7f1d2;
+    --jb-button-bg-color-ghost-hover: rgb(247 209 84 / 0.12);
+    --jb-button-border-color: rgb(247 209 84 / 0.45);
+    --jb-button-border-width-ghost: 1px;
+    --jb-button-border-radius: 0.85rem;
 }
 
 jb-time-input.forest-style::part(time-picker) {

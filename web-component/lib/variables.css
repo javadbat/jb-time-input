@@ -1,17 +1,5 @@
 :host {
-  /* Size */
-  --close-button-padding: var(--jb-time-input-close-button-padding, 0.5rem 1rem);
-  --close-button-border-radius: var(--jb-time-input-close-button-border-radius, var(--jb-radius-xs));
-
-  /* Theme/Color */
-  --close-button-color: var(--jb-time-input-close-button-color, var(--jb-text-primary));
-  --close-button-bg-color: var(--jb-time-input-close-button-bg-color, transparent);
-  --close-button-bg-color-hover: var(--jb-time-input-close-button-bg-color-hover, oklch(45% 0.12 260 / 0.06));
-  --close-button-border-color: var(--jb-time-input-close-button-border-color, transparent);
-
   /* Other */
   --margin: var(--jb-time-input-margin, 0.75rem 0);
   --popover-z-index: var(--jb-time-input-popover-z-index, 1000);
-  --close-button-font-weight: var(--jb-time-input-close-button-font-weight, 500);
-  --close-button-display: var(--jb-time-input-close-button-display, inline-flex);
 }

@@ -1,15 +1,19 @@
 jb-time-input.carbon-style {
     --jb-time-input-popover-z-index: 1000;
-    --jb-time-input-close-button-color: var(--jb-text-primary);
-    --jb-time-input-close-button-bg-color-hover: var(--jb-surface-hover);
-    --jb-time-input-close-button-border-color: var(--jb-text-disabled);
-    --jb-time-input-close-button-border-radius: 0;
     --jb-popover-bg-color: var(--jb-surface);
     --jb-popover-border-radius: 0;
     --jb-popover-padding: 1rem;
     --jb-popover-margin-top: 0.5rem;
     --jb-popover-back-bg-color: rgb(0 0 0 / 0.58);
     --jb-popover-box-shadow: 0 0.5rem 1rem rgb(0 0 0 / 0.28);
+}
+
+jb-time-input.carbon-style::part(close-button) {
+    --jb-button-color-ghost: var(--jb-text-primary);
+    --jb-button-bg-color-ghost-hover: var(--jb-surface-hover);
+    --jb-button-border-color: var(--jb-text-disabled);
+    --jb-button-border-width-ghost: 1px;
+    --jb-button-border-radius: 0;
 }
 
 jb-time-input.carbon-style::part(popover-content) {
