@@ -28,6 +28,7 @@ export class JBTimeInputWebComponent extends HTMLElement implements WithValidati
     if (isValid && this.elements.input.value !==undefined) {
       this.elements.input.value = value;
       this.#setFormValue();
+      this.updateTimePickerValue(this.hour, this.minute, this.second);
     }
   }
   /**
@@ -215,6 +216,9 @@ export class JBTimeInputWebComponent extends HTMLElement implements WithValidati
       if (this.#internals) this.#internals.ariaExpanded = "true";
       this.elements.input.setAttribute("aria-expanded", "true");
       this.elements.input.setAttribute("aria-haspopup", "dialog");
+      // Synchronize before opening in case the input value was changed by an external source
+      // such as browser autofill without passing through the component's value setter.
+      this.updateTimePickerValue(this.hour, this.minute, this.second);
       this.elements.timePicker.wrapper.open();
     } else {
       this.#internals?.states?.delete("open");

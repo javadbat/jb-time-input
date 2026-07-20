@@ -1,6 +1,6 @@
 # Changelog
 
-## [1.8.0] - 2026-07-19
+## [2.0.1] - 2026-07-19
 
 ### Added
 
@@ -14,6 +14,7 @@
 - Added complete popover shell styling to every time-input theme recipe.
 - Limited the popover close button to mobile viewports at 30rem and below.
 - Prevented the internal mobile popover host from widening time inputs beyond their container.
+- Kept the embedded time picker synchronized with programmatic input values and browser-provided values when opening.
 
 ### Removed
 
