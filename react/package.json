@@ -32,6 +32,6 @@
 		"url": "git@github.com:javadbat/jb-time-input-react.git"
   },
   "dependencies": {
-    "jb-time-input": ">=1.5.0"
+    "jb-time-input": "^1.5.0"
   }
 }
