@@ -1,5 +1,16 @@
 # Changelog
 
+## Unreleased
+
+### Added
+
+- Added Storybook interaction coverage for initial-value initialization, live-value precedence, explicit `null`, and native form reset.
+
+### Changed
+
+- Added `initialValue` as the default and reset time; it seeds `value` only until the live value is explicitly set.
+- Updated the React wrapper so an omitted `value` does not overwrite `initialValue`, while explicit `null` remains an explicit live value.
+
 ## [2.0.1] - 2026-07-19
 
 ### Added

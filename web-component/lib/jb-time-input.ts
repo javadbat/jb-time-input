@@ -20,16 +20,52 @@ export class JBTimeInputWebComponent extends HTMLElement implements WithValidati
     return true;
   }
   elements!: JBTimeInputElements;
+  #isDirty = false;
   get value() {
     return this.elements.input.value;
   }
-  set value(value) {
+  set value(value: string) {
+    // Invalid assignments are ignored, so they must not consume the clean
+    // initial-value latch either.
+    if (!this.#checkTimeFormatValidation(value)) {
+      return;
+    }
+    this.#isDirty = true;
+    this.#setValue(value);
+  }
+  #setValue(value: string) {
     const isValid = this.#checkTimeFormatValidation(value);
     if (isValid && this.elements.input.value !==undefined) {
       this.elements.input.value = value;
       this.#setFormValue();
       this.updateTimePickerValue(this.hour, this.minute, this.second);
     }
+  }
+  #initialValue = "00:00:00";
+  /**
+   * Default and reset value. It initializes `value` until the live value is explicitly set.
+   */
+  get initialValue(): string {
+    return this.#initialValue;
+  }
+  set initialValue(value: string | null) {
+    const normalizedValue = value ?? this.#getDefaultValue();
+    if (!this.#checkTimeFormatValidation(normalizedValue)) {
+      return;
+    }
+    this.#initialValue = normalizedValue;
+    if (!this.#isDirty) {
+      this.#setValue(this.#initialValue);
+    }
+  }
+  get isDirty(): boolean {
+    return this.value !== this.initialValue;
+  }
+  formResetCallback() {
+    this.#isDirty = false;
+    this.#setValue(this.initialValue);
+    this.#validation.reset();
+    this.#internals?.setValidity({}, '');
   }
   /**
  * @description will determine if component trigger jb-validation mechanism automatically on user event or it just let user-developer handle validation mechanism by himself
@@ -96,6 +132,7 @@ export class JBTimeInputWebComponent extends HTMLElement implements WithValidati
   }
 
   set hour(value: number) {
+    this.#isDirty = true;
     if (this.hour !== value) {
       let hour = value;
       if (hour < 0) {
@@ -134,6 +171,7 @@ export class JBTimeInputWebComponent extends HTMLElement implements WithValidati
     return Number(val);
   }
   set minute(value: number) {
+    this.#isDirty = true;
     if (this.minute !== value) {
       let minute = value;
       if (minute < 0) {
@@ -184,6 +222,7 @@ export class JBTimeInputWebComponent extends HTMLElement implements WithValidati
     return null;
   }
   set second(value: string | number | null) {
+    this.#isDirty = true;
     if (this.secondEnabled && value !== null) {
       if (this.second !== value) {
         let second = Math.floor(Number(value));
@@ -250,7 +289,7 @@ export class JBTimeInputWebComponent extends HTMLElement implements WithValidati
   set showPersianNumber(value: boolean) {
     this.#showPersianNumber = Boolean(value);
     this.elements.timePicker.component.showPersianNumber = value;
-    this.value = `${this.value}`;
+    this.#setValue(`${this.value}`);
   }
   #internals: ElementInternals | null = null;
   #disabled = false;
@@ -278,6 +317,7 @@ export class JBTimeInputWebComponent extends HTMLElement implements WithValidati
     return this.#required;
   }
   #valueOnInputFocus: string | null = null;
+  #isDirtyOnInputFocus = false;
   set optionalUnits(value: TimeUnitsString[]) {
     this.elements.timePicker.component.optionalUnits = value;
   }
@@ -354,17 +394,22 @@ export class JBTimeInputWebComponent extends HTMLElement implements WithValidati
   }
   #initProp() {
     //set initial value to input
-    this.#resetInputValue();
+    if (!this.#isDirty) {
+      const initialValue = this.#checkTimeFormatValidation(this.initialValue)
+        ? this.initialValue
+        : this.#getDefaultValue();
+      this.#initialValue = initialValue;
+      this.#setValue(initialValue);
+    }
     this.elements.input.addEventListener('init', () => {
       this.elements.input.addStandardValueCallback(this.#standardTimeValue.bind(this));
     });
   }
   #resetInputValue() {
-    let value = "00:00";
-    if (this.secondEnabled) {
-      value = `${value}:00`;
-    }
-    this.value = value;
+    this.#setValue(this.#getDefaultValue());
+  }
+  #getDefaultValue() {
+    return this.secondEnabled ? "00:00:00" : "00:00";
   }
   static get observedAttributes() {
     return [
@@ -742,10 +787,11 @@ export class JBTimeInputWebComponent extends HTMLElement implements WithValidati
     //TODO: add on paste so component handle paste more smartly
     if (!isTimeValid) {
       if (this.#valueOnInputFocus) {
-        this.value = this.#valueOnInputFocus;
+        this.#setValue(this.#valueOnInputFocus);
       } else {
         this.#resetInputValue();
       }
+      this.#isDirty = this.#isDirtyOnInputFocus;
     }
     // to prevent onChange call twice
     this.#valueOnInputFocus = this.value;
@@ -756,6 +802,7 @@ export class JBTimeInputWebComponent extends HTMLElement implements WithValidati
   }
   #onInputFocus(e: FocusEvent) {
     this.#valueOnInputFocus = this.value;
+    this.#isDirtyOnInputFocus = this.#isDirty;
     this.showTimePicker = true;
     const event = new FocusEvent("focus", { ...e });
     this.dispatchEvent(event);
@@ -841,10 +888,16 @@ export class JBTimeInputWebComponent extends HTMLElement implements WithValidati
   }
   #disableSecond() {
     //when user dont want second in time
-    this.value = `${this.hourString}:${this.minuteString}`;
+    if (/^\d{2}:\d{2}:\d{2}$/.test(this.#initialValue)) {
+      this.#initialValue = this.#initialValue.slice(0, 5);
+    }
+    this.#setValue(`${this.hourString}:${this.minuteString}`);
   }
   #enableSecond() {
-    this.value = `${this.hourString}:${this.minuteString}:${this.secondString}`;
+    if (/^\d{2}:\d{2}$/.test(this.#initialValue)) {
+      this.#initialValue = `${this.#initialValue}:00`;
+    }
+    this.#setValue(`${this.hourString}:${this.minuteString}:00`);
   }
   #getValidationValue(): ValidationValue {
     return {

@@ -142,6 +142,23 @@
             },
             {
               "kind": "field",
+              "name": "initialValue",
+              "description": "Default and reset value. It initializes value until the live value is explicitly set.",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "isDirty",
+              "description": "True when current value differs from initialValue.",
+              "type": {
+                "text": "boolean"
+              },
+              "readonly": true
+            },
+            {
+              "kind": "field",
               "name": "hour",
               "description": "Hour value from 0 to 24.",
               "type": {

@@ -4,6 +4,7 @@ import { type RefObject, useEffect } from "react";
 
 export type JBTimeInputAttributes = {
   value?: string | null,
+  initialValue?: string | null,
   validationList?: ValidationItem<ValidationValue>[] | null,
   secondEnabled?: boolean,
   frontalZero?: boolean,
@@ -12,22 +13,25 @@ export type JBTimeInputAttributes = {
 }
 export function useJBTimeInputAttribute(element: RefObject<JBTimeInputWebComponent | null>, props: JBTimeInputAttributes) {
   useEffect(() => {
-    if (!element.current) {
-      return;
+    if (element.current && props.secondEnabled !== null && props.secondEnabled !== undefined) {
+      element.current.secondEnabled = props.secondEnabled;
     }
-    const value = props.value ?? '00:00:00';
-    element.current.value = value;
+  }, [props.secondEnabled, element]);
+  useEffect(() => {
+    if (element.current && props.initialValue !== undefined) {
+      element.current.initialValue = props.initialValue;
+    }
+  }, [props.initialValue, element]);
+  useEffect(() => {
+    if (element.current && props.value !== undefined) {
+      element.current.value = props.value ?? (element.current.secondEnabled ? '00:00:00' : '00:00');
+    }
   }, [props.value, element]);
   useEffect(() => {
     if (Array.isArray(props.validationList) && element.current) {
       element.current.validation.list = props.validationList;
     }
   }, [props.validationList, element]);
-  useEffect(() => {
-    if (element.current && props.secondEnabled !== null && props.secondEnabled !== undefined) {
-      element.current.secondEnabled = props.secondEnabled;
-    }
-  }, [props.secondEnabled, element]);
   useEffect(() => {
     if (element.current && typeof props.frontalZero == "boolean") {
       element.current.frontalZero = props.frontalZero;

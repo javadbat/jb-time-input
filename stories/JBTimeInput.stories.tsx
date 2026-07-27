@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { JBTimeInput } from 'jb-time-input/react';
 import { expect, fn, userEvent, waitFor } from 'storybook/test';
 import {
@@ -36,6 +36,125 @@ export const Normal: Story = {
       expect(getTimePicker(timeInput).value).toEqual({ hour: 0, minute: 0, second: 0 });
     });
   }
+};
+
+export const InitialValue: Story = {
+  render: (args) => {
+    const formRef = useRef<HTMLFormElement>(null);
+    return (
+      <form ref={formRef}>
+        <JBTimeInput {...args} />
+        <JBButton onClick={() => formRef.current?.reset()}>Reset</JBButton>
+      </form>
+    );
+  },
+  args: {
+    label: 'initial value',
+    initialValue: '08:30:45',
+  },
+  play: async ({ canvasElement, args }) => {
+    const timeInput = getTimeInput(canvasElement);
+    const resetButton = canvasElement.querySelector('jb-button')?.shadowRoot?.querySelector<HTMLButtonElement>('button');
+
+    expect(resetButton).toBeTruthy();
+
+    await waitFor(() => {
+      expect(timeInput.initialValue).toBe(args.initialValue);
+      expect(timeInput.value).toBe(args.initialValue);
+      expect(timeInput.isDirty).toBe(false);
+    });
+
+    timeInput.secondEnabled = false;
+
+    await waitFor(() => {
+      // Changing time precision is configuration, so the reset baseline must
+      // be converted with the live value without making the input dirty.
+      expect(timeInput.initialValue).toBe('08:30');
+      expect(timeInput.value).toBe('08:30');
+      expect(timeInput.isDirty).toBe(false);
+    });
+
+    timeInput.secondEnabled = true;
+
+    await waitFor(() => {
+      expect(timeInput.initialValue).toBe('08:30:00');
+      expect(timeInput.value).toBe('08:30:00');
+      expect(timeInput.isDirty).toBe(false);
+    });
+
+    // A rejected live value must not prevent a later baseline from initializing
+    // a component whose accepted value has never changed.
+    timeInput.value = 'invalid-time';
+    timeInput.initialValue = '09:15:30';
+
+    await waitFor(() => {
+      expect(timeInput.initialValue).toBe('09:15:30');
+      expect(timeInput.value).toBe('09:15:30');
+      expect(timeInput.isDirty).toBe(false);
+    });
+
+    // This story verifies setter precedence and reset behavior. Input editing
+    // itself is exercised by the Normal story.
+    timeInput.value = '12:34:56';
+
+    await waitFor(() => {
+      expect(timeInput.value).toBe('12:34:56');
+      expect(timeInput.isDirty).toBe(true);
+    });
+
+    timeInput.initialValue = '10:15:30';
+
+    expect(timeInput.initialValue).toBe('10:15:30');
+    expect(timeInput.value).toBe('12:34:56');
+    expect(timeInput.isDirty).toBe(true);
+
+    await userEvent.click(resetButton!);
+
+    await waitFor(() => {
+      expect(timeInput.value).toBe('10:15:30');
+      expect(timeInput.initialValue).toBe(timeInput.value);
+      expect(timeInput.isDirty).toBe(false);
+    });
+
+    timeInput.initialValue = '11:20:30';
+
+    await waitFor(() => {
+      expect(timeInput.value).toBe('11:20:30');
+      expect(timeInput.isDirty).toBe(false);
+    });
+  },
+};
+
+export const InitialValueDoesNotOverrideValue: Story = {
+  args: {
+    initialValue: '08:30:45',
+    value: '12:34:56',
+  },
+  play: async ({ canvasElement }) => {
+    const timeInput = getTimeInput(canvasElement);
+
+    await waitFor(() => {
+      expect(timeInput.initialValue).toBe('08:30:45');
+      expect(timeInput.value).toBe('12:34:56');
+      expect(timeInput.isDirty).toBe(true);
+    });
+  },
+};
+
+export const ExplicitNullValueDoesNotFallBackToInitialValue: Story = {
+  args: {
+    initialValue: '08:30:45',
+    value: null,
+  },
+  play: async ({ canvasElement }) => {
+    const timeInput = getTimeInput(canvasElement);
+
+    await waitFor(() => {
+      expect(timeInput.initialValue).toBe('08:30:45');
+      expect(timeInput.value).toBe('00:00:00');
+      expect(timeInput.isDirty).toBe(true);
+    });
+  },
 };
 
 export const PersianNumber: Story = {

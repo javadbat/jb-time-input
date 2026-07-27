@@ -77,6 +77,8 @@ import 'jb-time-input';
 | name | type | readonly | description |
 | --- | --- | --- | --- |
 | `value` | `string` | no | Canonical time value submitted with forms. |
+| `initialValue` | `string` | no | Default and reset value. It initializes `value` until the live value is explicitly set. |
+| `isDirty` | `boolean` | yes | `true` when current `value` differs from `initialValue`. |
 | `hour` | `number` | no | Hour value from `0` to `24`. |
 | `minute` | `number` | no | Minute value from `0` to `59`. |
 | `second` | `number \| null` | no | Second value from `0` to `59`, or `null` when seconds are disabled. |
