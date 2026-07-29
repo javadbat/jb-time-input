@@ -83,6 +83,9 @@ export class JBTimeInputWebComponent extends HTMLElement implements WithValidati
     this.#validation.reset();
     this.#internals?.setValidity({}, '');
   }
+  formDisabledCallback(disabled: boolean) {
+    this.disabled = disabled;
+  }
   /**
  * @description will determine if component trigger jb-validation mechanism automatically on user event or it just let user-developer handle validation mechanism by himself
  */
