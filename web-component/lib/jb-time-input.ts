@@ -12,10 +12,11 @@ import { enToFaDigits, faToEnDigits, parseBooleanAttribute } from "jb-core";
 import { renderHTML } from "./render";
 export * from './types.js';
 import { i18n } from 'jb-core/i18n'
+import type { JBFormInputStandards } from "jb-form";
 //TODO: accept js Date value in value setter and extract time from date and return given date with a inputted time
 //TODO: add picker disabler and handle virtual keyboard for it
 //TODO: add placeholder handler like date input
-export class JBTimeInputWebComponent extends HTMLElement implements WithValidation<ValidationValue> {
+export class JBTimeInputWebComponent extends HTMLElement implements WithValidation<ValidationValue>, JBFormInputStandards<string> {
   static get formAssociated() {
     return true;
   }
@@ -35,12 +36,27 @@ export class JBTimeInputWebComponent extends HTMLElement implements WithValidati
   }
   #setValue(value: string) {
     const isValid = this.#checkTimeFormatValidation(value);
-    if (isValid && this.elements.input.value !==undefined) {
+    if (isValid && this.elements.input.value !== undefined) {
       this.elements.input.value = value;
       this.#setFormValue();
       this.updateTimePickerValue(this.hour, this.minute, this.second);
     }
   }
+  get form() {
+    return this.#internals!.form;
+  }
+  get name():string {
+    return this.getAttribute("name") || "";
+  }
+  set name(value: string | null | undefined) {
+    if (value) {
+      this.setAttribute('name', value)
+    }
+    else {
+      this.removeAttribute('name')
+    }
+  }
+  
   #initialValue = "00:00:00";
   /**
    * Default and reset value. It initializes `value` until the live value is explicitly set.
@@ -88,7 +104,7 @@ export class JBTimeInputWebComponent extends HTMLElement implements WithValidati
     clearValidationError: this.clearValidationError.bind(this),
     getValue: this.#getValidationValue.bind(this),
     getValidations: this.#getInsideValidations.bind(this),
-    getValueString: () => this.value??"",
+    getValueString: () => this.value ?? "",
     setValidationResult: this.#setValidationResult.bind(this),
     showValidationError: this.showValidationError.bind(this)
   });
@@ -115,7 +131,7 @@ export class JBTimeInputWebComponent extends HTMLElement implements WithValidati
     const val = this.elements.input.value?.slice(
       this.#inputRanges.hourRange[0],
       this.#inputRanges.hourRange[1] + 1
-    )??"";
+    ) ?? "";
     return val;
   }
   /**
@@ -156,7 +172,7 @@ export class JBTimeInputWebComponent extends HTMLElement implements WithValidati
     const val = this.elements.input.value?.slice(
       this.#inputRanges.minuteRange[0],
       this.#inputRanges.minuteRange[1] + 1
-    )??"";
+    ) ?? "";
     return val;
   }
   /**
@@ -202,7 +218,7 @@ export class JBTimeInputWebComponent extends HTMLElement implements WithValidati
       const val = this.elements.input.value?.slice(
         this.#inputRanges.secondRange[0],
         this.#inputRanges.secondRange[1] + 1
-      )??"";
+      ) ?? "";
       return val;
     }
     return "";
@@ -783,7 +799,7 @@ export class JBTimeInputWebComponent extends HTMLElement implements WithValidati
   #onInputChange() {
     const inputText = this.value;
     this.#checkValidity(true);
-    const isTimeValid = this.#checkTimeFormatValidation(inputText??"");
+    const isTimeValid = this.#checkTimeFormatValidation(inputText ?? "");
     //TODO: add on paste so component handle paste more smartly
     if (!isTimeValid) {
       if (this.#valueOnInputFocus) {

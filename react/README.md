@@ -41,6 +41,7 @@ Use `JBTimePicker` when you need only the inline time picker without the input f
 | `placeholder` | `string` | Placeholder forwarded to the inner input. |
 | `closeButtonText` | `string` | Text inside the picker popover close button. |
 | `validationList` | `ValidationItem<ValidationValue>[]` | Custom validators from `jb-validation`. |
+| `disabled` | `boolean` | Disables the nested native input and prevents focus, editing, picker opening, and user-generated value changes. |
 | `secondEnabled` | `boolean` | Enables or disables the second unit. |
 | `frontalZero` | `boolean` | Displays picker numbers below 10 with a leading zero. |
 | `optionalUnits` | `Array<'hour' \| 'minute' \| 'second'>` | Picker units displayed as optional/muted. |
@@ -66,6 +67,14 @@ For hour/minute-only input:
 ## Keyboard and picker
 
 The input supports keyboard entry and an attached time picker. Set `secondEnabled={false}` before using `HH:mm` values.
+
+## Disabled state
+
+```jsx
+<JBTimeInput label="Time" value="12:34:56" disabled />;
+```
+
+Setting `disabled={false}` removes the web component's disabled attribute and re-enables the nested native input.
 
 ## Validation
 
@@ -110,7 +119,7 @@ Use the same CSS parts and variables as the web component. The `Styling` section
 
 ## Accessibility notes
 
-Set `label` for the field name. Use `message` for time-format hints, especially when seconds are disabled or optional units are shown.
+Set `label` for the field name. Use `message` for time-format hints, especially when seconds are disabled or optional units are shown. The `disabled` prop is forwarded to the web component and its nested native input.
 
 ## Shared Documentation
 
@@ -126,6 +135,7 @@ For web-component behavior, methods, validation, and CSS variables, see [`jb-tim
 
 - Import `JBTimeInput` from `jb-time-input/react`; the wrapper imports and registers the web component.
 - Use React prop names such as `secondEnabled`, `frontalZero`, `optionalUnits`, and `showPersianNumber`.
+- Use the boolean `disabled` prop; the wrapper adds or removes the web component's `disabled` attribute.
 - Use `event.target.value` in `onChange` for the canonical English-digit value.
 - Set `secondEnabled={false}` before using `HH:mm` values.
 - Use `validationList`, not `validation.list`, in React props.

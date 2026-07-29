@@ -38,6 +38,35 @@ export const Normal: Story = {
   }
 };
 
+export const Disabled: Story = {
+  args: {
+    label: 'disabled time',
+    value: '12:34:56',
+    disabled: true,
+    onChange: fn(),
+  },
+  play: async ({ canvasElement, args }) => {
+    const timeInput = getTimeInput(canvasElement);
+    const innerInput = getInnerInput(timeInput);
+    const nativeInput = getNativeInput(timeInput);
+
+    await waitForInputValue(timeInput, '12:34:56');
+
+    expect(timeInput.disabled).toBe(true);
+    expect(innerInput.disabled).toBe(true);
+    expect(nativeInput.disabled).toBe(true);
+
+    await userEvent.click(nativeInput);
+    await userEvent.type(nativeInput, '23:59:59');
+
+    await waitFor(() => {
+      expect(timeInput.value).toBe('12:34:56');
+      expect(timeInput.showTimePicker).toBe(false);
+      expect(args.onChange).not.toHaveBeenCalled();
+    });
+  },
+};
+
 export const InitialValue: Story = {
   render: (args) => {
     const formRef = useRef<HTMLFormElement>(null);

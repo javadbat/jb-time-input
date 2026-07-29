@@ -104,10 +104,11 @@
             },
             {
               "name": "disabled",
-              "description": "Disables the inner input and sets disabled state on the host.",
+              "description": "Disables the inner input, prevents input interaction from opening the picker, and sets the disabled custom state on the host. Empty attribute and 'true' mean true; 'false' or a removed attribute means false.",
               "type": {
                 "text": "boolean"
-              }
+              },
+              "default": "false"
             },
             {
               "name": "readonly",
@@ -224,7 +225,7 @@
             {
               "kind": "field",
               "name": "disabled",
-              "description": "Enables or disables the inner input.",
+              "description": "Enables or disables the inner input and host disabled state.",
               "type": {
                 "text": "boolean"
               }
@@ -425,7 +426,7 @@
           "cssStates": [
             {
               "name": "disabled",
-              "description": "Applied when disabled is true."
+              "description": "Applied when the disabled attribute or property is true."
             },
             {
               "name": "invalid",

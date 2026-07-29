@@ -67,7 +67,7 @@ import 'jb-time-input';
 | `show-persian-number` | `boolean` | locale based | Displays Persian digits while `.value` remains English digits. |
 | `required` | `boolean \| string` | `false` | Enables required validation. A string value is used as the error message. |
 | `error` | `string` | `""` | External validation error message. |
-| `disabled` | `boolean` | `false` | Disables the inner input and sets disabled state on the host. |
+| `disabled` | `boolean` | `false` | Disables the inner input, prevents input interaction from opening the picker, and sets the disabled state on the host. Empty attribute and `"true"` mean true; `"false"` or a removed attribute means false. |
 | `readonly` | `boolean` | `false` | Forwarded to the inner `jb-input`. |
 | `autocomplete` | `string` | browser default | Forwarded to the inner `jb-input`. |
 | `size` | `'xs' \| 'sm' \| 'md' \| 'lg' \| 'xl'` | `md` style defaults | Forwarded to the inner `jb-input`. |
@@ -87,7 +87,7 @@ import 'jb-time-input';
 | `optionalUnits` | `Array<'hour' \| 'minute' \| 'second'>` | no | Time picker units shown as optional/muted. |
 | `showPersianNumber` | `boolean` | no | Displays Persian digits in the input and picker. |
 | `required` | `boolean` | no | Enables required validation. |
-| `disabled` | `boolean` | no | Enables or disables the inner input. |
+| `disabled` | `boolean` | no | Enables or disables the inner input and host disabled state. |
 | `validation` | `ValidationHelper<ValidationValue>` | yes | Validation helper from `jb-validation`; set `validation.list` for custom rules. |
 | `validationMessage` | `string` | yes | Current validation message from `ElementInternals`. |
 
@@ -153,6 +153,18 @@ timeInput.addMinute(-5);
 timeInput.addSecond(10);
 ```
 
+## Disabled state
+
+Use the `disabled` attribute or property to prevent focus, editing, picker opening, and user-generated value changes.
+
+```html
+<jb-time-input label="Time" value="12:34:56" disabled></jb-time-input>
+```
+
+```js
+timeInput.disabled = true;
+```
+
 ## Validation
 
 `jb-time-input` uses [`jb-validation`](https://github.com/javadbat/jb-validation). Custom validators receive `value`, `displayValue`, and `valueObject`.
@@ -201,6 +213,7 @@ For complete styling guidance, live examples, CSS parts, custom states, and copy
 - The component is form-associated and submits `.value`.
 - `label` maps to host aria label and the inner `jb-input` label.
 - `message` maps to host aria description and the inner helper message.
+- `disabled` disables the nested native input and exposes the host `disabled` custom state.
 - The inner input uses `inputmode="none"` and `virtualkeyboardpolicy="manual"` to favor the custom time editing UI.
 
 ## Related Docs
@@ -218,5 +231,6 @@ For complete styling guidance, live examples, CSS parts, custom states, and copy
 - Use `validation.list` for custom validation; validators receive `{ value, displayValue, valueObject }`.
 - Use `show-persian-number` only for display. `.value` remains English digits.
 - Use `optional-units` only for visual emphasis in the picker.
+- Use `disabled` as a boolean property in JavaScript; in markup, use `disabled`, `disabled="true"`, or remove the attribute to enable the input.
 - This package includes [`custom-elements.json`](./custom-elements.json) and points to it with the package.json `customElements` field. The field is documented by the Custom Elements Manifest project in [Referencing manifests from npm packages](https://github.com/webcomponents/custom-elements-manifest#referencing-manifests-from-npm-packages).
 - In `custom-elements.json`, `exports.kind: "js"` describes JavaScript/TypeScript exports and `exports.kind: "custom-element-definition"` maps the `jb-time-input` tag name to `JBTimeInputWebComponent`.

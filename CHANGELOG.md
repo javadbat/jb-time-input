@@ -1,9 +1,18 @@
 # Changelog
 
-## Unreleased
+## [2.3.0] - 2026-07-29
 
 ### Added
 
+- add `implements JBFormInputStandards` to web-component
+- add name setter to properties
+
+
+## [2.2.0] - 2026-07-29
+
+### Added
+
+- fix disabled works on react component
 - Added Storybook interaction coverage for initial-value initialization, live-value precedence, explicit `null`, and native form reset.
 
 ### Changed

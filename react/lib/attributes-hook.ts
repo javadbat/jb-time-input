@@ -6,12 +6,23 @@ export type JBTimeInputAttributes = {
   value?: string | null,
   initialValue?: string | null,
   validationList?: ValidationItem<ValidationValue>[] | null,
+  disabled?: boolean,
   secondEnabled?: boolean,
   frontalZero?: boolean,
   optionalUnits?: TimeUnits[] | null,
   showPersianNumber?: boolean,
 }
 export function useJBTimeInputAttribute(element: RefObject<JBTimeInputWebComponent | null>, props: JBTimeInputAttributes) {
+  useEffect(() => {
+    if (!element.current || typeof props.disabled !== "boolean") {
+      return;
+    }
+    if (props.disabled) {
+      element.current.setAttribute("disabled", "");
+    } else {
+      element.current.removeAttribute("disabled");
+    }
+  }, [props.disabled, element]);
   useEffect(() => {
     if (element.current && props.secondEnabled !== null && props.secondEnabled !== undefined) {
       element.current.secondEnabled = props.secondEnabled;
