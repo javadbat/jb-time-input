@@ -860,7 +860,7 @@ export class JBTimeInputWebComponent extends HTMLElement implements WithValidati
   }
   clearValidationError() {
     this.#internals?.states?.delete("invalid");
-    this.elements.input.clearValidationError();
+    this.elements.input?.clearValidationError?.();
   }
   /**
    * @public
