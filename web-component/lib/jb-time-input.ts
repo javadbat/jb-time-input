@@ -92,7 +92,7 @@ export class JBTimeInputWebComponent extends HTMLElement implements WithValidati
   get isAutoValidationDisabled(): boolean {
     //currently we only support disable-validation in attribute and only in initiate time but later we can add support for change of this
 
-    return (!!(this.getAttribute('disable-auto-validation') === '' || this.getAttribute('disable-auto-validation') === 'true'));
+    return parseBooleanAttribute(this.getAttribute('disable-auto-validation'));
   }
   #checkValidity(showError: boolean) {
     if (!this.isAutoValidationDisabled) {
