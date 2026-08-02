@@ -18,14 +18,14 @@
 
 ## When to use
 
-Use `jb-time-input` when users should type or edit a time value and may also benefit from a visual time picker.
+Use `jb-time-input` when users should type or edit a time value and may also benefit from a visual time picker. See the [basic time input demo](https://javadbat.github.io/design-system/?path=/story/components-form-elements-inputs-jbtimeinput--normal) for the default interaction.
 
 Use [`jb-time-picker`](https://github.com/javadbat/jb-time-picker) when you need only the visual wheel picker without an input field.
 
 ## Demo
 
-- [CodePen](https://codepen.io/javadbat/pen/QWdxzKb)
-- [Storybook](https://javadbat.github.io/design-system/?path=/docs/components-form-elements-inputs-jbtimeinput)
+- Explore the [time input examples](https://javadbat.github.io/design-system/?path=/story/components-form-elements-inputs-jbtimeinput--normal), including [hour/minute-only mode](https://javadbat.github.io/design-system/?path=/story/components-form-elements-inputs-jbtimeinput--without-second), [Persian digits](https://javadbat.github.io/design-system/?path=/story/components-form-elements-inputs-jbtimeinput--persian-number), [display options](https://javadbat.github.io/design-system/?path=/story/components-form-elements-inputs-jbtimeinput--frontal-zero), and [validation](https://javadbat.github.io/design-system/?path=/story/components-form-elements-inputs-jbtimeinput--validation-sample).
+- Try the standalone [CodePen example](https://codepen.io/javadbat/pen/QWdxzKb).
 
 ## Using With JS Frameworks
 
@@ -55,19 +55,19 @@ import 'jb-time-input';
 
 | name | type | default | description |
 | --- | --- | --- | --- |
-| `value` | `string` | `00:00:00` | Time value. Use `HH:mm:ss` when seconds are enabled and `HH:mm` when `second-enabled="false"`. |
-| `label` | `string` | `""` | Label forwarded to the inner `jb-input` and host aria label. |
+| `value` | `string` | `00:00:00` | Time value. Use `HH:mm:ss` when seconds are enabled and `HH:mm` when `second-enabled="false"`; see the [value demo](https://javadbat.github.io/design-system/?path=/story/components-form-elements-inputs-jbtimeinput--with-value). |
+| `label` | `string` | `""` | Label forwarded to the inner `jb-input` and host aria label; see the [normal demo](https://javadbat.github.io/design-system/?path=/story/components-form-elements-inputs-jbtimeinput--normal). |
 | `message` | `string` | `""` | Helper message forwarded to the inner `jb-input` and host aria description. |
 | `name` | `string` | `""` | Form field name forwarded to the inner `jb-input`. |
-| `placeholder` | `string` | `""` | Placeholder forwarded to the inner `jb-input`. |
+| `placeholder` | `string` | `""` | Placeholder forwarded to the inner `jb-input`; see the [RTL example](https://javadbat.github.io/design-system/?path=/story/components-form-elements-inputs-jbtimeinput--rtl-sample). |
 | `close-button-text` | `string` | localized `Close` | Text inside the popover close button. |
-| `second-enabled` | `boolean` | `true` | Enables the second unit. Empty attribute and `"true"` mean true; `"false"` means false. |
-| `frontal-zero` | `boolean` | `false` | Displays picker numbers below 10 with a leading zero. |
-| `optional-units` | `string` | `""` | Comma or space separated picker units shown as optional: `hour`, `minute`, `second`. |
-| `show-persian-number` | `boolean` | locale based | Displays Persian digits while `.value` remains English digits. |
-| `required` | `boolean \| string` | `false` | Enables required validation. A string value is used as the error message. |
-| `error` | `string` | `""` | External validation error message. |
-| `disabled` | `boolean` | `false` | Disables the inner input, prevents input interaction from opening the picker, and sets the disabled state on the host. Empty attribute and `"true"` mean true; `"false"` or a removed attribute means false. |
+| `second-enabled` | `boolean` | `true` | Enables the second unit. Empty attribute and `"true"` mean true; `"false"` means false; see [without-second mode](https://javadbat.github.io/design-system/?path=/story/components-form-elements-inputs-jbtimeinput--without-second). |
+| `frontal-zero` | `boolean` | `false` | Displays picker numbers below 10 with a leading zero; see [frontal zero](https://javadbat.github.io/design-system/?path=/story/components-form-elements-inputs-jbtimeinput--frontal-zero). |
+| `optional-units` | `string` | `""` | Comma or space separated picker units shown as optional: `hour`, `minute`, `second`; see [optional minute](https://javadbat.github.io/design-system/?path=/story/components-form-elements-inputs-jbtimeinput--optional-minute). |
+| `show-persian-number` | `boolean` | locale based | Displays Persian digits while `.value` remains English digits; see [Persian number](https://javadbat.github.io/design-system/?path=/story/components-form-elements-inputs-jbtimeinput--persian-number). |
+| `required` | `boolean \| string` | `false` | Enables required validation. A string value is used as the error message; see [validation](https://javadbat.github.io/design-system/?path=/story/components-form-elements-inputs-jbtimeinput--validation-sample). |
+| `error` | `string` | `""` | External validation error message; see [validation](https://javadbat.github.io/design-system/?path=/story/components-form-elements-inputs-jbtimeinput--validation-sample). |
+| `disabled` | `boolean` | `false` | Disables the inner input, prevents input interaction from opening the picker, and sets the disabled state on the host. Empty attribute and `"true"` mean true; `"false"` or a removed attribute means false; see [disabled](https://javadbat.github.io/design-system/?path=/story/components-form-elements-inputs-jbtimeinput--disabled). |
 | `readonly` | `boolean` | `false` | Forwarded to the inner `jb-input`. |
 | `autocomplete` | `string` | browser default | Forwarded to the inner `jb-input`. |
 | `size` | `'xs' \| 'sm' \| 'md' \| 'lg' \| 'xl'` | `md` style defaults | Forwarded to the inner `jb-input`. |
@@ -76,18 +76,18 @@ import 'jb-time-input';
 
 | name | type | readonly | description |
 | --- | --- | --- | --- |
-| `value` | `string` | no | Canonical time value submitted with forms. |
-| `initialValue` | `string` | no | Default and reset value. It initializes `value` until the live value is explicitly set. |
+| `value` | `string` | no | Canonical time value submitted with forms; see [controlled value](https://javadbat.github.io/design-system/?path=/story/components-form-elements-inputs-jbtimeinput--with-value). |
+| `initialValue` | `string` | no | Default and reset value. It initializes `value` until the live value is explicitly set; see [initial value](https://javadbat.github.io/design-system/?path=/story/components-form-elements-inputs-jbtimeinput--initial-value). |
 | `isDirty` | `boolean` | yes | `true` when current `value` differs from `initialValue`. |
 | `hour` | `number` | no | Hour value from `0` to `24`. |
 | `minute` | `number` | no | Minute value from `0` to `59`. |
 | `second` | `number \| null` | no | Second value from `0` to `59`, or `null` when seconds are disabled. |
-| `secondEnabled` | `boolean` | no | Enables or disables the second unit. |
-| `frontalZero` | `boolean` | no | Displays picker numbers below 10 with a leading zero. |
-| `optionalUnits` | `Array<'hour' \| 'minute' \| 'second'>` | no | Time picker units shown as optional/muted. |
-| `showPersianNumber` | `boolean` | no | Displays Persian digits in the input and picker. |
-| `required` | `boolean` | no | Enables required validation. |
-| `disabled` | `boolean` | no | Enables or disables the inner input and host disabled state. |
+| `secondEnabled` | `boolean` | no | Enables or disables the second unit; see [without-second mode](https://javadbat.github.io/design-system/?path=/story/components-form-elements-inputs-jbtimeinput--without-second). |
+| `frontalZero` | `boolean` | no | Displays picker numbers below 10 with a leading zero; see [frontal zero](https://javadbat.github.io/design-system/?path=/story/components-form-elements-inputs-jbtimeinput--frontal-zero). |
+| `optionalUnits` | `Array<'hour' \| 'minute' \| 'second'>` | no | Time picker units shown as optional/muted; see [optional minute](https://javadbat.github.io/design-system/?path=/story/components-form-elements-inputs-jbtimeinput--optional-minute). |
+| `showPersianNumber` | `boolean` | no | Displays Persian digits in the input and picker; see [Persian number](https://javadbat.github.io/design-system/?path=/story/components-form-elements-inputs-jbtimeinput--persian-number). |
+| `required` | `boolean` | no | Enables required validation; see [validation](https://javadbat.github.io/design-system/?path=/story/components-form-elements-inputs-jbtimeinput--validation-sample). |
+| `disabled` | `boolean` | no | Enables or disables the inner input and host disabled state; see [disabled](https://javadbat.github.io/design-system/?path=/story/components-form-elements-inputs-jbtimeinput--disabled). |
 | `validation` | `ValidationHelper<ValidationValue>` | yes | Validation helper from `jb-validation`; set `validation.list` for custom rules. |
 | `validationMessage` | `string` | yes | Current validation message from `ElementInternals`. |
 
@@ -95,32 +95,34 @@ import 'jb-time-input';
 
 | name | returns | description |
 | --- | --- | --- |
-| `checkValidity()` | `boolean` | Runs validation without showing the error message. Dispatches `invalid` when invalid. |
-| `reportValidity()` | `boolean` | Runs validation and shows the first error message. Dispatches `invalid` when invalid. |
-| `focus()` | `void` | Focuses the inner `jb-input`. |
-| `addHour(interval)` | `void` | Adds `interval` to the hour value. Use a negative number to subtract. |
-| `addMinute(interval)` | `void` | Adds `interval` to the minute value. Use a negative number to subtract. |
-| `addSecond(interval)` | `void` | Adds `interval` to the second value. Use a negative number to subtract. |
+| `checkValidity()` | `boolean` | Runs validation without showing the error message. Dispatches `invalid` when invalid; see [validation](https://javadbat.github.io/design-system/?path=/story/components-form-elements-inputs-jbtimeinput--validation-sample). |
+| `reportValidity()` | `boolean` | Runs validation and shows the first error message. Dispatches `invalid` when invalid; see [validation](https://javadbat.github.io/design-system/?path=/story/components-form-elements-inputs-jbtimeinput--validation-sample). |
+| `focus()` | `void` | Focuses the inner `jb-input`; see [keyboard and picker](https://javadbat.github.io/design-system/?path=/story/components-form-elements-inputs-jbtimeinput--normal). |
+| `addHour(interval)` | `void` | Adds `interval` to the hour value. Use a negative number to subtract; see [time editing](https://javadbat.github.io/design-system/?path=/story/components-form-elements-inputs-jbtimeinput--with-value). |
+| `addMinute(interval)` | `void` | Adds `interval` to the minute value. Use a negative number to subtract; see [time editing](https://javadbat.github.io/design-system/?path=/story/components-form-elements-inputs-jbtimeinput--with-value). |
+| `addSecond(interval)` | `void` | Adds `interval` to the second value. Use a negative number to subtract; see [time editing](https://javadbat.github.io/design-system/?path=/story/components-form-elements-inputs-jbtimeinput--with-value). |
 | `clearValidationError()` | `void` | Clears the visible validation error. |
 
 ### Events
 
 | event | description |
 | --- | --- |
-| `load` | Dispatched from `connectedCallback` before initialization. |
-| `init` | Dispatched from `connectedCallback` after initialization. |
-| `input` | Dispatched after user input changes the time value. |
-| `beforeinput` | Re-dispatched from the inner input before user input is applied. |
-| `change` | Dispatched when the committed time value changes after blur or picker interaction. |
-| `focus` | Re-dispatched when the inner input receives focus. |
-| `blur` | Re-dispatched when the inner input loses focus. |
-| `keydown` | Re-dispatched from the inner input. |
-| `keyup` | Re-dispatched from the inner input. |
-| `keypress` | Re-dispatched from the inner input. |
-| `enter` | Dispatched when Enter is pressed. |
-| `invalid` | Dispatched when validation fails. |
+| `load` | Dispatched from `connectedCallback` before initialization; see the [event demo](https://javadbat.github.io/design-system/?path=/story/components-form-elements-inputs-jbtimeinput--event-test-page). |
+| `init` | Dispatched from `connectedCallback` after initialization; see the [event demo](https://javadbat.github.io/design-system/?path=/story/components-form-elements-inputs-jbtimeinput--event-test-page). |
+| `input` | Dispatched after user input changes the time value; see [events](https://javadbat.github.io/design-system/?path=/story/components-form-elements-inputs-jbtimeinput--event-test-page). |
+| `beforeinput` | Re-dispatched from the inner input before user input is applied; see [events](https://javadbat.github.io/design-system/?path=/story/components-form-elements-inputs-jbtimeinput--event-test-page). |
+| `change` | Dispatched when the committed time value changes after blur or picker interaction; see [events](https://javadbat.github.io/design-system/?path=/story/components-form-elements-inputs-jbtimeinput--event-test-page). |
+| `focus` | Re-dispatched when the inner input receives focus; see [events](https://javadbat.github.io/design-system/?path=/story/components-form-elements-inputs-jbtimeinput--event-test-page). |
+| `blur` | Re-dispatched when the inner input loses focus; see [events](https://javadbat.github.io/design-system/?path=/story/components-form-elements-inputs-jbtimeinput--event-test-page). |
+| `keydown` | Re-dispatched from the inner input; see [events](https://javadbat.github.io/design-system/?path=/story/components-form-elements-inputs-jbtimeinput--event-test-page). |
+| `keyup` | Re-dispatched from the inner input; see [events](https://javadbat.github.io/design-system/?path=/story/components-form-elements-inputs-jbtimeinput--event-test-page). |
+| `keypress` | Re-dispatched from the inner input; see [events](https://javadbat.github.io/design-system/?path=/story/components-form-elements-inputs-jbtimeinput--event-test-page). |
+| `enter` | Dispatched when Enter is pressed; see the [Enter event demo](https://javadbat.github.io/design-system/?path=/story/components-form-elements-inputs-jbtimeinput--event-test-page). |
+| `invalid` | Dispatched when validation fails; see [validation](https://javadbat.github.io/design-system/?path=/story/components-form-elements-inputs-jbtimeinput--validation-sample). |
 
 ## Value
+
+Use `.value` for the canonical English-digit time; see the [value demo](https://javadbat.github.io/design-system/?path=/story/components-form-elements-inputs-jbtimeinput--with-value) and [hour/minute-only demo](https://javadbat.github.io/design-system/?path=/story/components-form-elements-inputs-jbtimeinput--without-second).
 
 ```js
 const timeInput = document.querySelector('jb-time-input');
@@ -145,6 +147,8 @@ timeInput.value = '14:34';
 
 ## Keyboard and picker
 
+Focus opens the picker, while ArrowUp/ArrowDown and the `addHour`/`addMinute`/`addSecond` methods adjust the active unit; see the [normal picker demo](https://javadbat.github.io/design-system/?path=/story/components-form-elements-inputs-jbtimeinput--normal).
+
 When the input is focused, the time picker opens in a popover. Use ArrowUp and ArrowDown to change the time unit at the current caret position.
 
 ```js
@@ -154,6 +158,8 @@ timeInput.addSecond(10);
 ```
 
 ## Disabled state
+
+Use `disabled` to prevent focus, editing, picker opening, and user-generated value changes; see the [disabled demo](https://javadbat.github.io/design-system/?path=/story/components-form-elements-inputs-jbtimeinput--disabled).
 
 Use the `disabled` attribute or property to prevent focus, editing, picker opening, and user-generated value changes.
 
@@ -166,6 +172,8 @@ timeInput.disabled = true;
 ```
 
 ## Validation
+
+Use `required`, `error`, and `validation.list` for validation; see the [validation demo](https://javadbat.github.io/design-system/?path=/story/components-form-elements-inputs-jbtimeinput--validation-sample).
 
 `jb-time-input` uses [`jb-validation`](https://github.com/javadbat/jb-validation). Custom validators receive `value`, `displayValue`, and `valueObject`.
 
@@ -186,6 +194,8 @@ timeInput.validation.list = [
 
 ## Display options
 
+Use `frontalZero`, `optionalUnits`, and `showPersianNumber` to control picker presentation; see [frontal zero](https://javadbat.github.io/design-system/?path=/story/components-form-elements-inputs-jbtimeinput--frontal-zero), [optional units](https://javadbat.github.io/design-system/?path=/story/components-form-elements-inputs-jbtimeinput--optional-minute), and [Persian digits](https://javadbat.github.io/design-system/?path=/story/components-form-elements-inputs-jbtimeinput--persian-number).
+
 ```html
 <jb-time-input
   frontal-zero
@@ -204,7 +214,7 @@ timeInput.showPersianNumber = true;
 
 ## CSS parts and variables
 
-For complete styling guidance, live examples, CSS parts, custom states, and copyable style recipes, see [Styling](https://javadbat.github.io/design-system/?path=/docs/components-form-elements-inputs-jbtimeinput-styling).
+For complete styling guidance, live examples, CSS parts, custom states, and copyable style recipes, see [Styling](https://javadbat.github.io/design-system/?path=/docs/components-form-elements-inputs-jbtimeinput-styling) and the [style gallery](https://javadbat.github.io/design-system/?path=/story/components-form-elements-inputs-jbtimeinput-style--gallery).
 
 `jb-time-input` composes `jb-input`, `jb-popover`, `jb-time-picker`, and `jb-button`. Style the exported `close-button` part with `--jb-button-*` variables instead of the removed `--jb-time-input-close-button-*` variables.
 
