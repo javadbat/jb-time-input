@@ -1,6 +1,6 @@
 jb-time-input.aurora-style {
     --jb-time-input-popover-z-index: 1000;
-    --jb-popover-bg-color: var(--jb-surface);
+    --jb-popover-bg-color: var(--jb-surface-primary);
     --jb-popover-border-radius: 1.25rem;
     --jb-popover-padding: 1rem;
     --jb-popover-margin-top: 0.625rem;

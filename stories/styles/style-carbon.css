@@ -1,6 +1,6 @@
 jb-time-input.carbon-style {
     --jb-time-input-popover-z-index: 1000;
-    --jb-popover-bg-color: var(--jb-surface);
+    --jb-popover-bg-color: var(--jb-surface-primary);
     --jb-popover-border-radius: 0;
     --jb-popover-padding: 1rem;
     --jb-popover-margin-top: 0.5rem;
@@ -9,7 +9,7 @@ jb-time-input.carbon-style {
 }
 
 jb-time-input.carbon-style::part(close-button) {
-    --jb-button-color-ghost: var(--jb-text-primary);
+    --jb-button-color-ghost: var(--jb-content-primary);
     --jb-button-bg-color-ghost-hover: var(--jb-surface-hover);
     --jb-button-border-color: var(--jb-text-disabled);
     --jb-button-border-width-ghost: 1px;
