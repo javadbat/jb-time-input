@@ -1,6 +1,6 @@
 jb-time-input.fluent-style {
     --jb-time-input-popover-z-index: 1000;
-    --jb-popover-bg-color: var(--jb-text-contrast);
+    --jb-popover-bg-color: var(--jb-text-inverse);
     --jb-popover-border-radius: 0.25rem;
     --jb-popover-padding: 1rem;
     --jb-popover-margin-top: 0.5rem;
