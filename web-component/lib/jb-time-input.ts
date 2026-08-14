@@ -302,10 +302,16 @@ export class JBTimeInputWebComponent extends HTMLElement implements WithValidati
   }
   //will show persian number even if user type en number but value will be passed as en number
   #showPersianNumber = i18n.locale.numberingSystem == "arabext";
+  #hasShowPersianNumberOverride = false;
+  #unsubscribeLocaleChange: VoidFunction | null = null;
   get showPersianNumber() {
     return this.#showPersianNumber;
   }
   set showPersianNumber(value: boolean) {
+    this.#hasShowPersianNumberOverride = true;
+    this.#setShowPersianNumber(value);
+  }
+  #setShowPersianNumber(value: boolean) {
     this.#showPersianNumber = Boolean(value);
     this.elements.timePicker.component.showPersianNumber = value;
     this.#setValue(`${this.value}`);
@@ -365,6 +371,15 @@ export class JBTimeInputWebComponent extends HTMLElement implements WithValidati
     this.#callOnLoadEvent();
     this.#initProp();
     this.#callOnInitEvent();
+    this.#unsubscribeLocaleChange?.();
+    if (!this.#hasShowPersianNumberOverride) this.#setShowPersianNumber(i18n.locale.numberingSystem === "arabext");
+    this.#unsubscribeLocaleChange = i18n.subscribe(() => {
+      if (!this.#hasShowPersianNumberOverride) this.#setShowPersianNumber(i18n.locale.numberingSystem === "arabext");
+    });
+  }
+  disconnectedCallback() {
+    this.#unsubscribeLocaleChange?.();
+    this.#unsubscribeLocaleChange = null;
   }
   #callOnLoadEvent() {
     const event = new CustomEvent("load", { bubbles: true, composed: true });
@@ -494,7 +509,8 @@ export class JBTimeInputWebComponent extends HTMLElement implements WithValidati
         this.optionalUnits = this.#parseOptionalUnits(value);
         break;
       case "show-persian-number":
-        this.showPersianNumber = parseBooleanAttribute(value, false);
+        this.#hasShowPersianNumberOverride = value !== null;
+        this.#setShowPersianNumber(parseBooleanAttribute(value, i18n.locale.numberingSystem === "arabext"));
         break;
       case "disabled":
         this.disabled = parseBooleanAttribute(value, false);
