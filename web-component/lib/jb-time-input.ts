@@ -1012,3 +1012,9 @@ export class JBTimeInputWebComponent extends JBBaseComponent implements WithVali
   }
 }
 defineWebComponent("jb-time-input", JBTimeInputWebComponent);
+
+declare global {
+  interface HTMLElementTagNameMap {
+    "jb-time-input": JBTimeInputWebComponent;
+  }
+}
