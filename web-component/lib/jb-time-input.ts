@@ -1,3 +1,4 @@
+import { defineWebComponent, JBBaseComponent, enToFaDigits, faToEnDigits, parseBooleanAttribute } from "jb-core";
 import CSS from "./jb-time-input.css";
 import VariablesCSS from "./variables.css";
 import "jb-time-picker";
@@ -8,7 +9,6 @@ import type { JBInputWebComponent, JBInputValue } from "jb-input";
 import type { JBTimePickerWebComponent, JBTimePickerValueObject, TimeUnitsString, SecondRange } from "jb-time-picker";
 import type { JBTimeInputElements, ValidationValue, } from "./types";
 import { type ValidationItem, type ValidationResult, type WithValidation, ValidationHelper, type ShowValidationErrorParameters } from "jb-validation";
-import { enToFaDigits, faToEnDigits, parseBooleanAttribute } from "jb-core";
 import { renderHTML } from "./render";
 export * from './types.js';
 import { i18n } from 'jb-core/i18n'
@@ -16,7 +16,7 @@ import type { JBFormInputStandards } from "jb-form";
 //TODO: accept js Date value in value setter and extract time from date and return given date with a inputted time
 //TODO: add picker disabler and handle virtual keyboard for it
 //TODO: add placeholder handler like date input
-export class JBTimeInputWebComponent extends HTMLElement implements WithValidation<ValidationValue>, JBFormInputStandards<string> {
+export class JBTimeInputWebComponent extends JBBaseComponent implements WithValidation<ValidationValue>, JBFormInputStandards<string> {
   static get formAssociated() {
     return true;
   }
@@ -1011,7 +1011,4 @@ export class JBTimeInputWebComponent extends HTMLElement implements WithValidati
     return this.#internals?.validationMessage ?? "";
   }
 }
-const myElementNotExists = !customElements.get("jb-time-input");
-if (myElementNotExists) {
-  window.customElements.define("jb-time-input", JBTimeInputWebComponent);
-}
+defineWebComponent("jb-time-input", JBTimeInputWebComponent);
