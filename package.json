@@ -43,7 +43,7 @@
   "customElements": "web-component/custom-elements.json",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/javadbat/jb-time-input.git"
+    "url": "https://github.com/javadbat/jb-time-input.git"
   },
   "dependencies": {
     "jb-button": "^4.0.0",
