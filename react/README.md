@@ -9,7 +9,7 @@ React wrapper for [`jb-time-input`](https://github.com/javadbat/jb-time-input). 
 
 ## Demo
 
-Explore the [basic time input demo](https://javadbat.github.io/design-system/?path=/story/components-form-elements-inputs-jbtimeinput--normal), [hour/minute-only mode](https://javadbat.github.io/design-system/?path=/story/components-form-elements-inputs-jbtimeinput--without-second), [Persian digits](https://javadbat.github.io/design-system/?path=/story/components-form-elements-inputs-jbtimeinput--persian-number), [display options](https://javadbat.github.io/design-system/?path=/story/components-form-elements-inputs-jbtimeinput--frontal-zero), and [validation](https://javadbat.github.io/design-system/?path=/story/components-form-elements-inputs-jbtimeinput--validation-sample). For standalone code, use the [CodeSandbox preview](https://3f63dj.csb.app/samples/jb-time-input) or [CodeSandbox editor](https://codesandbox.io/p/sandbox/jb-design-system-3f63dj?file=%2Fsrc%2Fsamples%2FJBTimeInput.tsx).
+Explore the [basic time input demo](https://javadbat.github.io/design-system/?path=/story/components-form-elements-inputs-jbtimeinput--normal), [hour/minute-only mode](https://javadbat.github.io/design-system/?path=/story/components-form-elements-inputs-jbtimeinput--without-second), [Persian digits](https://javadbat.github.io/design-system/?path=/story/components-form-elements-inputs-jbtimeinput--persian-number), [display options](https://javadbat.github.io/design-system/?path=/story/components-form-elements-inputs-jbtimeinput--leading-zero), and [validation](https://javadbat.github.io/design-system/?path=/story/components-form-elements-inputs-jbtimeinput--validation-sample). For standalone code, use the [CodeSandbox preview](https://3f63dj.csb.app/samples/jb-time-input) or [CodeSandbox editor](https://codesandbox.io/p/sandbox/jb-design-system-3f63dj?file=%2Fsrc%2Fsamples%2FJBTimeInput.tsx).
 
 ## Installation
 
@@ -41,7 +41,7 @@ Use `JBTimePicker` when you need only the inline time picker without the input f
 | `validationList` | `ValidationItem<ValidationValue>[]` | Custom validators from `jb-validation`; see [validation](https://javadbat.github.io/design-system/?path=/story/components-form-elements-inputs-jbtimeinput--validation-sample). |
 | `disabled` | `boolean` | Disables the nested native input and prevents focus, editing, picker opening, and user-generated value changes; see [disabled](https://javadbat.github.io/design-system/?path=/story/components-form-elements-inputs-jbtimeinput--disabled). |
 | `secondEnabled` | `boolean` | Enables or disables the second unit; see [without-second mode](https://javadbat.github.io/design-system/?path=/story/components-form-elements-inputs-jbtimeinput--without-second). |
-| `frontalZero` | `boolean` | Displays picker numbers below 10 with a leading zero; see [frontal zero](https://javadbat.github.io/design-system/?path=/story/components-form-elements-inputs-jbtimeinput--frontal-zero). |
+| `leadingZero` | `boolean` | Displays picker numbers below 10 with a leading zero; see [leading zero](https://javadbat.github.io/design-system/?path=/story/components-form-elements-inputs-jbtimeinput--leading-zero). |
 | `optionalUnits` | `Array<'hour' \| 'minute' \| 'second'>` | Picker units displayed as optional/muted; see [optional units](https://javadbat.github.io/design-system/?path=/story/components-form-elements-inputs-jbtimeinput--optional-minute). |
 | `showPersianNumber` | `boolean` | Displays Persian digits while keeping `.value` in English digits; see [Persian digits](https://javadbat.github.io/design-system/?path=/story/components-form-elements-inputs-jbtimeinput--persian-number). |
 
@@ -115,9 +115,9 @@ The wrapper forwards input, keyboard, focus, blur, change, and Enter events; see
 
 ## Display options
 
-Use `frontalZero`, `optionalUnits`, and `showPersianNumber` to control picker presentation; see [frontal zero](https://javadbat.github.io/design-system/?path=/story/components-form-elements-inputs-jbtimeinput--frontal-zero), [optional units](https://javadbat.github.io/design-system/?path=/story/components-form-elements-inputs-jbtimeinput--optional-minute), and [Persian digits](https://javadbat.github.io/design-system/?path=/story/components-form-elements-inputs-jbtimeinput--persian-number).
+Use `leadingZero`, `optionalUnits`, and `showPersianNumber` to control picker presentation; see [leading zero](https://javadbat.github.io/design-system/?path=/story/components-form-elements-inputs-jbtimeinput--leading-zero), [optional units](https://javadbat.github.io/design-system/?path=/story/components-form-elements-inputs-jbtimeinput--optional-minute), and [Persian digits](https://javadbat.github.io/design-system/?path=/story/components-form-elements-inputs-jbtimeinput--persian-number).
 
-Use `frontalZero`, `optionalUnits`, and `showPersianNumber` to control picker display. The canonical value remains English digits.
+Use `leadingZero`, `optionalUnits`, and `showPersianNumber` to control picker display. The canonical value remains English digits.
 
 ## Styling
 
@@ -148,8 +148,9 @@ For web-component behavior, methods, validation, and CSS variables, see [`jb-tim
 ## AI agent notes
 
 - Import `JBTimeInput` from `jb-time-input/react`; the wrapper imports and registers the web component.
-- Use React prop names such as `secondEnabled`, `frontalZero`, `optionalUnits`, and `showPersianNumber`.
+- Use React prop names such as `secondEnabled`, `leadingZero`, `optionalUnits`, and `showPersianNumber`.
 - Use the boolean `disabled` prop; the wrapper adds or removes the web component's `disabled` attribute.
 - Use `event.target.value` in `onChange` for the canonical English-digit value.
+- Read `event.target.displayValue` or `ref.current.displayValue` for the formatted text shown to the user.
 - Set `secondEnabled={false}` before using `HH:mm` values.
 - Use `validationList`, not `validation.list`, in React props.

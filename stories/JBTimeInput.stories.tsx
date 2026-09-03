@@ -32,7 +32,7 @@ export const Normal: Story = {
     await userEvent.click(getNativeInput(timeInput));
 
     await waitFor(() => {
-      expect(timeInput.showTimePicker).toBe(true);
+      expect(timeInput.isOpen).toBe(true);
       expect(getTimePicker(timeInput).value).toEqual({ hour: 0, minute: 0, second: 0 });
     });
   }
@@ -61,7 +61,7 @@ export const Disabled: Story = {
 
     await waitFor(() => {
       expect(timeInput.value).toBe('12:34:56');
-      expect(timeInput.showTimePicker).toBe(false);
+      expect(timeInput.isOpen).toBe(false);
       expect(args.onChange).not.toHaveBeenCalled();
     });
   },
@@ -203,6 +203,7 @@ export const PersianNumber: Story = {
     await waitFor(() => {
       expect(timeInput.value).toBe('12:34:56');
       expect(innerInput.displayValue).toBe('\u06F1\u06F2:\u06F3\u06F4:\u06F5\u06F6');
+      expect(timeInput.displayValue).toBe(innerInput.displayValue);
       expect(nativeInput.value).toBe('\u06F1\u06F2:\u06F3\u06F4:\u06F5\u06F6');
     });
   }
@@ -228,8 +229,8 @@ export const withValue: Story = {
 
 export const RTLSample: Story = {
   args: {
-    label: 'زمان',
-    closeButtonText: 'بستن'
+    label: 'Ø²Ù…Ø§Ù†',
+    closeButtonText: 'Ø¨Ø³ØªÙ†'
   },
   parameters: {
     themes: {
@@ -240,8 +241,8 @@ export const RTLSample: Story = {
     const timeInput = getTimeInput(canvasElement);
 
     await waitFor(() => {
-      expect(getInnerInput(timeInput).getAttribute('label')).toBe('زمان');
-      expect(timeInput.elements.timePicker.closeButton.textContent).toBe('بستن');
+      expect(getInnerInput(timeInput).getAttribute('label')).toBe('Ø²Ù…Ø§Ù†');
+      expect(timeInput.elements.timePicker.closeButton.textContent).toBe('Ø¨Ø³ØªÙ†');
     });
   },
 };
@@ -419,18 +420,18 @@ export const withoutSecond:Story = {
   }
 };
 
-export const FrontalZero:Story = {
+export const LeadingZero:Story = {
   args:{
     label:'time',
-    closeButtonText:'بستن',
-    frontalZero:true
+    closeButtonText:'Ø¨Ø³ØªÙ†',
+    leadingZero:true
   },
   play: async ({ canvasElement }) => {
     const timeInput = getTimeInput(canvasElement);
     const timePicker = getTimePicker(timeInput);
 
     await waitFor(() => {
-      expect(timeInput.frontalZero).toBe(true);
+      expect(timeInput.leadingZero).toBe(true);
       expect(getTimeText(timePicker, 'hour', 'currentTime').textContent).toBe('00');
       expect(getTimeText(timePicker, 'minute', 'currentTime').textContent).toBe('00');
       expect(getTimeText(timePicker, 'second', 'currentTime').textContent).toBe('00');
@@ -440,8 +441,8 @@ export const FrontalZero:Story = {
 
 export const OptionalMinute:Story = {
   args:{
-    label:'زمان',
-    closeButtonText:'بستن',
+    label:'Ø²Ù…Ø§Ù†',
+    closeButtonText:'Ø¨Ø³ØªÙ†',
     optionalUnits:['minute']
   },
   play: async ({ canvasElement }) => {

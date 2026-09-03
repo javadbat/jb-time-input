@@ -1,5 +1,17 @@
 # Changelog
 
+## [3.0.0] - 2026-09-03
+
+### Changed
+
+- Standardized private DOM event handlers on the `#on<Target><Event>()` naming convention.
+- Standardized private empty-value and form synchronization helpers as `#clearValue()` and `#updateFormValue()`.
+- Added the standard public `reset()` method; native form reset delegates to the same behavior.
+- Exposed readonly `displayValue` for the formatted text shown to the user.
+- Breaking: renamed `showTimePicker` to `isOpen` and added `open()`/`close()` picker methods.
+- Breaking: updated forwarded input parts to use the shared `control` contract.
+- Breaking: renamed `frontalZero` / `frontal-zero` to `leadingZero` / `leading-zero`.
+
 ## [2.5.0] - 2026-08-27
 
 ### Changed

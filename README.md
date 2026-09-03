@@ -24,14 +24,14 @@ Use [`jb-time-picker`](https://github.com/javadbat/jb-time-picker) when you need
 
 ## Demo
 
-- Explore the [time input examples](https://javadbat.github.io/design-system/?path=/story/components-form-elements-inputs-jbtimeinput--normal), including [hour/minute-only mode](https://javadbat.github.io/design-system/?path=/story/components-form-elements-inputs-jbtimeinput--without-second), [Persian digits](https://javadbat.github.io/design-system/?path=/story/components-form-elements-inputs-jbtimeinput--persian-number), [display options](https://javadbat.github.io/design-system/?path=/story/components-form-elements-inputs-jbtimeinput--frontal-zero), and [validation](https://javadbat.github.io/design-system/?path=/story/components-form-elements-inputs-jbtimeinput--validation-sample).
+- Explore the [time input examples](https://javadbat.github.io/design-system/?path=/story/components-form-elements-inputs-jbtimeinput--normal), including [hour/minute-only mode](https://javadbat.github.io/design-system/?path=/story/components-form-elements-inputs-jbtimeinput--without-second), [Persian digits](https://javadbat.github.io/design-system/?path=/story/components-form-elements-inputs-jbtimeinput--persian-number), [display options](https://javadbat.github.io/design-system/?path=/story/components-form-elements-inputs-jbtimeinput--leading-zero), and [validation](https://javadbat.github.io/design-system/?path=/story/components-form-elements-inputs-jbtimeinput--validation-sample).
 - Try the standalone [CodePen example](https://codepen.io/javadbat/pen/QWdxzKb).
 
 ## Using With JS Frameworks
 
 <a href="https://github.com/javadbat/jb-time-input/tree/main/react" target="_blank" rel="noopener noreferrer"><img src="https://img.shields.io/badge/React.js-jb--time--input%2Freact-000.svg?logo=react&logoColor=%2361DAFB" height="30" /></a>
 
-Other integrations: <a href="https://javadbat.github.io/design-system/?path=/docs/getting-started-framework-integration--docs#angular" target="_blank" rel="noopener noreferrer">Angular</a> · <a href="https://javadbat.github.io/design-system/?path=/docs/getting-started-framework-integration--docs#vue" target="_blank" rel="noopener noreferrer">Vue</a> · <a href="https://javadbat.github.io/design-system/?path=/docs/getting-started-framework-integration--docs#nuxt" target="_blank" rel="noopener noreferrer">Nuxt</a> · <a href="https://javadbat.github.io/design-system/?path=/docs/getting-started-framework-integration--docs#svelte" target="_blank" rel="noopener noreferrer">Svelte</a> · <a href="https://javadbat.github.io/design-system/?path=/docs/getting-started-framework-integration--docs#sveltekit" target="_blank" rel="noopener noreferrer">SvelteKit</a> · <a href="https://javadbat.github.io/design-system/?path=/docs/getting-started-framework-integration--docs#solidjs" target="_blank" rel="noopener noreferrer">SolidJS</a> · <a href="https://javadbat.github.io/design-system/?path=/docs/getting-started-framework-integration--docs#lit" target="_blank" rel="noopener noreferrer">Lit</a> · <a href="https://javadbat.github.io/design-system/?path=/docs/getting-started-framework-integration--docs#nextjs" target="_blank" rel="noopener noreferrer">Next.js</a> · <a href="https://javadbat.github.io/design-system/?path=/docs/getting-started-framework-integration--docs#astro" target="_blank" rel="noopener noreferrer">Astro</a> · <a href="https://javadbat.github.io/design-system/?path=/docs/getting-started-framework-integration--docs#blazor" target="_blank" rel="noopener noreferrer">Blazor</a> · <a href="https://javadbat.github.io/design-system/?path=/docs/getting-started-framework-integration--docs#server-rendered-templates" target="_blank" rel="noopener noreferrer">Server-rendered templates</a> · <a href="https://javadbat.github.io/design-system/?path=/docs/getting-started-framework-integration--docs#wordpress" target="_blank" rel="noopener noreferrer">WordPress</a> · <a href="https://javadbat.github.io/design-system/?path=/docs/getting-started-framework-integration--docs#alpinejs-and-htmx" target="_blank" rel="noopener noreferrer">Alpine.js and HTMX</a>
+Other integrations: <a href="https://javadbat.github.io/design-system/?path=/docs/getting-started-framework-integration--docs#angular" target="_blank" rel="noopener noreferrer">Angular</a> Â· <a href="https://javadbat.github.io/design-system/?path=/docs/getting-started-framework-integration--docs#vue" target="_blank" rel="noopener noreferrer">Vue</a> Â· <a href="https://javadbat.github.io/design-system/?path=/docs/getting-started-framework-integration--docs#nuxt" target="_blank" rel="noopener noreferrer">Nuxt</a> Â· <a href="https://javadbat.github.io/design-system/?path=/docs/getting-started-framework-integration--docs#svelte" target="_blank" rel="noopener noreferrer">Svelte</a> Â· <a href="https://javadbat.github.io/design-system/?path=/docs/getting-started-framework-integration--docs#sveltekit" target="_blank" rel="noopener noreferrer">SvelteKit</a> Â· <a href="https://javadbat.github.io/design-system/?path=/docs/getting-started-framework-integration--docs#solidjs" target="_blank" rel="noopener noreferrer">SolidJS</a> Â· <a href="https://javadbat.github.io/design-system/?path=/docs/getting-started-framework-integration--docs#lit" target="_blank" rel="noopener noreferrer">Lit</a> Â· <a href="https://javadbat.github.io/design-system/?path=/docs/getting-started-framework-integration--docs#nextjs" target="_blank" rel="noopener noreferrer">Next.js</a> Â· <a href="https://javadbat.github.io/design-system/?path=/docs/getting-started-framework-integration--docs#astro" target="_blank" rel="noopener noreferrer">Astro</a> Â· <a href="https://javadbat.github.io/design-system/?path=/docs/getting-started-framework-integration--docs#blazor" target="_blank" rel="noopener noreferrer">Blazor</a> Â· <a href="https://javadbat.github.io/design-system/?path=/docs/getting-started-framework-integration--docs#server-rendered-templates" target="_blank" rel="noopener noreferrer">Server-rendered templates</a> Â· <a href="https://javadbat.github.io/design-system/?path=/docs/getting-started-framework-integration--docs#wordpress" target="_blank" rel="noopener noreferrer">WordPress</a> Â· <a href="https://javadbat.github.io/design-system/?path=/docs/getting-started-framework-integration--docs#alpinejs-and-htmx" target="_blank" rel="noopener noreferrer">Alpine.js and HTMX</a>
 
 ## Installation
 
@@ -62,7 +62,7 @@ import 'jb-time-input';
 | `placeholder` | `string` | `""` | Placeholder forwarded to the inner `jb-input`; see the [RTL example](https://javadbat.github.io/design-system/?path=/story/components-form-elements-inputs-jbtimeinput--rtl-sample). |
 | `close-button-text` | `string` | localized `Close` | Text inside the popover close button. |
 | `second-enabled` | `boolean` | `true` | Enables the second unit. Empty attribute and `"true"` mean true; `"false"` means false; see [without-second mode](https://javadbat.github.io/design-system/?path=/story/components-form-elements-inputs-jbtimeinput--without-second). |
-| `frontal-zero` | `boolean` | `false` | Displays picker numbers below 10 with a leading zero; see [frontal zero](https://javadbat.github.io/design-system/?path=/story/components-form-elements-inputs-jbtimeinput--frontal-zero). |
+| `leading-zero` | `boolean` | `false` | Displays picker numbers below 10 with a leading zero; see [leading zero](https://javadbat.github.io/design-system/?path=/story/components-form-elements-inputs-jbtimeinput--leading-zero). |
 | `optional-units` | `string` | `""` | Comma or space separated picker units shown as optional: `hour`, `minute`, `second`; see [optional minute](https://javadbat.github.io/design-system/?path=/story/components-form-elements-inputs-jbtimeinput--optional-minute). |
 | `show-persian-number` | `boolean` | locale based | Displays Persian digits while `.value` remains English digits; see [Persian number](https://javadbat.github.io/design-system/?path=/story/components-form-elements-inputs-jbtimeinput--persian-number). |
 | `required` | `boolean \| string` | `false` | Enables required validation. A string value is used as the error message; see [validation](https://javadbat.github.io/design-system/?path=/story/components-form-elements-inputs-jbtimeinput--validation-sample). |
@@ -77,15 +77,17 @@ import 'jb-time-input';
 | name | type | readonly | description |
 | --- | --- | --- | --- |
 | `value` | `string` | no | Canonical time value submitted with forms; see [controlled value](https://javadbat.github.io/design-system/?path=/story/components-form-elements-inputs-jbtimeinput--with-value). |
+| `displayValue` | `string` | yes | Formatted time text shown by the inner input, including localized digits. |
 | `initialValue` | `string` | no | Default and reset value. It initializes `value` until the live value is explicitly set; see [initial value](https://javadbat.github.io/design-system/?path=/story/components-form-elements-inputs-jbtimeinput--initial-value). |
 | `isDirty` | `boolean` | yes | `true` when current `value` differs from `initialValue`. |
 | `hour` | `number` | no | Hour value from `0` to `24`. |
 | `minute` | `number` | no | Minute value from `0` to `59`. |
 | `second` | `number \| null` | no | Second value from `0` to `59`, or `null` when seconds are disabled. |
 | `secondEnabled` | `boolean` | no | Enables or disables the second unit; see [without-second mode](https://javadbat.github.io/design-system/?path=/story/components-form-elements-inputs-jbtimeinput--without-second). |
-| `frontalZero` | `boolean` | no | Displays picker numbers below 10 with a leading zero; see [frontal zero](https://javadbat.github.io/design-system/?path=/story/components-form-elements-inputs-jbtimeinput--frontal-zero). |
+| `leadingZero` | `boolean` | no | Displays picker numbers below 10 with a leading zero; see [leading zero](https://javadbat.github.io/design-system/?path=/story/components-form-elements-inputs-jbtimeinput--leading-zero). |
 | `optionalUnits` | `Array<'hour' \| 'minute' \| 'second'>` | no | Time picker units shown as optional/muted; see [optional minute](https://javadbat.github.io/design-system/?path=/story/components-form-elements-inputs-jbtimeinput--optional-minute). |
 | `showPersianNumber` | `boolean` | no | Displays Persian digits in the input and picker; see [Persian number](https://javadbat.github.io/design-system/?path=/story/components-form-elements-inputs-jbtimeinput--persian-number). |
+| `isOpen` | `boolean` | no | Opens or closes the internal time picker popover. |
 | `required` | `boolean` | no | Enables required validation; see [validation](https://javadbat.github.io/design-system/?path=/story/components-form-elements-inputs-jbtimeinput--validation-sample). |
 | `disabled` | `boolean` | no | Enables or disables the inner input and host disabled state; see [disabled](https://javadbat.github.io/design-system/?path=/story/components-form-elements-inputs-jbtimeinput--disabled). |
 | `validation` | `ValidationHelper<ValidationValue>` | yes | Validation helper from `jb-validation`; set `validation.list` for custom rules. |
@@ -97,6 +99,9 @@ import 'jb-time-input';
 | --- | --- | --- |
 | `checkValidity()` | `boolean` | Runs validation without showing the error message. Dispatches `invalid` when invalid; see [validation](https://javadbat.github.io/design-system/?path=/story/components-form-elements-inputs-jbtimeinput--validation-sample). |
 | `reportValidity()` | `boolean` | Runs validation and shows the first error message. Dispatches `invalid` when invalid; see [validation](https://javadbat.github.io/design-system/?path=/story/components-form-elements-inputs-jbtimeinput--validation-sample). |
+| `reset()` | `void` | Restores `initialValue` and clears displayed validation. |
+| `open()` | `void` | Opens the internal time picker popover. |
+| `close()` | `void` | Closes the internal time picker popover. |
 | `focus()` | `void` | Focuses the inner `jb-input`; see [keyboard and picker](https://javadbat.github.io/design-system/?path=/story/components-form-elements-inputs-jbtimeinput--normal). |
 | `addHour(interval)` | `void` | Adds `interval` to the hour value. Use a negative number to subtract; see [time editing](https://javadbat.github.io/design-system/?path=/story/components-form-elements-inputs-jbtimeinput--with-value). |
 | `addMinute(interval)` | `void` | Adds `interval` to the minute value. Use a negative number to subtract; see [time editing](https://javadbat.github.io/design-system/?path=/story/components-form-elements-inputs-jbtimeinput--with-value). |
@@ -194,18 +199,18 @@ timeInput.validation.list = [
 
 ## Display options
 
-Use `frontalZero`, `optionalUnits`, and `showPersianNumber` to control picker presentation; see [frontal zero](https://javadbat.github.io/design-system/?path=/story/components-form-elements-inputs-jbtimeinput--frontal-zero), [optional units](https://javadbat.github.io/design-system/?path=/story/components-form-elements-inputs-jbtimeinput--optional-minute), and [Persian digits](https://javadbat.github.io/design-system/?path=/story/components-form-elements-inputs-jbtimeinput--persian-number).
+Use `leadingZero`, `optionalUnits`, and `showPersianNumber` to control picker presentation; see [leading zero](https://javadbat.github.io/design-system/?path=/story/components-form-elements-inputs-jbtimeinput--leading-zero), [optional units](https://javadbat.github.io/design-system/?path=/story/components-form-elements-inputs-jbtimeinput--optional-minute), and [Persian digits](https://javadbat.github.io/design-system/?path=/story/components-form-elements-inputs-jbtimeinput--persian-number).
 
 ```html
 <jb-time-input
-  frontal-zero
+  leading-zero
   optional-units="second"
   show-persian-number
 ></jb-time-input>
 ```
 
 ```js
-timeInput.frontalZero = true;
+timeInput.leadingZero = true;
 timeInput.optionalUnits = ['second'];
 timeInput.showPersianNumber = true;
 ```

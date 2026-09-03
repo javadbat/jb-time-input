@@ -17,9 +17,9 @@ const JBTimeInput = React.forwardRef((props:Props, ref)=>{
     [element],
   );
   // placeholder label message are in other Props
-  const {onBeforeInput,onBlur,onChange,onEnter,onFocus,onInit,onInput,onKeyDown,onKeyPress,onKeyUp,onLoad, disabled,frontalZero,initialValue,optionalUnits,secondEnabled,showPersianNumber,value,validationList,closeButtonText,error,label,message,placeholder, children, ...otherProps} = props;
+  const {onBeforeInput,onBlur,onChange,onEnter,onFocus,onInit,onInput,onKeyDown,onKeyPress,onKeyUp,onLoad, disabled,leadingZero,initialValue,optionalUnits,secondEnabled,showPersianNumber,value,validationList,closeButtonText,error,label,message,placeholder, children, ...otherProps} = props;
   useEvents(element, {onBeforeInput,onBlur,onChange,onEnter,onFocus,onInit,onInput,onKeyDown,onKeyPress,onKeyUp,onLoad});
-  useJBTimeInputAttribute(element,{disabled,frontalZero,initialValue,optionalUnits,secondEnabled,showPersianNumber,value,validationList});
+  useJBTimeInputAttribute(element,{disabled,leadingZero,initialValue,optionalUnits,secondEnabled,showPersianNumber,value,validationList});
   return (
     <jb-time-input
       ref={element}
@@ -45,4 +45,3 @@ type TimeInputProps = EventProps & JBTimeInputAttributes &{
 }
 export type Props= TimeInputProps & JBElementStandardProps<JBTimeInputWebComponent, keyof TimeInputProps>
 export {JBTimeInput};
-

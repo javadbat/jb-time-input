@@ -14,7 +14,7 @@
     "time",
     "web component"
   ],
-  "version": "2.5.0",
+  "version": "3.0.0",
   "bugs": "https://github.com/javadbat/jb-time-input/issues",
   "license": "MIT",
   "files": [

@@ -25,6 +25,9 @@ export class JBTimeInputWebComponent extends JBBaseComponent implements WithVali
   get value() {
     return this.elements.input.value;
   }
+  get displayValue(): string {
+    return this.elements.input.displayValue;
+  }
   set value(value: string) {
     // Invalid assignments are ignored, so they must not consume the clean
     // initial-value latch either.
@@ -38,7 +41,7 @@ export class JBTimeInputWebComponent extends JBBaseComponent implements WithVali
     const isValid = this.#checkTimeFormatValidation(value);
     if (isValid && this.elements.input.value !== undefined) {
       this.elements.input.value = value;
-      this.#setFormValue();
+      this.#updateFormValue();
       this.updateTimePickerValue(this.hour, this.minute, this.second);
     }
   }
@@ -77,11 +80,14 @@ export class JBTimeInputWebComponent extends JBBaseComponent implements WithVali
   get isDirty(): boolean {
     return this.value !== this.initialValue;
   }
-  formResetCallback() {
+  reset() {
     this.#isDirty = false;
     this.#setValue(this.initialValue);
     this.#validation.reset();
     this.#internals?.setValidity({}, '');
+  }
+  formResetCallback() {
+    this.reset();
   }
   formDisabledCallback(disabled: boolean) {
     this.disabled = disabled;
@@ -164,7 +170,7 @@ export class JBTimeInputWebComponent extends JBBaseComponent implements WithVali
       this.elements.input.value = `${hourString}${this.elements.input.value?.slice(
         this.#inputRanges.hourRange[1] + 1
       )}`;
-      this.#setFormValue();
+      this.#updateFormValue();
       this.updateTimePickerValue(hour, this.minute, this.second);
     }
   }
@@ -206,7 +212,7 @@ export class JBTimeInputWebComponent extends JBBaseComponent implements WithVali
       )}${minuteString}${this.elements.input.value?.slice(
         this.#inputRanges.minuteRange[1] + 1
       )}`;
-      this.#setFormValue();
+      this.#updateFormValue();
       this.updateTimePickerValue(this.hour, minute, this.second);
     }
   }
@@ -257,18 +263,18 @@ export class JBTimeInputWebComponent extends JBBaseComponent implements WithVali
             0,
             this.#inputRanges.secondRange[0]
           )}${secondString}`;
-          this.#setFormValue();
+          this.#updateFormValue();
           this.updateTimePickerValue(this.hour, this.minute, second);
         }
       }
     }
   }
-  #showTimePicker = false;
-  get showTimePicker() {
-    return this.#showTimePicker;
+  #isOpen = false;
+  get isOpen(): boolean {
+    return this.#isOpen;
   }
-  set showTimePicker(value) {
-    this.#showTimePicker = value;
+  set isOpen(value: boolean) {
+    this.#isOpen = value;
     if (value == true) {
       this.#internals?.states?.add("open");
       if (this.#internals) this.#internals.ariaExpanded = "true";
@@ -284,6 +290,14 @@ export class JBTimeInputWebComponent extends JBBaseComponent implements WithVali
       this.elements.input.setAttribute("aria-expanded", "false");
       this.elements.timePicker.wrapper.close();
     }
+  }
+
+  open(): void {
+    this.isOpen = true;
+  }
+
+  close(): void {
+    this.isOpen = false;
   }
   #secondEnabled = true;
   get secondEnabled() {
@@ -349,11 +363,11 @@ export class JBTimeInputWebComponent extends JBBaseComponent implements WithVali
   get optionalUnits() {
     return this.elements.timePicker.component.optionalUnits;
   }
-  set frontalZero(value: boolean) {
-    this.elements.timePicker.component.frontalZero = value;
+  set leadingZero(value: boolean) {
+    this.elements.timePicker.component.leadingZero = value;
   }
-  get frontalZero() {
-    return this.elements.timePicker.component.frontalZero;
+  get leadingZero() {
+    return this.elements.timePicker.component.leadingZero;
   }
   constructor() {
     super();
@@ -416,14 +430,14 @@ export class JBTimeInputWebComponent extends JBBaseComponent implements WithVali
   }
   #registerEventListener() {
     this.elements.input.addEventListener("keydown", this.#onInputKeyDown.bind(this));
-    this.elements.input.addEventListener("keyup", this.#onInputKeyup.bind(this));
+    this.elements.input.addEventListener("keyup", this.#onInputKeyUp.bind(this));
     this.elements.input.addEventListener("change", this.#onInputChange.bind(this));
     this.elements.input.addEventListener("keypress", this.#onInputKeyPress.bind(this));
     this.elements.input.addEventListener("beforeinput", this.#onInputBeforeInput.bind(this), {});
     this.elements.input.addEventListener("focus", this.#onInputFocus.bind(this));
     this.elements.input.addEventListener("blur", this.#onInputBlur.bind(this));
     this.elements.timePicker.component.addEventListener("change", this.#onTimePickerChange.bind(this));
-    this.elements.timePicker.closeButton.addEventListener("click", () => { this.showTimePicker = false; });
+    this.elements.timePicker.closeButton.addEventListener("click", () => { this.isOpen = false; });
     this.elements.timePicker.component.addEventListener("blur", this.#onTimePickerBlur.bind(this));
   }
   #initProp() {
@@ -439,7 +453,7 @@ export class JBTimeInputWebComponent extends JBBaseComponent implements WithVali
       this.elements.input.addStandardValueCallback(this.#standardTimeValue.bind(this));
     });
   }
-  #resetInputValue() {
+  #clearValue() {
     this.#setValue(this.#getDefaultValue());
   }
   #getDefaultValue() {
@@ -459,7 +473,7 @@ export class JBTimeInputWebComponent extends JBBaseComponent implements WithVali
       "error",
       "size",
       "close-button-text",
-      "frontal-zero",
+      "leading-zero",
       "second-enabled",
       "optional-units",
       "show-persian-number",
@@ -499,8 +513,8 @@ export class JBTimeInputWebComponent extends JBBaseComponent implements WithVali
       case "close-button-text":
         this.elements.timePicker.closeButton.innerHTML = value ?? "";
         break;
-      case "frontal-zero":
-        this.frontalZero = parseBooleanAttribute(value, false);
+      case "leading-zero":
+        this.leadingZero = parseBooleanAttribute(value, false);
         break;
       case "second-enabled":
         this.secondEnabled = parseBooleanAttribute(value, true);
@@ -800,7 +814,7 @@ export class JBTimeInputWebComponent extends JBBaseComponent implements WithVali
     const event = new KeyboardEvent("keypress", keyPressInitObj);
     this.dispatchEvent(event);
   }
-  #onInputKeyup(e: KeyboardEvent) {
+  #onInputKeyUp(e: KeyboardEvent) {
     const keyUpInitObj: KeyboardEventInit = {
       ...e,
       cancelable: false
@@ -824,31 +838,29 @@ export class JBTimeInputWebComponent extends JBBaseComponent implements WithVali
       if (this.#valueOnInputFocus) {
         this.#setValue(this.#valueOnInputFocus);
       } else {
-        this.#resetInputValue();
+        this.#clearValue();
       }
       this.#isDirty = this.#isDirtyOnInputFocus;
     }
     // to prevent onChange call twice
     this.#valueOnInputFocus = this.value;
     //TODO: check  if this works without call
-    // const validationResult = this.triggerInputValidation(true);
     const event = new Event("change");
     this.dispatchEvent(event);
   }
   #onInputFocus(e: FocusEvent) {
     this.#valueOnInputFocus = this.value;
     this.#isDirtyOnInputFocus = this.#isDirty;
-    this.showTimePicker = true;
+    this.isOpen = true;
     const event = new FocusEvent("focus", { ...e });
     this.dispatchEvent(event);
   }
   #onInputBlur(e: FocusEvent) {
     const focusedElement = e.relatedTarget;
     if (focusedElement !== this.elements.timePicker.component) {
-      this.showTimePicker = false;
+      this.isOpen = false;
     }
     //TODO:check if this works without call
-    // this.triggerInputValidation(true);
     if (this.#valueOnInputFocus !== this.value) {
       this.#onInputChange();
     }
@@ -896,7 +908,7 @@ export class JBTimeInputWebComponent extends JBBaseComponent implements WithVali
   #onTimePickerBlur(e: FocusEvent) {
     const newFocusedElement = e.relatedTarget;
     if (newFocusedElement !== this.elements.input) {
-      this.showTimePicker = false;
+      this.isOpen = false;
       if (this.#valueOnInputFocus !== this.value) {
         this.#onInputChange();
       }
@@ -945,7 +957,7 @@ export class JBTimeInputWebComponent extends JBBaseComponent implements WithVali
       }
     };
   }
-  #setFormValue() {
+  #updateFormValue() {
     this.#internals?.setFormValue(this.value);
   }
   #getInsideValidations(): ValidationItem<ValidationValue>[] {
@@ -1009,6 +1021,9 @@ export class JBTimeInputWebComponent extends JBBaseComponent implements WithVali
   }
   get validationMessage() {
     return this.#internals?.validationMessage ?? "";
+  }
+  get validity() {
+    return this.#internals?.validity;
   }
 }
 defineWebComponent("jb-time-input", JBTimeInputWebComponent);

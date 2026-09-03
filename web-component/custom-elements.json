@@ -67,7 +67,7 @@
               "default": "true"
             },
             {
-              "name": "frontal-zero",
+              "name": "leading-zero",
               "description": "Displays picker values below 10 with a leading zero.",
               "type": {
                 "text": "boolean"
@@ -135,11 +135,28 @@
           "members": [
             {
               "kind": "field",
+              "name": "isOpen",
+              "description": "Whether the time picker popover is open.",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "kind": "field",
               "name": "value",
               "description": "Canonical time value submitted with forms.",
               "type": {
                 "text": "string"
               }
+            },
+            {
+              "kind": "field",
+              "name": "displayValue",
+              "description": "Formatted time text shown by the inner input, including localized digits.",
+              "type": {
+                "text": "string"
+              },
+              "readonly": true
             },
             {
               "kind": "field",
@@ -192,7 +209,7 @@
             },
             {
               "kind": "field",
-              "name": "frontalZero",
+              "name": "leadingZero",
               "description": "Displays picker values below 10 with a leading zero.",
               "type": {
                 "text": "boolean"
@@ -250,6 +267,18 @@
             }
           ],
           "methods": [
+            {
+              "name": "reset",
+              "description": "Restores initialValue and clears displayed validation."
+            },
+            {
+              "name": "open",
+              "description": "Opens the internal time picker popover."
+            },
+            {
+              "name": "close",
+              "description": "Closes the internal time picker popover."
+            },
             {
               "name": "checkValidity",
               "description": "Runs validation without showing the error message and returns whether the input is valid.",
@@ -341,7 +370,7 @@
           ],
           "cssParts": [
             {
-              "name": "wrapper",
+              "name": "root",
               "description": "Root wrapper inside the shadow DOM."
             },
             {
@@ -353,8 +382,8 @@
               "description": "Forwarded label part from the internal jb-input."
             },
             {
-              "name": "input-box",
-              "description": "Forwarded input-box part from the internal jb-input."
+              "name": "control",
+              "description": "Forwarded control part from the internal jb-input."
             },
             {
               "name": "message",

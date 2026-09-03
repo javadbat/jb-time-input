@@ -8,7 +8,7 @@ export type JBTimeInputAttributes = {
   validationList?: ValidationItem<ValidationValue>[] | null,
   disabled?: boolean,
   secondEnabled?: boolean,
-  frontalZero?: boolean,
+  leadingZero?: boolean,
   optionalUnits?: TimeUnits[] | null,
   showPersianNumber?: boolean,
 }
@@ -44,10 +44,10 @@ export function useJBTimeInputAttribute(element: RefObject<JBTimeInputWebCompone
     }
   }, [props.validationList, element]);
   useEffect(() => {
-    if (element.current && typeof props.frontalZero == "boolean") {
-      element.current.frontalZero = props.frontalZero;
+    if (element.current && typeof props.leadingZero == "boolean") {
+      element.current.leadingZero = props.leadingZero;
     }
-  }, [props.frontalZero, element]);
+  }, [props.leadingZero, element]);
   useEffect(() => {
     if (element.current && Array.isArray(props.optionalUnits)) {
       element.current.optionalUnits = props.optionalUnits;
