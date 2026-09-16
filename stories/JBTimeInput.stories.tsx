@@ -38,6 +38,35 @@ export const Normal: Story = {
   }
 };
 
+export const PickerValueSynchronization: Story = {
+  args: { label: 'picker synchronization' },
+  play: async ({ canvasElement }) => {
+    const timeInput = getTimeInput(canvasElement);
+    await waitForInputValue(timeInput, '00:00:00');
+    await userEvent.click(getNativeInput(timeInput));
+    const picker = getTimePicker(timeInput);
+    expect(Object.hasOwn(picker, 'value')).toBe(false);
+
+    for (const unit of ['hour', 'minute', 'second'] as const) {
+      await userEvent.click(getTimeText(picker, unit, 'nextTime'));
+      await waitFor(() => {
+        expect(picker.value[unit]).toBe(1);
+        expect(timeInput[unit]).toBe(1);
+      });
+    }
+    await waitForInputValue(timeInput, '01:01:01');
+
+    for (const unit of ['hour', 'minute', 'second'] as const) {
+      await userEvent.click(getTimeText(picker, unit, 'prevTime'));
+      await waitFor(() => {
+        expect(picker.value[unit]).toBe(0);
+        expect(timeInput[unit]).toBe(0);
+      });
+    }
+    await waitForInputValue(timeInput, '00:00:00');
+  },
+};
+
 export const Disabled: Story = {
   args: {
     label: 'disabled time',

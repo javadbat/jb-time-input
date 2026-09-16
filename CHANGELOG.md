@@ -1,5 +1,9 @@
 # Changelog
 
+## [3.0.3] - 2026-09-16
+
+- fix initial value assignment.
+
 ## [3.0.0] - 2026-09-03
 
 ### Changed
