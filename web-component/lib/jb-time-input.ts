@@ -43,7 +43,7 @@ export class JBTimeInputWebComponent extends JBBaseComponent implements WithVali
     if (this.elements.input.value === undefined) {
       this.elements.input.addEventListener("init", () => {
         this.#setValue(value);
-      });
+      },{once:true});
       return;
     }
     const isValid = this.#checkTimeFormatValidation(value);
@@ -387,7 +387,7 @@ export class JBTimeInputWebComponent extends JBBaseComponent implements WithVali
     this.dispatchEvent(event);
   }
   #callOnInitEvent() {
-    const event = new CustomEvent("init", { bubbles: true, composed: true });
+    const event = new CustomEvent("init", { bubbles: true, composed: false });
     this.dispatchEvent(event);
   }
   #initWebComponent() {
@@ -427,7 +427,7 @@ export class JBTimeInputWebComponent extends JBBaseComponent implements WithVali
     this.elements.timePicker.component.addEventListener("init", () => {
       this.#isTimePickerInitialized = true;
       this.updateTimePickerValue(this.hour, this.minute, this.second);
-    });
+    },{once:true});
     this.elements.timePicker.closeButton.addEventListener("click", () => {
       this.isOpen = false;
     });
@@ -442,7 +442,7 @@ export class JBTimeInputWebComponent extends JBBaseComponent implements WithVali
     }
     this.elements.input.addEventListener("init", () => {
       this.elements.input.addStandardValueCallback(this.#standardTimeValue.bind(this));
-    });
+    },{once:true});
   }
   #clearValue() {
     this.#setValue(this.#getDefaultValue());
